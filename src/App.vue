@@ -1,8 +1,10 @@
 <script setup>
+import {ref} from 'vue';
+import Header from './components/Header.vue';
 </script>
 
 <template>
-  <h1 class="text-xl w-auto">Testing</h1>
+  <Header :classFromParent = "'px-[4%]'"></Header>
 </template>
 
 <style scoped>

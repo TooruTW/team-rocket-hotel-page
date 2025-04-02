@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+@theme{
+    --color-theme-white: #FFFFFF;
+    --color-theme-primary: #BF9D7D;
+    --radius-md:8px;
+}
