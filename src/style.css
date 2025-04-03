@@ -2,10 +2,14 @@
 
 @theme{
     --color-theme-white: #FFFFFF;
-    --color-theme-primary: #BF9D7D;
+    --color-theme-primary-120: #7B6651;
+    --color-theme-primary-100: #BF9D7D;
+    --color-theme-primary-40: #F1EAE4;
     --radius-md:8px;
     --radius-10xl:80px;
     --text-100: 100px;
+    --text-80: 80px;
+    --text-50: 50px;
     --text-40:40px;
     --text-30: 30px;
     --text-24:24px;

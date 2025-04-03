@@ -5,7 +5,7 @@ import Section1 from './components/Section1.vue';
 </script>
 
 <template>
-  <Section1 :classFromParent = "'px-[4%]'"></Section1>
+  <Section1></Section1>
 </template>
 
 <style scoped>

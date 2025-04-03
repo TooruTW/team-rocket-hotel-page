@@ -27,12 +27,12 @@ function handleMenu(){
         <ul class="flex gap-4 w-auto max-md:hidden">
             <a class="w-24" href=""><li :class="[basicClass]">客房旅宿</li></a>
             <a class="w-24" href=""><li :class="[basicClass]">{{ loginState }}</li></a>
-            <a class="w-32" href=""><li :class="[basicClass]" class="bg-theme-primary  rounded-md">立即訂房</li></a>
+            <a class="w-32" href=""><li :class="[basicClass]" class="bg-theme-primary-100  rounded-md">立即訂房</li></a>
         </ul>
         <ul class="hidden flex-col items-center absolute right-0 top-20" :class="[toggleMenu]" >
             <a class="w-32" href=""><li :class="[basicClassMd]">客房旅宿</li></a>
             <a class="w-32" href=""><li :class="[basicClassMd]">{{ loginState }}</li></a>
-            <a class="w-32" href=""><li :class="[basicClassMd]" class="bg-theme-primary  rounded-l-full">立即訂房</li></a>
+            <a class="w-32" href=""><li :class="[basicClassMd]" class="bg-theme-primary-100  rounded-l-full">立即訂房</li></a>
         </ul>
     </nav>
 </template>
