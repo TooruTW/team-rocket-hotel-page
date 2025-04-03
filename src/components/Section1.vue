@@ -15,6 +15,15 @@ let currentPhotoIndex = ref(0);
 let isLastPhoto = false
 let photoInterval
 
+const lineStyle = ref("bg-black")
+
+function handleBtnEnter(){
+    lineStyle.value = "bg-white"
+}
+function handleBtnOut(){
+    lineStyle.value = "bg-black"
+}
+
 function createInterval(){
     return setInterval(()=>{
     if(isLastPhoto){
@@ -26,15 +35,12 @@ function createInterval(){
     isLastPhoto = currentPhotoIndex.value === roomAlbum.length - 1 &&  true
 },5000)
 }
-
 onMounted(()=>{
     photoInterval = createInterval()
 })
-
 onUnmounted(()=>{
     clearInterval(photoInterval)
 })
-
 function handleMouseEnter(index){
     clearInterval(photoInterval)
     currentPhotoIndex.value = index
@@ -66,11 +72,17 @@ defineProps({
                 </div>
 
                 <div class="w-1/2 text-theme-white border-t-1 border-r-1 rounded-10xl py-24 backdrop-blur-xl">
-                    <div class="ml-[-48px] w-3/4">
+                    <div class="ml-[-48px] w-fit">
                         <h1 class="text-100 max-2xl:text-80">高雄 <br>豪華住宿之選</h1>
                         <p class="text-30 max-2xl:text-24">我們致力於為您提供無與倫比的奢華體驗與優質服務</p>
-                        <div class="flex justify-end items-center bg-theme-white p-10 mt-15 text-black rounded-md">
-                            <p class="text-24 inline-flex items-center gap-4 after:inline-block after:content-[''] after:w-[150px] after:h-0.5 after:bg-black">立即訂房</p>
+
+                        <div class="w-auto flex justify-end items-center gap-4 p-10 mt-15 rounded-md bg-theme-white text-black
+                         hover:bg-theme-primary-100 hover:text-white" 
+                        @:mouseenter="handleBtnEnter"
+                        @:mouseout="handleBtnOut"
+                        >
+                            <p class="text-24">立即訂房</p>
+                            <div class="w-1/5 h-0.5" :class="[lineStyle]"></div>
                         </div>
                     </div>
                 </div>
