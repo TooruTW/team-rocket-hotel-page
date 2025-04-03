@@ -4,7 +4,7 @@ import Header from './components/Header.vue';
 </script>
 
 <template>
-  <Header :classFromParent = "'px-[4%]'"></Header>
+  <Header :classFromParent = "'mx-[4%]'"></Header>
 </template>
 
 <style scoped>
