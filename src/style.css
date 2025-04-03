@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @theme{
+    --font-sans: "Noto Serif TC", serif;
     --color-theme-white: #FFFFFF;
     --color-theme-primary-120: #7B6651;
     --color-theme-primary-100: #BF9D7D;
