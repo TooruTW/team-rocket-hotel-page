@@ -1,10 +1,11 @@
 <script setup>
 import {ref} from 'vue';
 import Header from './components/Header.vue';
+import Section1 from './components/Section1.vue';
 </script>
 
 <template>
-  <Header :classFromParent = "'mx-[4%]'"></Header>
+  <Section1 :classFromParent = "'px-[4%]'"></Section1>
 </template>
 
 <style scoped>

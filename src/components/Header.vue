@@ -3,9 +3,10 @@ import {ref} from 'vue';
 
 const paddingFromParent = ref(null)
 const loginState = ref("會員登入")
-    defineProps({
+    
+defineProps({
         classFromParent: String
-    })
+})
 
 const basicClass = "text-theme-white text-base h-14 flex items-center justify-center w-full"
 const basicClassMd = "text-theme-white text-base h-14 flex items-center justify-end pr-2 w-full"
