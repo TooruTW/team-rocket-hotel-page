@@ -1,6 +1,6 @@
 <script setup>
 import {ref, onMounted} from 'vue';
-import Menu from './icons/Menu.vue';
+import Menu from './icons/menu.vue';
 
 const paddingFromParent = ref(null)
 const loginState = ref("會員登入")
@@ -15,7 +15,7 @@ const aTagClass = "w-24"
 const aTagClassMd = "w-full px-5"
 const ulClass = "flex gap-4 w-auto "
 const ulPosition = ref("translate-x-full")
-const ulClassMd = " absolute transition w-full h-screen left-0 top-0 flex-col items-center gap-4 justify-center bg-theme-neutral-bg "
+const ulClassMd = " absolute transition ease-in-out w-full h-screen left-0 top-0 flex-col items-center gap-4 justify-center bg-theme-neutral-bg "
 
 const isShowBurgerMenu = ref(true)
 
