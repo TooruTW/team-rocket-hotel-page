@@ -1,1 +1,42 @@
 @import "tailwindcss";
+
+@theme{
+    --font-sans: "Noto Serif TC", serif;
+    --color-theme-primary-120: #7B6651;
+    --color-theme-primary-100: #BF9D7D;
+    --color-theme-primary-40: #F1EAE4;
+    --color-theme-neutral-bg: #140F0A;
+    --color-theme-neutral-100: #000000;
+    --color-theme-neutral-80: #4B4B4B;
+    --color-theme-neutral-60: #909090;
+    --color-theme-neutral-40: #ECECEC;
+    --color-theme-neutral-10: #F9F9F9;
+    --color-theme-neutral-0: #FFFFFF;
+    --color-theme-success-120:#299F65;
+    --color-theme-success-100:#52DD7E;
+    --color-theme-success-20:#BCFBBD;
+    --color-theme-success-10:#E8FEE7;
+    --color-theme-info-120:#1D66AC;
+    --color-theme-info-100:#3BADEF;
+    --color-theme-info-20:#B1EFFD;
+    --color-theme-info-10:#E6FBFE;
+    --color-theme-alert-120:#C22538;
+    --color-theme-alert-100:#DA3E51;
+    --color-theme-alert-20:#F5CCD1;
+    --color-theme-alert-10:#FDECEF;
+
+
+
+
+
+
+    --radius-md:8px;
+    --radius-10xl:80px;
+    --text-100: 100px;
+    --text-80: 80px;
+    --text-50: 50px;
+    --text-40:40px;
+    --text-30: 30px;
+    --text-28:28px;
+    --text-24:24px;
+}

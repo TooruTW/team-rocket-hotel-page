@@ -1,9 +1,12 @@
 <script setup>
+import {ref} from 'vue';
+import Header from './components/Header.vue';
+import Section1 from './components/Section1.vue';
 </script>
 
 <template>
-  <h1 class="text-xl w-auto">Testing</h1>
+  <Section1></Section1>
 </template>
-
+ <!-- vue router -->
 <style scoped>
 </style>
