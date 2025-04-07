@@ -7,6 +7,6 @@ import Section1 from './components/Section1.vue';
 <template>
   <Section1></Section1>
 </template>
-
+ <!-- vue router -->
 <style scoped>
 </style>

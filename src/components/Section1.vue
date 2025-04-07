@@ -18,7 +18,7 @@ let photoInterval
 const lineStyle = ref("bg-black")
 
 function handleBtnEnter(){
-    lineStyle.value = "bg-white"
+    lineStyle.value = "bg-theme-neutral-0"
 }
 function handleBtnOut(){
     lineStyle.value = "bg-black"
@@ -62,22 +62,22 @@ defineProps({
         :class = "[classFromParent]"
         :style = "{ backgroundImage: `url(${heroBgImg})` }"
         >
-        <Header class="w-full z-10 px-[4%]"></Header>
+        <Header class="w-full z-20 px-[4%]"></Header>
 
         <div class="flex items-center w-full justify-between z-10 px-[4%]">
                 <div class="text-theme-primary-100 w-1/3">
                     <h2 class="text-40 2xl:text-40">享樂酒店</h2>
                     <p class="text-24">Enjoyment Luxury Hotel</p>
-                    <div class="w-full h-0.5 bg-linear-to-r from-theme-primary-100 to-theme-white"></div>
+                    <div class="w-full h-0.5 bg-linear-to-r from-theme-primary-100 to-theme-neutral-0"></div>
                 </div>
 
-                <div class="w-1/2 text-theme-white border-t-1 border-r-1 rounded-10xl py-24 backdrop-blur-xl">
+                <div class="w-1/2 text-theme-neutral-0 border-t-1 border-r-1 rounded-10xl py-24 backdrop-blur-xl">
                     <div class="ml-[-48px] w-fit">
                         <h1 class="text-100 max-2xl:text-80">高雄 <br>豪華住宿之選</h1>
                         <p class="text-30 max-2xl:text-24">我們致力於為您提供無與倫比的奢華體驗與優質服務</p>
 
-                        <div class="w-auto flex justify-end items-center gap-4 p-10 mt-15 rounded-md bg-theme-white text-black
-                         hover:bg-theme-primary-100 hover:text-white" 
+                        <div class="w-auto flex justify-end items-center gap-4 p-10 mt-15 rounded-md bg-theme-neutral-0 text-black
+                         hover:bg-theme-primary-100 hover:text-theme-neutral-0" 
                         @:mouseenter="handleBtnEnter"
                         @:mouseout="handleBtnOut"
                         >
