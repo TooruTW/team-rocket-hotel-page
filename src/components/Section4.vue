@@ -1,5 +1,5 @@
 <script setup>
-import { inject, ref } from 'vue';
+import { inject, ref, computed } from 'vue';
 import Slider from './slider.vue';
 import { getData } from '../apiFunction';
 import RectWideBtn from './RectWideBtn.vue';
@@ -10,9 +10,27 @@ const roomInfoUrl = "https://team-rocket-hotelapi-from-freyja.onrender.com/api/v
 
 const roomInfoArr = await getData(roomInfoUrl,token)
 
-let currentRoom = 0
+const currentRoom = ref(0)
 
-const currentRoomImageList = ref(roomInfoArr[currentRoom].imageUrlList)
+const currentRoomImageList = computed(()=>roomInfoArr[currentRoom.value].imageUrlList)
+
+const roomType = computed(() => roomInfoArr[currentRoom.value].name)
+const roomDescribe = computed(() => roomInfoArr[currentRoom.value].description)
+const roomPrice = computed(() => roomInfoArr[currentRoom.value].price)
+
+function handleArrow(diraction){
+
+    const isRight = diraction;
+    const isLastRoom = (roomInfoArr.length - 1 ) === currentRoom.value ? true : false ;
+    const isFirstRoom = currentRoom.value === 0 ? true : false ;
+    if(isRight){
+        currentRoom.value = isLastRoom ? currentRoom.value = 0 : currentRoom.value + 1 ;
+    }else{
+        currentRoom.value = isFirstRoom ? currentRoom.value = (roomInfoArr.length -1) : currentRoom.value - 1 ;
+    }
+    console.log("clicked" , currentRoom.value)
+
+}
 
 
 </script>
@@ -26,21 +44,24 @@ const currentRoomImageList = ref(roomInfoArr[currentRoom].imageUrlList)
             <Slider class="bg-center bg-cover aspect-square" :dataArr="currentRoomImageList"></Slider>
         </div>
 
-        <div class="w-150 flex flex-col gap-10 text-theme-neutral-0">
+        <div class="w-150 flex flex-col gap-10 text-theme-neutral-0 z-20">
             <div>
-                <h2 class="text-40 font-bold leading-[1.2] tracking-wider">尊爵雙人房</h2>
-                <p class="text-base font-medium leading-[1.5] tracking-wide">享受高級的住宿體驗，尊爵雙人房提供給您舒適寬敞的空間和精緻的裝潢。</p>
+                <h2 class="text-40 font-bold leading-[1.2] tracking-wider">{{ roomType }}</h2>
+                <p class="text-base font-medium leading-[1.5] tracking-wide">{{ roomDescribe }}</p>
             </div>
 
-            <h3 class="text-32 font-bold leading-[1.2] tracking-wider">NT$ 10,000</h3>
+            <h3 class="text-32 font-bold leading-[1.2] tracking-wider">NT$ <span>{{ roomPrice }}</span></h3>
 
-           <RectWideBtn class="z-20 w-full" content="查看更多"></RectWideBtn>
+           <RectWideBtn class="w-full" content="查看更多"></RectWideBtn>
 
-            <div class="text-theme-primary-100 flex items-center">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <div class="text-theme-primary-100 flex items-center self-end">
+                <div @click="handleArrow(false)">
+                    <svg  class="m-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 20L13.41 18.59L7.83 13L20 13L20 11L7.83 11L13.41 5.41L12 4L4 12L12 20Z" fill="currentColor"/>
-                </svg>
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    </svg>
+                </div>
+                
+                <svg @click="handleArrow(true)" class="m-3" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" fill="currentColor"/>
                 </svg>
 

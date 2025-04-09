@@ -28,6 +28,7 @@ onMounted(()=>{
 function handleMouseEnter(index){
     clearInterval(photoInterval)
     currentPage.value = index
+    isLastPhoto = currentPage.value === props.dataArr.length - 1 &&  true
 }
 function handleMouseOut(){
     photoInterval = createInterval()
@@ -39,7 +40,7 @@ const currentImg = computed(() => props.dataArr[currentPage.value])
 
 <template>
     <!-- slide show  in bg -->
-    <div class="relative" :style="{backgroundImage : `url(${currentImg})`}">
+    <div class="relative transition-all duration-1000 ease-in-out" :style="{backgroundImage : `url(${currentImg})`}">
         <!-- slide indicator -->
         <div class="flex justify-center w-full z-10 mb-6 absolute bottom-0">
             <div class="bg-theme-primary-40 rounded-full mx-1 w-8 h-1 transition-all ease-in duration-300"  
