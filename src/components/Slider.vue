@@ -1,12 +1,13 @@
 <script setup>
-import{ ref, onMounted } from 'vue';
+import{ ref, onMounted, computed } from 'vue';
 
-defineProps:{
-    dataArr: Array;
-}
+const props = defineProps({
+  dataArr: Array
+})
 
 let currentPage = ref(0)
 let isLastPhoto = false
+let photoInterval
 
 function createInterval(){
     return setInterval(()=>{
@@ -16,11 +17,12 @@ function createInterval(){
             return
         }
         currentPage.value ++
-        isLastPhoto = currentPage.value === dataArr.length - 1 &&  true
+        isLastPhoto = currentPage.value === props.dataArr.length - 1 &&  true
     },5000)
 }
+
 onMounted(()=>{
-    createInterval()
+    photoInterval = createInterval()
 })
 
 function handleMouseEnter(index){
@@ -31,16 +33,16 @@ function handleMouseOut(){
     photoInterval = createInterval()
 }
 
-const currentImg = ref(dataArr[currentPage.value])
+const currentImg = computed(() => props.dataArr[currentPage.value])
 
 </script>
 
 <template>
-    <div>
-        <!-- slide show -->
-        <img :src="currentImg" alt="image driver" class="w-full object-cover">
+    <!-- slide show  in bg -->
+    <div class="relative" :style="{backgroundImage : `url(${currentImg})`}">
         <!-- slide indicator -->
-        <div class="bg-theme-primary-40 rounded-full mx-1 w-8 h-1 transition-all ease-in duration-300"  
+        <div class="flex justify-center w-full z-10 mb-6 absolute bottom-0">
+            <div class="bg-theme-primary-40 rounded-full mx-1 w-8 h-1 transition-all ease-in duration-300"  
                 v-for="(item,index) in dataArr" 
                 :key="index"
                 :class="{
@@ -49,7 +51,7 @@ const currentImg = ref(dataArr[currentPage.value])
                     }"
                 @:mouseenter="handleMouseEnter(index)"
                 @:mouseout="handleMouseOut">
+            </div>
         </div>
     </div>
-
 </template>
