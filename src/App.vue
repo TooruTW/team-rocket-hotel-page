@@ -1,12 +1,12 @@
 <script setup>
-import {provide} from "vue"
+import { provide } from "vue"
 import Section1 from './components/Section1.vue';
 import Sectioin2 from './components/Sectioin2.vue';
 import Section3 from "./components/Section3.vue";
+import Section4 from "./components/Section4.vue";
 
-const isMobile = window.innerWidth <= 768 ? true:false;
-console.log(isMobile)
-provide("isMobile", isMobile)
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2Y0N2YzZGQ2OTU1NDE1MzZmYzBhMjAiLCJpYXQiOjE3NDQwNzY2NDYsImV4cCI6MTc0NDY4MTQ0Nn0.OzwlHHbbPwhrNqLgK9PIBGoqwY9IM5UGIPiplAl3S5I"
+provide("token",token)
 
 
 </script>
@@ -16,6 +16,9 @@ provide("isMobile", isMobile)
     <Sectioin2></Sectioin2>
   </Suspense>
   <Section3></Section3>
+  <Suspense>
+    <Section4></Section4>
+  </Suspense>
 </template>
  <!-- vue router -->
 <style scoped>
