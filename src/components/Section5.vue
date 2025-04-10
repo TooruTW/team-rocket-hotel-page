@@ -6,15 +6,14 @@
     const culiaryUrl = "https://team-rocket-hotelapi-from-freyja.onrender.com/api/v1/admin/culinary/"
     const culiaryArr = await getData(culiaryUrl,token)
 
-
 </script>
 <template>
     <div class="h-screen w-full bg-theme-primary-10 relative">
         <!-- decoration -->
         <img class="w-50 absolute -top-10 right-20" src="/public/dots.png" alt="decroation-dot">
-        <div class="w-full h-full flex items-center ml-10 gap-20">
+        <div class="w-full h-full flex items-center ml-10 justify-between">
             <img class="h-screen mt-13.5" src="/public/wave-line-vertical.png" alt="decroation-wave-vertical">
-            <div class="w-400 flex flex-col justify-between h-full py-30">
+            <div class="w-[83.75%] flex flex-col justify-between h-full py-30">
                 <!-- title -->
                 <div class="flex items-center gap-10 leading-[1.2] tracking-wider">
                     <h1 class="h-full text-theme-primary-100 text-48 font-bold leading-[1.2] tracking-wider max-md:text-32">
