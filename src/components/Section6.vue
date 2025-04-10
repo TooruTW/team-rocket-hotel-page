@@ -73,7 +73,7 @@
         </div>
     </div>
 <img class="w-full max-md:hidden" src="/public/wave-line-horizone-full.png" alt="decoration-wave">
-<img src="/public/wave-line-horizone-full-md.png" alt="decoration-wave-md">
+<img class="hidden max-md:block" src="/public/wave-line-horizone-full-md.png" alt="decoration-wave-md">
 
 </div>
 
