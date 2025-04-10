@@ -26,18 +26,22 @@ function handleArrow(diraction){
 
 </script>
 <template>
-    <div class="w-full h-screen flex gap-20 items-end pb-30 bg-theme-neutral-bg relative overflow-hidden">
-            <img src="/wave-lines-horizone.png" class="w-[63%] object-contain absolute right-0 top-45 z-10" alt="theme-decoration-wave">
+    <div class="w-full min-h-screen flex gap-20 items-end py-30 bg-theme-neutral-bg relative  px-3
+                max-xl:flex-col max-xl:items-center max-xl:justify-center max-xl:h-auto max-xl:overflow-x-clip max-lg:py-20" >
+            <img src="/wave-lines-horizone.png" 
+            class="w-[63%] object-contain absolute right-0 top-45 z-10
+                   max-xl:w-full max-xl:-top-6 max-xl:-right-20 max-xl:scale-y-127" 
+            alt="theme-decoration-wave">
             <img src="/public/decoration-1.png" class="w-full object-cover absolute top-[50%] " alt="decoration">
-        <div class="w-[46%]">
+        <div class="w-[46%] max-xl:w-full">
             <Slider class="bg-center bg-cover aspect-square" :dataArr="currentRoomImageList"></Slider>
         </div>
-        <div class="w-150 flex flex-col gap-10 text-theme-neutral-0 z-20">
+        <div class="w-150 flex flex-col gap-10 text-theme-neutral-0 z-20 max-xl:w-full">
             <div>
-                <h2 class="text-40 font-bold leading-[1.2] tracking-wider">{{ roomType }}</h2>
-                <p class="text-base font-medium leading-[1.5] tracking-wide">{{ roomDescribe }}</p>
+                <h2 class="text-40 font-bold leading-[1.2] tracking-wider max-md:text-28">{{ roomType }}</h2>
+                <p class="text-base font-medium leading-[1.5] tracking-wide max-md:text-14 max-md:font-normal">{{ roomDescribe }}</p>
             </div>
-            <h3 class="text-32 font-bold leading-[1.2] tracking-wider">NT$ <span>{{ roomPrice }}</span></h3>
+            <h3 class="text-32 font-bold leading-[1.2] tracking-wider max-md:text-24">NT$ <span>{{ roomPrice }}</span></h3>
             <RectWideBtn class="w-full" content="查看更多"></RectWideBtn>
             <div class="text-theme-primary-100 flex items-center self-end">
                 <svg @click="handleArrow(false)" class="m-3 hover:scale-150 active:scale-95 transition-all ease-in-out duration-250" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
