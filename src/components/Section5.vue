@@ -1,9 +1,10 @@
 <script setup>
-    import { getCulinary } from '../apiFunction'
+    import { getData } from '../apiFunction'
     import {ref, inject} from 'vue';
 
     const token = inject("token")
-    const culiaryArr = await getCulinary(token)
+    const culiaryUrl = "https://team-rocket-hotelapi-from-freyja.onrender.com/api/v1/admin/culinary/"
+    const culiaryArr = await getData(culiaryUrl,token)
 
 
 </script>
