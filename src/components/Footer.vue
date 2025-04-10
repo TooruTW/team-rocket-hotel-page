@@ -1,11 +1,11 @@
 <script setup></script>
 <template>
-    <div class="w-full max-w-324 bg-theme-neutral-bg text-theme-neutral-0 flex flex-col items-center justify-center gap-20 mb-30 mt-20">
-        <div class="w-full h-33 flex justify-between">
-            <div class="flex flex-col justify-between ">
-                <!-- logo -->
+    <div class="w-full max-w-324 bg-theme-neutral-bg text-theme-neutral-0 
+                flex flex-col items-center justify-center gap-20 mb-30 mt-20 p-3">
+        <div class="w-full h-33 flex justify-between gap-10
+                    max-md:flex-col max-md:h-auto">
+            <div class="flex flex-col justify-between gap-10">
                 <img class="w-49" src="/public/hotel-icon.png" alt="hotel-icon">
-                <!-- social media -->
                 <div class="flex gap-4">
                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect x="0.5" y="0.5" width="39" height="39" rx="19.5" stroke="white"/>
@@ -24,9 +24,8 @@
                     </svg>
                 </div>
             </div>
-            <div class="flex justify-between w-106">
-                <!-- tel fax -->
-                <div  class="flex flex-col justify-between">
+            <div class="flex justify-between w-106 max-md:flex-col max-md:gap-4">
+                <div  class="flex flex-col justify-between max-md:gap-4">
                     <div>
                         <h5>TEL</h5>
                         <p class="text-theme-neutral-40">+886-7-1234567</p>
@@ -36,21 +35,19 @@
                         <p class="text-theme-neutral-40">+886-7-1234567</p>
                     </div>
                 </div>
-                <!-- mail web -->
-                <div  class="flex flex-col justify-between">
-                    <duv>
+                <div  class="flex flex-col justify-between max-md:gap-4">
+                    <div>
                         <h5>MAIL</h5>
                         <p class="text-theme-neutral-40">elh@hexschool.com</p>
-                    </duv>
-                    <duv>
+                    </div>
+                    <div>
                         <h5>WEB</h5>
                         <p class="text-theme-neutral-40">www.elhhexschool.com.tw</p>
-                    </duv>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- copy right -->
-        <p class="flex justify-between w-full">
+        <p class="flex justify-between w-full gap-4 max-md:flex-col ">
             <span>806023 台灣高雄市新興區六角路123號</span>
             <span>© 享樂酒店 2023 All Rights Reserved.</span>
         </p>
