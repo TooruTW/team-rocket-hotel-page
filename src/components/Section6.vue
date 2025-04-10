@@ -1,4 +1,5 @@
 <script setup>
+    import Footer from './Footer.vue';
 </script>
 <template>
     <div class="min-h-screen flex flex-col justify-between items-center pt-30 bg-theme-neutral-bg text-theme-neutral-0 
@@ -74,7 +75,7 @@
     </div>
 <img class="w-full max-md:hidden" src="/public/wave-line-horizone-full.png" alt="decoration-wave">
 <img class="hidden max-md:block" src="/public/wave-line-horizone-full-md.png" alt="decoration-wave-md">
-
+<Footer></Footer>
 </div>
 
 </template>
