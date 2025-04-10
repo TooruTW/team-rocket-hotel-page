@@ -26,6 +26,7 @@ provide("token",token)
     <Section5></Section5>
   </Suspense>
   <Section6></Section6>
+  <Footer></Footer>
 </template>
  <!-- vue router -->
 <style scoped>
