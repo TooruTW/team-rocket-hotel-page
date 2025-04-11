@@ -1,6 +1,7 @@
 <script setup>
 import {ref, onMounted} from 'vue';
 import Menu from './icons/Menu.vue';
+import { RouterLink } from 'vue-router';
 
 const paddingFromParent = ref(null)
 const loginState = ref("會員登入")
@@ -66,7 +67,7 @@ function handleMenu(){
             <a :class="aTagClassState" href=""><li :class="liClassState">
                 客房旅宿</li>
             </a>
-            <RouterLink :class="aTagClassState" to="/account">
+            <RouterLink :class="aTagClassState" to="/user">
                 <li :class="liClassState">{{ loginState }}</li>
             </RouterLink>
 
