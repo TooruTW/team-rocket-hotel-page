@@ -1,6 +1,6 @@
 <script setup>
 import {ref, onMounted} from 'vue';
-import Menu from '../icons/Menu.vue';
+import Menu from './icons/Menu.vue';
 
 const paddingFromParent = ref(null)
 const loginState = ref("會員登入")
@@ -54,18 +54,13 @@ function handleMenu(){
 
 </script>
 <template>
-    <nav  class="w-auto flex items-center justify-between py-6 relative" :class="[classFromParent]"  >
-        <img class="h-18" src="/hotel-icon.png" alt="hotel-icon">
+    <nav  class="w-auto flex items-center justify-between py-6 max-md:py-4 relative" :class="[classFromParent]"  >
+        <img class="h-full" src="/hotel-icon.png" alt="hotel-icon">
         <Menu class="z-50 " @click="handleMenu" size="30" color="text-theme-neutral-0" :isShow="isShowBurgerMenu"></Menu>
         <ul class="flex gap-4 w-auto" :class="[ulClassState, ulPosition]">
             <a :class="aTagClassState" href=""><li :class="liClassState">客房旅宿</li></a>
             <a :class="aTagClassState" href=""><li :class="liClassState">{{ loginState }}</li></a>
             <a class="w-32" :class="aTagClassState" href=""><li :class="liClassState" class="bg-theme-primary-100  rounded-md">立即訂房</li></a>
         </ul>
-        <!-- <ul class="hidden absolute w-full h-screen left-0 top-0 flex-col items-center gap-4 justify-center bg-theme-neutral-bg" :class="[toggleMenu]" >
-            <a :class="aTagClassMd" href=""><li :class="[basicClassMd]">客房旅宿</li></a>
-            <a :class="aTagClassMd" href=""><li :class="[basicClassMd]">{{ loginState }}</li></a>
-            <a :class="aTagClassMd" href=""><li :class="[basicClassMd]" class="bg-theme-primary-100  rounded-md">立即訂房</li></a>
-        </ul> -->
     </nav>
 </template>

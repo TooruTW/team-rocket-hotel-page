@@ -1,6 +1,6 @@
 <script setup>
 import {ref,computed, onMounted, onUnmounted} from 'vue'
-import Header from './Header.vue';
+import Header from '../Header.vue';
 
 const roomAlbum = [
     "/hero-img.jpeg", 
