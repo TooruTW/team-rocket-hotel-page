@@ -3,8 +3,18 @@ import MainPage from '../components/main-page/MainPage.vue'
 import UserPage from '../components/user-page/UserPage.vue'
 
 const routes = [
-  { path: '/', component: MainPage },
-  { path: '/user', component: UserPage },
+    { path: '/',
+    name:' MainPage', 
+    component: MainPage 
+    },
+    { path: '/user', 
+    name:'UserPage',
+    component: UserPage,
+    // children: [
+    //     {path: 'login', component: LoginForm},
+    //     {path: 'register', component: RegisterForm},
+    // ]
+},
 ]
 
 const router = createRouter({
