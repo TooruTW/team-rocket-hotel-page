@@ -1,7 +1,7 @@
 <script setup>
 import { inject, ref, computed } from 'vue';
 import Slider from './slider.vue';
-import { getData } from '../apiFunction';
+import { getData } from '../../apiFunction';
 import RectWideBtn from './RectWideBtn.vue';
 
 const token = inject("token")

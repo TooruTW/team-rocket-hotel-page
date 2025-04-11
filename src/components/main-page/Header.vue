@@ -1,6 +1,6 @@
 <script setup>
 import {ref, onMounted} from 'vue';
-import Menu from './icons/menu.vue';
+import Menu from '../icons/Menu.vue';
 
 const paddingFromParent = ref(null)
 const loginState = ref("會員登入")
