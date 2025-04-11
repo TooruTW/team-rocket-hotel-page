@@ -1,6 +1,7 @@
 <script setup>
 import {ref, onMounted} from 'vue';
 import Menu from './icons/Menu.vue';
+import { RouterLink } from 'vue-router';
 
 const paddingFromParent = ref(null)
 const loginState = ref("會員登入")
@@ -54,12 +55,22 @@ function handleMenu(){
 
 </script>
 <template>
-    <nav  class="w-auto flex items-center justify-between py-6 max-md:py-4 relative" :class="[classFromParent]"  >
-        <img class="h-full" src="/hotel-icon.png" alt="hotel-icon">
-        <Menu class="z-50 " @click="handleMenu" size="30" color="text-theme-neutral-0" :isShow="isShowBurgerMenu"></Menu>
+
+
+
+    <nav  class="w-auto flex items-center justify-between py-6 max-md:py-4 relative" :class="[classFromParent]">
+        <RouterLink class="h-full" to="/">
+            <img class="h-full" src="/hotel-icon.png" alt="hotel-icon">
+        </RouterLink>
+        <Menu class="z-50" @click="handleMenu" size="30" color="text-theme-neutral-0" :isShow="isShowBurgerMenu"></Menu>
         <ul class="flex gap-4 w-auto" :class="[ulClassState, ulPosition]">
-            <a :class="aTagClassState" href=""><li :class="liClassState">客房旅宿</li></a>
-            <a :class="aTagClassState" href=""><li :class="liClassState">{{ loginState }}</li></a>
+            <a :class="aTagClassState" href=""><li :class="liClassState">
+                客房旅宿</li>
+            </a>
+            <RouterLink :class="aTagClassState" to="/user">
+                <li :class="liClassState">{{ loginState }}</li>
+            </RouterLink>
+
             <a class="w-32" :class="aTagClassState" href=""><li :class="liClassState" class="bg-theme-primary-100  rounded-md">立即訂房</li></a>
         </ul>
     </nav>

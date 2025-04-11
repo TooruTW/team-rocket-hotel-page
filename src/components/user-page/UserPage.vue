@@ -4,12 +4,14 @@ import Header from '../Header.vue';
 </script>
 <template>
     <div class="w-full h-screen bg-theme-neutral-bg overflow-hidden relative flex flex-col max-md:justify-center">
+
         <Header class="w-full h-120/1080 px-20 max-md:px-3 max-md:absolute max-md:top-0"></Header>
-        <div class="w-full h-960/1080 flex text-theme-neutral-0 justify-center">
+
+        <div class="w-full h-960/1080 flex text-theme-neutral-0 justify-center max-md:mt-41">
             <img class="w-1/2 object-cover object-center max-md:hidden" src="https://images.unsplash.com/photo-1630587148265-761cbd139043?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="login-img">
-            <div class="w-1/2 max-md:w-full flex flex-col justify-center items-center relative">
-                <img class="w-full max-md:w-screen absolute top-48 max-md:-top-1.5 z-0" src="/public/wave-lines-horizone.png" alt="decroation-wave">
-                <form class="z-10 min-w-416/960 max-md:w-full px-5 flex flex-col gap-10 mt-23" action="">
+            <div class="w-1/2 max-md:w-full h-full flex flex-col justify-center max-md:justify-start items-center relative">
+                <img class="w-full max-md:w-screen absolute top-48 max-md:-top-15 z-0" src="/public/wave-lines-horizone.png" alt="decroation-wave">
+                <form class="z-10 min-w-416/960 max-md:w-full px-5 flex flex-col gap-10" action="">
                     <div>
                         <p class=" text-theme-primary-100 font-bold text-base max-md:text-14 leading-[1.5] tracking-wide">享樂酒店，誠摯歡迎</p>
                         <h1 class="font-bold text-48 max-md:text-32 leading-[1.2] tracking-wider">立即開始旅程</h1>
