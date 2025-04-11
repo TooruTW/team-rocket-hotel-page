@@ -1,5 +1,8 @@
 <script setup>
 import { ref, computed } from 'vue'
+import cityName from '../asset/CityCountyData.json'
+
+let cityArr = cityName.map((city)=> city.CityName)
 
 let isStage2 = ref(true)
 
@@ -96,7 +99,7 @@ const days = computed(() => {
                             </div>
 
                         </label>
-                        
+
                         <label class=" font-bold text-base max-md:text-14 leading-[1.5] tracking-wide w-full flex flex-col gap-2" for="">
                             確認密碼
                             <input class="w-full rounded-md p-4 bg-theme-neutral-40 text-theme-neutral-60 font-medium" type="text" placeholder="請再輸入一次密碼">
