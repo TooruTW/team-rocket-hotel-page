@@ -77,22 +77,22 @@ const days = computed(() => {
                             <div class="flex justify-between gap-2 text-theme-neutral-80">
                                 <!-- year -->
                                 <div class="w-full flex items-center relative bg-theme-neutral-0 rounded-md">
-                                    <select class="appearance-none p-4 w-full" name="" id="">
+                                    <select class="appearance-none p-4 w-full" name="year" id="year" v-model="selectedYear">
                                         <option v-for="year in years" :key="year" :value="year">{{ year }}年</option>
                                     </select>
                                     <svg class=" absolute right-4" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
                                 </div>
                                 <!-- month -->
                                 <div class="w-full flex items-center relative bg-theme-neutral-0 rounded-md">
-                                    <select class="appearance-none p-4 w-full" name="" id="">
-                                        <option v-for="month in months" :key="month" :value="month">{{ month }}年</option>
+                                    <select class="appearance-none p-4 w-full" name="month" id="month" v-model="selectedMonth">
+                                        <option v-for="month in months" :key="month" :value="month">{{ month }}月</option>
                                     </select>
                                     <svg class=" absolute right-4" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
                                 </div>
                                 <!-- day -->
                                 <div class="w-full flex items-center relative bg-theme-neutral-0 rounded-md">
-                                    <select class="appearance-none p-4 w-full" name="" id="">
-                                        <option v-for="day in days" :key="day" :value="day">{{ day }}年</option>
+                                    <select class="appearance-none p-4 w-full" name="day" id="day" v-model="selectedDay">
+                                        <option v-for="day in days" :key="day" :value="day">{{ day }}日</option>
                                     </select>
                                     <svg class=" absolute right-4" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
                                 </div>
