@@ -10,7 +10,7 @@
             <img class="w-1/2 object-cover object-center" src="https://images.unsplash.com/photo-1630587148265-761cbd139043?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="login-img">
             <div class="w-1/2 flex flex-col justify-center items-center relative">
                 <img class="w-304 absolute top-48 z-0" src="/public/wave-lines-horizone.png" alt="decroation-wave">
-                <form class="z-10 w-416/960 flex flex-col gap-10" action="">
+                <form class="z-10 min-w-416/960 flex flex-col gap-10" action="">
                     <div>
                         <p class=" text-theme-primary-100 font-bold text-base leading-[1.5] tracking-wide">享樂酒店，誠摯歡迎</p>
                         <h1 class="font-bold text-48 leading-[1.2] tracking-wider">立即開始旅程</h1>
@@ -37,7 +37,7 @@
                             <a class=" justify-self-end-safe text-theme-primary-100 underline" href="">忘記密碼？</a>
                         </label>
                     </div>
-                    <button class="w-full rounded-md p-4 bg-theme-neutral-40 text-theme-neutral-60">會員登入</button>
+                    <button class="w-full rounded-md p-4 bg-theme-neutral-40 text-theme-neutral-60 hover:bg-theme-primary-100 hover:text-theme-neutral-0">會員登入</button>
                     <h4>沒有會員嗎？
                         <a  class=" text-theme-primary-100 underline" href="">前往註冊</a>
                     </h4>
