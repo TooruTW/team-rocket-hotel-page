@@ -1,5 +1,5 @@
 <script setup>
-    import { getData } from '../apiFunction'
+    import { getData } from '../../apiFunction'
     import {ref, inject} from 'vue';
 
     const token = inject("token")
