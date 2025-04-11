@@ -1,6 +1,6 @@
 <script setup>
 import MainPage from './components/main-page/MainPage.vue';
-import LoginPage from './components/login-page/login.vue'
+import LoginPage from './components/account-page/login.vue'
 
 </script>
 <template>

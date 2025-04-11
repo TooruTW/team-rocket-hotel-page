@@ -10,7 +10,7 @@
             <img class="w-1/2 object-cover object-center" src="https://images.unsplash.com/photo-1630587148265-761cbd139043?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="login-img">
             <div class="w-1/2 flex flex-col justify-center items-center relative">
                 <img class="w-304 absolute top-48 z-0" src="/public/wave-lines-horizone.png" alt="decroation-wave">
-                <form class="z-10 w-416/960 flex flex-col gap-10 " action="">
+                <form class="z-10 w-416/960 flex flex-col gap-10" action="">
                     <div>
                         <p class=" text-theme-primary-100 font-bold text-base leading-[1.5] tracking-wide">享樂酒店，誠摯歡迎</p>
                         <h1 class="font-bold text-48 leading-[1.2] tracking-wider">立即開始旅程</h1>
@@ -25,8 +25,13 @@
                             <input class="w-full rounded-md p-4 bg-theme-neutral-40 text-theme-neutral-60" type="text" placeholder="請輸入密碼">
                         </label>
                         <label class="flex justify-between gap-2 font-bold text-base leading-[1.5] tracking-wide w-full" for="">
-                            <span>
-                                <input class="" type="checkbox">
+                            <span class="relative">
+                                <input class="accent-theme-primary-100 text-theme-neutral-0 w-6 peer" type="checkbox">
+                                <div class=" absolute left-0 top-0 peer-checked:hidden pointer-events-none w-6 border-1 border-theme-neutral-60 aspect-square  rounded-sm bg-theme-neutral-0 flex justify-center items-center">
+                                </div>
+                                <div class=" absolute left-0 top-0 hidden pointer-events-none w-6 aspect-square  rounded-sm bg-theme-primary-100 peer-checked:flex justify-center items-center">
+                                    <svg class="w-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#ffffff"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
+                                </div>
                                 記住帳號
                             </span>
                             <a class=" justify-self-end-safe text-theme-primary-100 underline" href="">忘記密碼？</a>
