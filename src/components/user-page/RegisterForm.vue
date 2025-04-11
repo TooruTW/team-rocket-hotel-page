@@ -2,7 +2,21 @@
 import { ref, computed } from 'vue'
 import cityName from '../asset/CityCountyData.json'
 
-let cityArr = cityName.map((city)=> city.CityName)
+console.log(cityName)
+const cityArr = computed(()=>{
+    return cityName.map((city)=> city.CityName)
+})
+
+const selectedCity = ref(null)
+const selectedZone = ref(null)
+
+const zoneArr = computed(()=>{
+    if(!selectedCity.value) return []
+    const zonesInfo = cityName.find((city)=> city.CityName === selectedCity.value ).AreaList
+    const zoneName = zonesInfo.map(zone => zone.AreaName)
+    return zoneName 
+})
+
 
 let isStage2 = ref(true)
 
@@ -64,45 +78,62 @@ const days = computed(() => {
                     </div>
                     <!-- stage 2 -->
                     <div v-if="isStage2" class="flex flex-col gap-2">
-                        <label class=" font-bold text-base max-md:text-14 leading-[1.5] tracking-wide w-full flex flex-col gap-2" for="">
+                        <label class=" font-bold text-base max-md:text-14 leading-[1.5] tracking-wide w-full flex flex-col gap-2" for="fullName">
                             姓名
-                            <input class="w-full rounded-md p-4 bg-theme-neutral-40 text-theme-neutral-60 font-medium" type="text" placeholder="請輸入姓名">
+                            <input id="fullName" class="w-full rounded-md p-4 bg-theme-neutral-40 text-theme-neutral-60 font-medium" type="text" placeholder="請輸入姓名">
                         </label>
-                        <label class=" font-bold text-base max-md:text-14 leading-[1.5] tracking-wide w-full flex flex-col gap-2" for="">
+                        <label class=" font-bold text-base max-md:text-14 leading-[1.5] tracking-wide w-full flex flex-col gap-2" for="phoneNum">
                             手機號碼
-                            <input class="w-full rounded-md p-4 bg-theme-neutral-40 text-theme-neutral-60 font-medium" type="text" placeholder="請輸入手機號碼">
+                            <input id="phoneNum" class="w-full rounded-md p-4 bg-theme-neutral-40 text-theme-neutral-60 font-medium" type="text" placeholder="請輸入手機號碼">
                         </label>
-                        <label class="" for="">
+                        <label class=" font-bold text-base max-md:text-14 leading-[1.5] tracking-wide" for="year">
                             生日
-                            <div class="flex justify-between gap-2 text-theme-neutral-80">
+                            <div class="flex font-medium justify-between gap-2 text-theme-neutral-80">
                                 <!-- year -->
                                 <div class="w-full flex items-center relative bg-theme-neutral-0 rounded-md">
                                     <select class="appearance-none p-4 w-full" name="year" id="year" v-model="selectedYear">
                                         <option v-for="year in years" :key="year" :value="year">{{ year }}年</option>
                                     </select>
-                                    <svg class=" absolute right-4" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
+                                    <svg class="pointer-events-none absolute right-4" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
                                 </div>
                                 <!-- month -->
                                 <div class="w-full flex items-center relative bg-theme-neutral-0 rounded-md">
                                     <select class="appearance-none p-4 w-full" name="month" id="month" v-model="selectedMonth">
                                         <option v-for="month in months" :key="month" :value="month">{{ month }}月</option>
                                     </select>
-                                    <svg class=" absolute right-4" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
+                                    <svg class="pointer-events-none absolute right-4" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
                                 </div>
                                 <!-- day -->
                                 <div class="w-full flex items-center relative bg-theme-neutral-0 rounded-md">
                                     <select class="appearance-none p-4 w-full" name="day" id="day" v-model="selectedDay">
                                         <option v-for="day in days" :key="day" :value="day">{{ day }}日</option>
                                     </select>
-                                    <svg class=" absolute right-4" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
+                                    <svg class="pointer-events-none absolute right-4" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
                                 </div>
                             </div>
-
                         </label>
 
                         <label class=" font-bold text-base max-md:text-14 leading-[1.5] tracking-wide w-full flex flex-col gap-2" for="">
-                            確認密碼
-                            <input class="w-full rounded-md p-4 bg-theme-neutral-40 text-theme-neutral-60 font-medium" type="text" placeholder="請再輸入一次密碼">
+                            地址
+                            <div class="flex gap-2 text-theme-neutral-80">
+                                <div class="w-full flex items-center relative bg-theme-neutral-0 rounded-md">
+                                    <select class="appearance-none p-4 w-full" name="city" id="city" v-model="selectedCity">
+                                        <option v-for="city in cityArr" :key="city" :value="city">{{ city }}</option>
+                                    </select>
+                                    <svg class="pointer-events-none absolute right-4" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
+                                </div>
+                                <div class="w-full flex items-center relative bg-theme-neutral-0 rounded-md">
+                                    <select class="appearance-none p-4 w-full" name="zone" id="zone" v-model="selectedZone">
+                                        <option v-for="zone in zoneArr" :key="zone" :value="zone">{{ zone }}</option>
+                                    </select>
+                                    <svg class="pointer-events-none absolute right-4" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
+                                </div>
+                            </div>
+                            <input class="w-full rounded-md p-4 bg-theme-neutral-40 text-theme-neutral-60 font-medium" type="text" placeholder="請輸入詳細地址">
+                        </label>
+                        <label for="readed">
+                            <input id="readed" type="checkbox">
+                            <p>我已閱讀並同意本網站個資使用規範</p>
                         </label>
                         <button class="w-full rounded-md p-4 bg-theme-neutral-40 text-theme-neutral-60 hover:bg-theme-primary-100 hover:text-theme-neutral-0">完成註冊</button>
                     </div>
