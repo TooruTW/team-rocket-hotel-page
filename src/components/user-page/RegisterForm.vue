@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import cityName from '../asset/CityCountyData.json'
 import { isEmail, isPassword, isPhoneNum, isBirthday, isAddress } from '../../validator'
 import { postDate } from '../../apiFunction'
+import Cookies from 'js-cookie'
 const url = 'https://team-rocket-hotelapi-from-freyja.onrender.com/api/v1/user/signup'
 const isStage2 = ref(false)
 const isStage1Pass = ref(false)
@@ -101,7 +102,7 @@ const selectedZipCode = computed(()=>{
 function updateZipCode(){
     user.value.address.zipcode = Number(selectedZipCode.value)
 }
-function handleSubmit(event){
+async function handleSubmit(event){
     event.preventDefault()
     updateZipCode()
     formatorBirthday()
@@ -109,7 +110,9 @@ function handleSubmit(event){
     if(isStage1Pass.value && isStage2Pass.value){
         console.log("Register Compeleted sending data to sever")
         delete user.value.isReaded
-        let token = postDate(url,null,user.value)
+        const data = await postDate(url,null,user.value)
+        Cookies.set('token',data.token,{expires: 10 })
+        console.log(data)
         return
     }
     console.log("Validate fail",user.value)

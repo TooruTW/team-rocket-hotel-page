@@ -25,8 +25,7 @@ export async function postDate(url, token = null, body) {
     try {
         const res = await fetch(url,createFetchingObject("POST",null,body))
         const data = await res.json()
-        console.log(data)
-        return data.token
+        return data
     } catch (error) {
         console.log(error.message)
     }
