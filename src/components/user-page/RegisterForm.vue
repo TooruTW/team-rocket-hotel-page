@@ -1,44 +1,75 @@
 <script setup>
 import { ref, computed } from 'vue'
 import cityName from '../asset/CityCountyData.json'
+import { isEmail, isPassword } from '../../validator'
 
-console.log(cityName)
-const cityArr = computed(()=>{
-    return cityName.map((city)=> city.CityName)
-})
-
-const selectedCity = ref("高雄市")
-const selectedZone = ref('新興區')
-
-const zoneArr = computed(()=>{
-    if(!selectedCity.value) return []
-    const zonesInfo = cityName.find((city)=> city.CityName === selectedCity.value ).AreaList
-    const zoneName = zonesInfo.map(zone => zone.AreaName)
-    return zoneName 
-})
-
-
-let isStage2 = ref(true)
-
+const isStage2 = ref(false)
 const stageClass = computed(()=> {
     if(!isStage2.value){
         return "border-1  border-theme-neutral-60 text-theme-neutral-60"
     }
     return "border-0 bg-theme-primary-100 text-theme-neutral-0"
 })
+// stage-1
 
+const user = ref(
+    {
+        name: null,
+        email: null,
+        password: null,
+        phone: null,
+        birthday:null,
+        address: {
+            zipcode: null,
+            detail: null
+        }
+    }
+)
+
+const userPasswordConfirm = ref(null)
+
+const validatorEmail = ref(null)
+const validatorPassword = ref(null)
+const validatorPasswordConfirem = ref(null)
+const stage1Validator = computed(()=>{
+    return validatorEmail.value || validatorPassword.value || validatorPasswordConfirem.value ? false:true;
+})
+
+function formChecker(){
+    console.log(user.value)
+    validatorEmail.value = isEmail(user.value.email)? null:"電子郵件格式錯誤。"
+    validatorPassword.value = isPassword(user.value.password)? null:"請輸入 8 碼密碼，且需包含至少一個英文字。"
+    validatorPasswordConfirem.value = user.value.password === userPasswordConfirm.value? null : "與輸入密碼不符"
+}
+
+function handleRegiserAccount(event){
+    event.preventDefault()
+    console.log(stage1Validator.value)
+    stage1Validator.value? isStage2.value = true : null ;
+}
+
+
+// stage-2
+const cityArr = computed(()=>{
+    return cityName.map((city)=> city.CityName)
+})
+const selectedCity = ref("高雄市")
+const selectedZone = ref('新興區')
+const zoneArr = computed(()=>{
+    if(!selectedCity.value) return []
+    const zonesInfo = cityName.find((city)=> city.CityName === selectedCity.value ).AreaList
+    const zoneName = zonesInfo.map(zone => zone.AreaName)
+    return zoneName 
+})
 const years = Array.from({ length: 100 }, (_, i) => 2025 - i)
 const months = Array.from({ length: 12 }, (_, i) => i + 1)
-
 const selectedYear = ref(new Date().getFullYear())
 const selectedMonth = ref(new Date().getMonth() + 1)
 const selectedDay = ref(new Date().getDate())
-
 const days = computed(() => {
   const lastDay = new Date(selectedYear.value, selectedMonth.value, 0).getDate()
   return Array.from({ length: lastDay }, (_, i) => i + 1)
 })
-
 
 </script>
 <template>
@@ -61,20 +92,25 @@ const days = computed(() => {
                     </div>
                     <!-- stage 1 -->
                     <div v-if="!isStage2" class="flex flex-col gap-2">
-                        <label class=" font-bold text-base max-md:text-14 leading-[1.5] tracking-wide w-full flex flex-col gap-2" for="">
-                            電子信箱
-                            <input class="w-full rounded-md p-4 bg-theme-neutral-40 text-theme-neutral-60 font-medium" type="text" placeholder="hello@exsample.com">
+                        <label class=" font-bold text-base max-md:text-14 leading-[1.5] tracking-wide w-full flex flex-col gap-2" for="email">
+                            <p class="flex gap-2 items-center">
+                                電子信箱 <span class="text-14 text-theme-alert-100">  {{ validatorEmail }} </span>
+                            </p>
+                            <input @input="formChecker" v-model="user.email" id="email" class="w-full rounded-md p-4 bg-theme-neutral-40 text-theme-neutral-60 font-medium" type="text" placeholder="hello@exsample.com">
                         </label>
                         <label class=" font-bold text-base max-md:text-14 leading-[1.5] tracking-wide w-full flex flex-col gap-2" for="">
-                            密碼
-                            <input class="w-full rounded-md p-4 bg-theme-neutral-40 text-theme-neutral-60 font-medium" type="text" placeholder="請輸入密碼">
+                            <p class="flex gap-2 items-center">
+                                密碼 <span class="text-14 text-theme-alert-100">  {{ validatorPassword }} </span>
+                            </p>
+                            <input @input="formChecker" v-model="user.password" class="w-full rounded-md p-4 bg-theme-neutral-40 text-theme-neutral-60 font-medium" type="text" placeholder="請輸入密碼">
                         </label>
-                        
                         <label class=" font-bold text-base max-md:text-14 leading-[1.5] tracking-wide w-full flex flex-col gap-2" for="">
-                            確認密碼
-                            <input class="w-full rounded-md p-4 bg-theme-neutral-40 text-theme-neutral-60 font-medium" type="text" placeholder="請再輸入一次密碼">
+                            <p class="flex gap-2 items-center">
+                                確認密碼 <span class="text-14 text-theme-alert-100">  {{ validatorPasswordConfirem }} </span>
+                            </p>
+                            <input @input="formChecker" v-model="userPasswordConfirm" class="w-full rounded-md p-4 bg-theme-neutral-40 text-theme-neutral-60 font-medium" type="text" placeholder="請再輸入一次密碼">
                         </label>
-                        <button class="w-full mt-10 rounded-md p-4 bg-theme-neutral-40 text-theme-neutral-60 hover:bg-theme-primary-100 hover:text-theme-neutral-0">下一步</button>
+                        <button @click="handleRegiserAccount" class="w-full mt-10 rounded-md p-4 bg-theme-neutral-40 text-theme-neutral-60 hover:bg-theme-primary-100 hover:text-theme-neutral-0">下一步</button>
                     </div>
                     <!-- stage 2 -->
                     <div v-if="isStage2" class="flex flex-col gap-2">
@@ -112,7 +148,6 @@ const days = computed(() => {
                                 </div>
                             </div>
                         </label>
-
                         <label class=" font-bold text-base max-md:text-14 leading-[1.5] tracking-wide w-full flex flex-col gap-2" for="">
                             地址
                             <div class="flex gap-2 text-theme-neutral-80">
