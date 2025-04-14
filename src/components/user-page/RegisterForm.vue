@@ -2,6 +2,8 @@
 import { ref, computed } from 'vue'
 import cityName from '../asset/CityCountyData.json'
 import { isEmail, isPassword, isPhoneNum, isBirthday, isAddress } from '../../validator'
+import { postDate } from '../../apiFunction'
+const url = 'https://team-rocket-hotelapi-from-freyja.onrender.com/api/v1/user/signup'
 const isStage2 = ref(false)
 const isStage1Pass = ref(false)
 const isStage2Pass = ref(false)
@@ -79,7 +81,6 @@ const days = computed(() => {
   const lastDay = new Date(selectedYear.value, selectedMonth.value, 0).getDate()
   return Array.from({ length: lastDay }, (_, i) => i + 1)
 })
-
 // address
 const selectedCity = ref("高雄市")
 const selectedZone = ref('新興區')
@@ -98,7 +99,7 @@ const selectedZipCode = computed(()=>{
     return zipCode
 })
 function updateZipCode(){
-    user.value.address.zipcode = selectedZipCode.value
+    user.value.address.zipcode = Number(selectedZipCode.value)
 }
 function handleSubmit(event){
     event.preventDefault()
@@ -107,6 +108,8 @@ function handleSubmit(event){
     stage2Checker()
     if(isStage1Pass.value && isStage2Pass.value){
         console.log("Register Compeleted sending data to sever")
+        delete user.value.isReaded
+        let token = postDate(url,null,user.value)
         return
     }
     console.log("Validate fail",user.value)
