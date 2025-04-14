@@ -1,7 +1,7 @@
 <script setup>
 </script>
 <template>
-    <form class="z-10 min-w-416/960 max-md:w-full px-5 flex flex-col gap-10" action="">
+    <form class="z-10 min-w-416/960 max-md:w-full px-5 flex flex-col gap-10 " action="">
                     <div>
                         <p class=" text-theme-primary-100 font-bold text-base max-md:text-14 leading-[1.5] tracking-wide">享樂酒店，誠摯歡迎</p>
                         <h1 class="font-bold text-48 max-md:text-32 leading-[1.2] tracking-wider">立即開始旅程</h1>

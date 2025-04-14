@@ -7,8 +7,8 @@ const cityArr = computed(()=>{
     return cityName.map((city)=> city.CityName)
 })
 
-const selectedCity = ref(null)
-const selectedZone = ref(null)
+const selectedCity = ref("高雄市")
+const selectedZone = ref('新興區')
 
 const zoneArr = computed(()=>{
     if(!selectedCity.value) return []
@@ -42,7 +42,7 @@ const days = computed(() => {
 
 </script>
 <template>
-    <form class="z-10 min-w-416/960 max-2xl:w-full px-5 flex flex-col gap-10" action="">
+    <form class="z-10 min-w-416/960 max-2xl:w-full px-5 flex flex-col gap-10 mb-23" action="">
                     <div>
                         <p class=" text-theme-primary-100 font-bold text-base max-md:text-14 leading-[1.5] tracking-wide">享樂酒店，誠摯歡迎</p>
                         <h1 class="font-bold text-48 max-md:text-32 leading-[1.2] tracking-wider">立即註冊</h1>
@@ -131,13 +131,12 @@ const days = computed(() => {
                             </div>
                             <input class="w-full rounded-md p-4 bg-theme-neutral-40 text-theme-neutral-60 font-medium" type="text" placeholder="請輸入詳細地址">
                         </label>
-                        <label for="readed">
+                        <label for="reade" class="flex gap-2">
                             <input id="readed" type="checkbox">
                             <p>我已閱讀並同意本網站個資使用規範</p>
                         </label>
                         <button class="w-full rounded-md p-4 bg-theme-neutral-40 text-theme-neutral-60 hover:bg-theme-primary-100 hover:text-theme-neutral-0">完成註冊</button>
                     </div>
-
                     <h4 class="font-medium text-base max-md:text-14 leading-[1.5] tracking-wide">已經有會員了嗎？
                         <a  class="font-bold text-theme-primary-100 underline" href="">立即登入</a>
                     </h4>
