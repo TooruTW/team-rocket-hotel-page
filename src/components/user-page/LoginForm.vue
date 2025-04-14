@@ -1,4 +1,14 @@
 <script setup>
+import { postDate } from '../../apiFunction'
+import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
+const url = 'https://team-rocket-hotelapi-from-freyja.onrender.com/api/v1/user/login'
+
+
+async function login(){
+    postDate(url,null,body)
+}
+
 </script>
 <template>
     <form class="z-10 min-w-416/960 max-md:w-full px-5 flex flex-col gap-10 " action="">
@@ -30,7 +40,7 @@
                     </div>
                     <button class="w-full rounded-md p-4 bg-theme-neutral-40 text-theme-neutral-60 hover:bg-theme-primary-100 hover:text-theme-neutral-0">會員登入</button>
                     <h4 class="font-bold text-base max-md:text-14 leading-[1.5] tracking-wide">沒有會員嗎？
-                        <a  class=" text-theme-primary-100 underline" href="">前往註冊</a>
+                        <RouterLink class=" text-theme-primary-100 underline" to="/user/register">前往註冊</RouterLink>
                     </h4>
     </form>
 </template>

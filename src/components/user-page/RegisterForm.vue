@@ -4,6 +4,8 @@ import cityName from '../asset/CityCountyData.json'
 import { isEmail, isPassword, isPhoneNum, isBirthday, isAddress } from '../../validator'
 import { postDate } from '../../apiFunction'
 import Cookies from 'js-cookie'
+import { RouterLink } from 'vue-router'
+
 const url = 'https://team-rocket-hotelapi-from-freyja.onrender.com/api/v1/user/signup'
 const isStage2 = ref(false)
 const isStage1Pass = ref(false)
@@ -222,7 +224,7 @@ async function handleSubmit(event){
                         <button @click="handleSubmit" class="w-full mt-10 rounded-md p-4  bg-theme-neutral-40 text-theme-neutral-60 hover:bg-theme-primary-100 hover:text-theme-neutral-0">完成註冊</button>
                     </div>
                     <h4 class="font-medium text-base max-md:text-14 leading-[1.5] tracking-wide">已經有會員了嗎？
-                        <a  class="font-bold text-theme-primary-100 underline" href="">立即登入</a>
+                        <RouterLink class=" text-theme-primary-100 underline" to="/user/login">立即登入</RouterLink>
                     </h4>
     </form>
 </template>
