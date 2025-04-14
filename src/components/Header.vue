@@ -38,8 +38,6 @@ onMounted(()=>{
     aTagClassState.value = aTagClassMd
     liClassState.value = liClassMd
 })
-
-
 function handleMenu(){
     if(!isShowBurgerMenu.value){
         isShowBurgerMenu.value = true
@@ -48,11 +46,7 @@ function handleMenu(){
     }
     isShowBurgerMenu.value = false
     ulPosition.value = "translate-none"
-
 }
-
-
-
 </script>
 <template>
 
@@ -60,7 +54,7 @@ function handleMenu(){
 
     <nav  class="w-auto flex items-center justify-between py-6 max-md:py-4 relative" :class="[classFromParent]">
         <RouterLink class="h-full" to="/">
-            <img class="h-full" src="/hotel-icon.png" alt="hotel-icon">
+            <img class="h-full max-w-50" src="/hotel-icon.png" alt="hotel-icon">
         </RouterLink>
         <Menu class="z-50" @click="handleMenu" size="30" color="text-theme-neutral-0" :isShow="isShowBurgerMenu"></Menu>
         <ul class="flex gap-4 w-auto" :class="[ulClassState, ulPosition]">
