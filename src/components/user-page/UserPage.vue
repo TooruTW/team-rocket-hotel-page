@@ -7,7 +7,7 @@ import RegisterForm from './RegisterForm.vue';
 <template>
     <div class="w-full h-auto bg-theme-neutral-bg overflow-hidden relative flex flex-col max-md:justify-center">
 
-        <Header class="w-full h-120/1080 px-20 max-md:px-3 max-md:absolute max-md:top-0"></Header>
+        <Header class="w-full h-120/1080 px-20 max-md:px-3 max-md:absolute max-md:h-18 max-md:top-0 z-20"></Header>
 
         <div class="w-full h-960/1080 flex text-theme-neutral-0 justify-center max-md:py-24">
             <img class="w-1/2 max-h-240 object-cover object-center max-md:hidden" 
