@@ -1,5 +1,6 @@
 <script setup>
-import { provide } from "vue"
+import Cookies from 'js-cookie';
+import { provide,computed } from "vue";
 import Section1 from './Section1.vue';
 import Sectioin2 from './Sectioin2.vue';
 import Section3 from "./Section3.vue";
@@ -7,21 +8,26 @@ import Section4 from "./Section4.vue";
 import Section5 from "./Section5.vue";
 import Section6 from "./Section6.vue";
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2Y0N2YzZGQ2OTU1NDE1MzZmYzBhMjAiLCJpYXQiOjE3NDQwNzY2NDYsImV4cCI6MTc0NDY4MTQ0Nn0.OzwlHHbbPwhrNqLgK9PIBGoqwY9IM5UGIPiplAl3S5I"
+const token = Cookies.get('usertoken') ?  Cookies.get('usertoken'):null;
+const isTokenExist = computed(()=>{
+  return token? true:false;
+})
+
+console.log(isTokenExist.value)
 provide("token",token)
 
 
 </script>
 <template>
   <Section1></Section1>
-  <Suspense>
+  <Suspense v-if="isTokenExist">
     <Sectioin2></Sectioin2>
   </Suspense>
   <Section3></Section3>
-  <Suspense>
+  <Suspense v-if="isTokenExist">
     <Section4></Section4>
   </Suspense>
-  <Suspense>
+  <Suspense v-if="isTokenExist">
     <Section5></Section5>
   </Suspense>
   <Section6></Section6>

@@ -61,7 +61,7 @@ function handleMenu(){
             <a :class="aTagClassState" href=""><li :class="liClassState">
                 客房旅宿</li>
             </a>
-            <RouterLink :class="aTagClassState" to="/user">
+            <RouterLink :class="aTagClassState" to="/user/login">
                 <li :class="liClassState">{{ loginState }}</li>
             </RouterLink>
 
