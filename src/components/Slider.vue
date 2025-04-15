@@ -1,14 +1,11 @@
 <script setup>
 import{ ref, onMounted, computed } from 'vue';
-
 const props = defineProps({
   dataArr: Array
 })
-
 let currentPage = ref(0)
 let isLastPhoto = false
 let photoInterval
-
 function createInterval(){
     return setInterval(()=>{
         if(isLastPhoto){
@@ -20,11 +17,9 @@ function createInterval(){
         isLastPhoto = currentPage.value === props.dataArr.length - 1 &&  true
     },5000)
 }
-
 onMounted(()=>{
     photoInterval = createInterval()
 })
-
 function handleMouseEnter(index){
     clearInterval(photoInterval)
     currentPage.value = index
@@ -33,11 +28,8 @@ function handleMouseEnter(index){
 function handleMouseOut(){
     photoInterval = createInterval()
 }
-
 const currentImg = computed(() => props.dataArr[currentPage.value])
-
 </script>
-
 <template>
     <!-- slide show  in bg -->
     <div class="relative transition-all duration-1000 ease-in-out bg-center bg-cover" :style="{backgroundImage : `url(${currentImg})`}">
