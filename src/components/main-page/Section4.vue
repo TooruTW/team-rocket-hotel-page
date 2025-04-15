@@ -13,8 +13,6 @@ const roomType = computed(() => roomInfoArr[currentRoom.value].name)
 const roomDescribe = computed(() => roomInfoArr[currentRoom.value].description)
 const roomPrice = computed(() => roomInfoArr[currentRoom.value].price)
 
-console.log(roomInfoArr)
-
 function handleArrow(diraction){
     const isRight = diraction;
     const isLastRoom = (roomInfoArr.length - 1 ) === currentRoom.value ? true : false ;

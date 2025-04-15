@@ -1,13 +1,16 @@
 <script setup>
 import { postDate } from '../../apiFunction'
 import { ref, computed } from 'vue'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 import Cookies from 'js-cookie'
 const url = 'https://team-rocket-hotelapi-from-freyja.onrender.com/api/v1/user/login'
+const router = useRouter()
 
-const email = ref(null)
-const password = ref(null)
+const userEmail = ref(null)
+const userPassword = ref(null)
 const isSaveUser = ref(false)
+const accountdWarn = ref(null)
+const passwordWarn = ref(null)
 
 function saveUserAccount(account){
     Cookies.set('account',account, { expires: 7, path: '/' })
@@ -15,7 +18,10 @@ function saveUserAccount(account){
 }
 function getAccountFromCookie(){
     const userAccount = Cookies.get('account')
-    userAccount && ( email.value = userAccount )
+    if(userAccount){
+        userEmail.value = userAccount 
+        isSaveUser.value = true
+    }
 }
 
 async function login(email,password){
@@ -27,14 +33,31 @@ async function login(email,password){
         const data = await postDate(url, null, body)
         const token = data.token 
 
-    if (token) {
+    if (data.status) {
         Cookies.set('usertoken', token, { expires: 7, path: '/' })
         console.log("✅ Login success and token saved in cookie:", Cookies.get('usertoken'))
-        console.log(email)
         isSaveUser.value && saveUserAccount(email);
+        router.replace('/')
 
     } else {
-        console.warn("❌ Login failed: no token received.")
+        const message = data.message
+        console.log(message)
+        passwordWarn.value = null
+        accountdWarn.value = null
+        userPassword.value = null
+        switch (message) {
+            case "密碼錯誤":
+                passwordWarn.value = "密碼錯誤"
+                break;
+            case "密碼需至少 8 碼以上":
+                passwordWarn.value = "密碼需至少 8 碼以上"
+                break;
+            case "此使用者不存在":
+                accountdWarn.value = "此使用者不存在"
+                break;
+            default:
+                break;
+        }
         }
     } catch (error) {
         console.error("🚨 Login error:", error)
@@ -42,9 +65,9 @@ async function login(email,password){
 }
 function handleLogin(event){
     event.preventDefault()
-    console.log("email", email.value)
-    console.log("password", password.value)
-    login(email.value,password.value)
+    console.log("email", userEmail.value)
+    console.log("password", userPassword.value)
+    login(userEmail.value,userPassword.value)
 }
 
 // 取得已記錄帳號
@@ -59,12 +82,12 @@ getAccountFromCookie()
                     </div>
                     <div class="flex flex-col gap-2">
                         <label class=" font-bold text-base max-md:text-14 leading-[1.5] tracking-wide w-full flex flex-col gap-2" for="">
-                            電子信箱
-                            <input v-model= "email" class="w-full rounded-md p-4 bg-theme-neutral-40 text-theme-neutral-60" type="text" placeholder="hello@exsample.com">
+                            <p>電子信箱 <span class="text-14 text-theme-alert-100">{{ accountdWarn }}</span></p>
+                            <input v-model= "userEmail" class="w-full rounded-md p-4 bg-theme-neutral-40 text-theme-neutral-60" type="text" placeholder="hello@exsample.com">
                         </label>
                         <label class=" font-bold text-base max-md:text-14 leading-[1.5] tracking-wide w-full flex flex-col gap-2" for="">
-                            密碼
-                            <input v-model= "password" class="w-full rounded-md p-4 bg-theme-neutral-40 text-theme-neutral-60" type="text" placeholder="請輸入密碼">
+                            <p>密碼 <span class="text-14 text-theme-alert-100">{{ passwordWarn }}</span></p>
+                            <input v-model= "userPassword" class="w-full rounded-md p-4 bg-theme-neutral-40 text-theme-neutral-60" type="text" placeholder="請輸入密碼">
                         </label>
                         <label class="flex justify-between gap-2 font-bold text-base max-md:text-14 leading-[1.5] tracking-wide w-full" for="">
                             <span class="relative">
