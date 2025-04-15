@@ -1,9 +1,9 @@
 <script setup>
 import { getData } from '../../apiFunction'
+import { inject } from 'vue'
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2Y0YjA4YTU4ZWNkOGYzNWY4N2Y2YWUiLCJpYXQiOjE3NDQwODkyMzEsImV4cCI6MTc0NDY5NDAzMX0.-XGmTM0X7ptHggl4nnyL1YR3-l0Tr2tsJlJurz4z3kg"
 const newsUrl = "https://team-rocket-hotelapi-from-freyja.onrender.com/api/v1/admin/news"
-
+const token = inject("token")
 const newsArr = await getData(newsUrl, token)
 </script>
 
