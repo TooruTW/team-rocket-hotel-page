@@ -18,7 +18,7 @@ export async function getData(url, token) {
         !data.status && console.log(data.message)
         return data.result
     } catch (error) {
-        console.log(error)
+        console.log(error.message)
     }
 }
 
@@ -26,8 +26,10 @@ export async function postDate(url, token = null, body) {
     try {
         const res = await fetch(url,createFetchingObject("POST",null,body))
         const data = await res.json()
+        console.log(data)
         return data
     } catch (error) {
         console.log(error.message)
     }
 }
+
