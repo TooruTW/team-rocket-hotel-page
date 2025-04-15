@@ -32,7 +32,7 @@ function handleArrow(diraction){
             class="w-[63%] object-contain absolute right-0 top-45 z-10
                    max-xl:w-full max-xl:-top-6 max-xl:-right-20 max-xl:scale-y-127" 
             alt="theme-decoration-wave">
-            <img src="/public/decoration-1.png" class="w-full object-cover absolute top-[50%] " alt="decoration">
+            <img src="/public/decoration-1.png" class="w-full object-cover absolute top-[50%] left-0" alt="decoration">
         <div class="w-[46%] max-xl:w-full">
             <Slider class="bg-center bg-cover aspect-square" :dataArr="currentRoomImageList"></Slider>
         </div>

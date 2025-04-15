@@ -24,7 +24,7 @@
                     </svg>
                 </div>
             </div>
-            <div class="w-full flex justify-between w-106 max-md:flex-col max-md:gap-4">
+            <div class="w-full flex justify-between max-md:flex-col max-md:gap-4">
                 <div  class="flex flex-col justify-between max-md:gap-4">
                     <div>
                         <h5>TEL</h5>
