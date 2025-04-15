@@ -1,6 +1,7 @@
-<section setup>
+<script setup>
+    import Footer from "../Footer.vue"
 
-</section>
+</script>
 <template>
     <!-- hero -->
      <div>
@@ -21,5 +22,9 @@
          </div>
      </div>
      <!-- footer -->
+      <div class="flex justify-center items-center bg-theme-neutral-bg">
+        <Footer></Footer>
+      </div>
+
 
 </template>

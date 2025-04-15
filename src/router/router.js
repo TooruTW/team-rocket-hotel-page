@@ -3,10 +3,11 @@ import MainPage from '../components/main-page/MainPage.vue'
 import UserPage from '../components/user-page/UserPage.vue'
 import LoginForm from '../components/user-page/LoginForm.vue'
 import RegisterForm from '../components/user-page/RegisterForm.vue'
+import RoomsPage from '../components/rooms-page/RoomsPage.vue'
 
 const routes = [
     { path: '/',
-    name:' MainPage', 
+    name:'MainPage', 
     component: MainPage 
     },
     { path: '/user', 
@@ -16,7 +17,11 @@ const routes = [
         {path: 'login', component: LoginForm},
         {path: 'register', component: RegisterForm},
     ]
-},
+    },
+    { path: '/rooms',
+      name:'RoomsPage', 
+      component: RoomsPage 
+      },
 ]
 
 const router = createRouter({
