@@ -7,7 +7,8 @@ import Section4 from "./Section4.vue";
 import Section5 from "./Section5.vue";
 import Section6 from "./Section6.vue";
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2Y0N2YzZGQ2OTU1NDE1MzZmYzBhMjAiLCJpYXQiOjE3NDQwNzY2NDYsImV4cCI6MTc0NDY4MTQ0Nn0.OzwlHHbbPwhrNqLgK9PIBGoqwY9IM5UGIPiplAl3S5I"
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2ZjZDdmYjMzYjJlMGFjNzc3Y2JmNTMiLCJpYXQiOjE3NDQ2OTI0NjYsImV4cCI6MTc0NTI5NzI2Nn0.lmFtn76GFkGIVXV07eDP-KRFs9LIH2-36fDpeJsDwC8"
+
 provide("token",token)
 
 
