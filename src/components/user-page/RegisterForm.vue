@@ -1,8 +1,8 @@
 <script setup>
 import { ref, computed } from 'vue'
 import cityName from '../asset/CityCountyData.json'
-import { isEmail, isPassword, isPhoneNum, isBirthday, isAddress } from '../../validator'
-import { postDate } from '../../apiFunction'
+import { isEmail, isPassword, isPhoneNum, isBirthday, isAddress} from '../../validator'
+import { postDate, isEmailRegisted } from '../../apiFunction'
 import Cookies from 'js-cookie'
 import { RouterLink } from 'vue-router'
 
@@ -41,13 +41,14 @@ const validatorPhone = ref(null)
 const validatorBirthday = ref(null)
 const validatorAddress = ref(null)
 const validatorAggrement = ref(null)
+const isRegisted = ref(null)
 
 function stage1Checker(){
         // stage 1
         validatorEmail.value = isEmail(user.value.email)? null:"電子郵件格式有誤。"
         validatorPassword.value = isPassword(user.value.password)? null:"請輸入至少 8 碼密碼，且需包含至少一個英文字。"
         validatorPasswordConfirem.value = user.value.password === userPasswordConfirm.value? null : "與輸入密碼不符"
-        if(!validatorEmail.value && !validatorPassword.value && !validatorPasswordConfirem.value){
+        if(!validatorEmail.value && !validatorPassword.value && !validatorPasswordConfirem.value && !isRegisted.value){
             isStage1Pass.value = true
             console.log("Stage 1 pass")
         } 
@@ -110,14 +111,25 @@ async function handleSubmit(event){
     formatorBirthday()
     stage2Checker()
     if(isStage1Pass.value && isStage2Pass.value){
-        console.log("Register Compeleted sending data to sever")
+        console.log("Register Compeleted sending data to server")
         delete user.value.isReaded
         const data = await postDate(url,null,user.value)
-        Cookies.set('token',data.token,{expires: 10 })
+        Cookies.set('usertoken',data.token,{expires: 10 })
         console.log(data)
         return
     }
     console.log("Validate fail",user.value)
+}
+async function checkEmailIsRegisted(useremail){
+
+    const email = {"email":`${useremail}`}
+    const data = await isEmailRegisted(email)
+    console.log(data.result.isEmailExists)
+    if(data.result.isEmailExists){
+        isRegisted.value = "Email 已被註冊"
+    }else{
+        isRegisted.value = null
+    }
 }
 
 </script>
@@ -145,7 +157,8 @@ async function handleSubmit(event){
                             <p class="flex gap-2 items-center">
                                 電子信箱 <span class="text-14 text-theme-alert-100">  {{ validatorEmail }} </span>
                             </p>
-                            <input v-model="user.email" id="email" class="w-full rounded-md p-4 bg-theme-neutral-40 text-theme-neutral-60 font-medium" type="text" placeholder="hello@exsample.com">
+                            <p class="text-14 text-theme-alert-100">{{ isRegisted }}</p>
+                            <input @change="checkEmailIsRegisted(user.email)" v-model="user.email" id="email" class="w-full rounded-md p-4 bg-theme-neutral-40 text-theme-neutral-60 font-medium" type="text" placeholder="hello@exsample.com">
                         </label>
                         <label class=" font-bold text-base max-md:text-14 leading-[1.5] tracking-wide w-full flex flex-col gap-2" for="">
                             <p class="flex gap-2 items-center">

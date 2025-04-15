@@ -19,6 +19,7 @@ export async function getData(url, token) {
         return data.result
     } catch (error) {
         console.log(error.message)
+        alert(error.message)
     }
 }
 
@@ -30,6 +31,16 @@ export async function postDate(url, token = null, body) {
         return data
     } catch (error) {
         console.log(error.message)
+        alert(error.message)
     }
 }
 
+export async function isEmailRegisted(body) {
+    const url = "https://team-rocket-hotelapi-from-freyja.onrender.com/api/v1/verify/email"
+    try {
+        const data = postDate(url,null,body)
+        return data
+    } catch (error) {
+        console.log(error.message)
+    }
+}
