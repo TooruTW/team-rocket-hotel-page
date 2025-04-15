@@ -1,4 +1,3 @@
-
 export function createFetchingObject(method, token, body){
     const fetchingPromp = {
         method: method,

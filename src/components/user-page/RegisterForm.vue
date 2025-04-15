@@ -3,9 +3,9 @@ import { ref, computed } from 'vue'
 import cityName from '../asset/CityCountyData.json'
 import { isEmail, isPassword, isPhoneNum, isBirthday, isAddress} from '../../validator'
 import { postDate, isEmailRegisted } from '../../apiFunction'
-import Cookies from 'js-cookie'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 
+const router = useRouter()
 const url = 'https://team-rocket-hotelapi-from-freyja.onrender.com/api/v1/user/signup'
 const isStage2 = ref(false)
 const isStage1Pass = ref(false)
@@ -114,8 +114,9 @@ async function handleSubmit(event){
         console.log("Register Compeleted sending data to server")
         delete user.value.isReaded
         const data = await postDate(url,null,user.value)
-        Cookies.set('usertoken',data.token,{expires: 10 })
-        console.log(data)
+        if(data.status){
+            router.push('/user/login')
+        }
         return
     }
     console.log("Validate fail",user.value)
