@@ -19,7 +19,7 @@ provide("token",token)
 
 </script>
 <template>
-  <Section1></Section1>
+  <!-- <Section1></Section1>
   <Suspense v-if="isTokenExist">
     <Sectioin2></Sectioin2>
   </Suspense>
@@ -29,7 +29,7 @@ provide("token",token)
   </Suspense>
   <Suspense v-if="isTokenExist">
     <Section5></Section5>
-  </Suspense>
+  </Suspense> -->
   <Section6></Section6>
 </template>
  <!-- vue router -->
