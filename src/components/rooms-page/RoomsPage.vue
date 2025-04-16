@@ -21,7 +21,7 @@
             </div>
         </div>
         <!-- footer -->
-        <div class="flex justify-center items-center bg-theme-neutral-bg">
+        <div class="flex justify-center items-center bg-theme-neutral-bg max-md:h-screen">
             <Footer></Footer>
         </div>
     </div>
