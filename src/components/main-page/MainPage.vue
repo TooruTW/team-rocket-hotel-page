@@ -1,6 +1,5 @@
 <script setup>
-import Cookies from 'js-cookie';
-import { provide,computed } from "vue";
+import { provide, computed, inject } from "vue";
 import Section1 from './Section1.vue';
 import Sectioin2 from './Sectioin2.vue';
 import Section3 from "./Section3.vue";
@@ -8,14 +7,11 @@ import Section4 from "./Section4.vue";
 import Section5 from "./Section5.vue";
 import Section6 from "./Section6.vue";
 
-const token = Cookies.get('usertoken') ?  Cookies.get('usertoken'):null;
+const token = inject(token)
+
 const isTokenExist = computed(()=>{
   return token? true:false;
 })
-
-console.log(isTokenExist.value)
-provide("token",token)
-
 
 </script>
 <template>

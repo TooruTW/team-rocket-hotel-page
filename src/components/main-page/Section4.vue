@@ -1,6 +1,6 @@
 <script setup>
 import { inject, ref, computed } from 'vue';
-import Slider from './slider.vue';
+import Slider from '../Slider.vue';
 import { getData } from '../../apiFunction';
 import RectWideBtn from './RectWideBtn.vue';
 
