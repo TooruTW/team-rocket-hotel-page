@@ -3,12 +3,14 @@ import MainPage from '../components/main-page/MainPage.vue'
 import UserPage from '../components/user-page/UserPage.vue'
 import LoginForm from '../components/user-page/LoginForm.vue'
 import RegisterForm from '../components/user-page/RegisterForm.vue'
-import RoomsPage from '../components/rooms-page/RoomsPage.vue'
+import RoomsPage from '../components/rooms-page/RoomDetail/RoomDetail.vue'
+
+
 
 const routes = [
     { path: '/',
-    name:'MainPage', 
-    component: MainPage 
+      name:'MainPage', 
+      component: MainPage 
     },
     { path: '/user', 
     name:'UserPage',

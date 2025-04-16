@@ -7,7 +7,7 @@ import Section4 from "./Section4.vue";
 import Section5 from "./Section5.vue";
 import Section6 from "./Section6.vue";
 
-const token = inject(token)
+const token = inject("token")
 
 const isTokenExist = computed(()=>{
   return token? true:false;
