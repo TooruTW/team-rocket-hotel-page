@@ -6,7 +6,7 @@ const bgImg =
   <div class=" bg-theme-neutral-bg w-full min-h-screen h-200 flex items-center z-0">
     <div class="h-3/4 w-full relative">
       <img class="h-9/10  w-full object-cover z-10 absolute top-0" :src="bgImg" alt="" />
-      <div class="h-9/10 max-md:h-fit max-w-260 max-2xl:max-w-200 max-md:max-w-4/5 w-full flex flex-col gap-20 max-md:gap-10 rounded-10xl max-md:rounded-5xl rounded-br-none border-b-1 border-l-1 z-20 p-20 max-md:p-6 absolute bottom-0 left-[30%] max-xl:left-[15%] max-lg:left-0 max-md:left-10 text-theme-neutral-0 border-theme-neutral-0 bg-linear-to-b from-section3-box-start/80 to-section3-box-end/80 backdrop-blur-lg">
+      <div class="h-9/10 max-md:h-fit max-w-260 max-2xl:max-w-200 max-xl:max-w-4/5 max-md:max-w-80 w-full flex flex-col gap-20 max-md:gap-10 rounded-10xl max-md:rounded-5xl rounded-br-none border-b-1 border-l-1 z-20 p-20 max-lg:p-6 absolute bottom-0 left-[30%] max-xl:left-[15%] max-lg:left-0 max-md:left-10 text-theme-neutral-0 border-theme-neutral-0 bg-linear-to-b from-section3-box-start/80 to-section3-box-end/80 backdrop-blur-lg">
         <div class="flex items-center gap-10">
             <h1 class="text-48 max-md:text-32 text-nowrap font-bold leading-[1.2] tracking-wider">關於<br />我們</h1>
             <div class="w-40 h-0.5 bg-theme-neutral-0"></div>
