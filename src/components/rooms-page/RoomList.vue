@@ -1,14 +1,55 @@
 <script setup>
 import Slider from '../Slider.vue';
 import {ref} from 'vue'
+import RoomCard from './RoomCard.vue';
 
 const roomAlbum = ref(["/hero-img.jpeg", "/room-1-1.jpg", "/room-1-2.jpg", "/room-1-3.jpg", "/room-1-4.jpg", "/room-1-5.jpg" ])
+
+    const sampleObj = ref({
+            _id: "67f4865cd695541536fc0a50",
+            name: "尊爵雙人房",
+            description: "享受高級的住宿體驗，尊爵雙人房提供給您舒適寬敞的空間和精緻的裝潢。",
+            imageUrl: "https://images.unsplash.com/photo-1560448205-4d9b3e6bb6db?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            imageUrlList: [
+                "https://images.unsplash.com/photo-1560448205-4d9b3e6bb6db?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?q=80&w=2942&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                "https://images.unsplash.com/photo-1472232533367-7fea57261049?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                "https://images.unsplash.com/photo-1497215457980-d57c69aee12d?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                "https://images.unsplash.com/photo-1482867899247-e295efdd8c1a?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            ],
+            areaInfo: "24坪",
+            bedInfo: "1 張大床",
+            maxPeople: 4,
+            price: 10000,
+            status: 1,
+            layoutInfo: [
+                {
+                    title: "市景",
+                    isProvide: true
+                }
+            ],
+            facilityInfo: [
+                {
+                    title: "平面電視",
+                    isProvide: true
+                }
+            ],
+            amenityInfo: [
+                {
+                    title: "衛生紙",
+                    isProvide: true
+                }
+            ],
+            createdAt: "2025-04-08T02:13:48.267Z",
+            updatedAt: "2025-04-08T02:26:28.344Z"
+        })
+
 
 </script>
 <template>
     <div class="flex justify-center w-full pt-30 pb-42 bg-theme-primary-10">
 
-        <div class="flex flex-col gap-20 w-1296/1920">
+        <div class="flex flex-col gap-20 w-324 max-2xl:w-full">
             <!-- title -->
             <div>
                 <h6 class="text-20 text-theme-neutral-80 font-bold leading-[1.2] tracking-wider">房型選擇</h6>
@@ -17,6 +58,7 @@ const roomAlbum = ref(["/hero-img.jpeg", "/room-1-1.jpg", "/room-1-2.jpg", "/roo
             <!-- card container -->
             <div class="w-full">
                 <!-- cards -->
+                 <RoomCard :dataObj="sampleObj"></RoomCard>
                 <div class="w-full flex rounded-3xl overflow-hidden ">
                     <Slider class="w-3/5" :dataArr="roomAlbum"></Slider>
                      <!-- right content -->

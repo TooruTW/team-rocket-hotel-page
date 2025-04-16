@@ -6,6 +6,18 @@ const props = defineProps({
 let currentPage = ref(0)
 let isLastPhoto = false
 let photoInterval
+
+function preloadImages(images) {
+  return Promise.all(
+    images.map( src => {
+        new Promise((resolve, reject) => {
+          const img = new Image()
+          img.src = src
+          img.onload = resolve
+          img.onerror = reject
+        })
+    }))}
+
 function createInterval(){
     return setInterval(()=>{
         if(isLastPhoto){
@@ -17,7 +29,9 @@ function createInterval(){
         isLastPhoto = currentPage.value === props.dataArr.length - 1 &&  true
     },5000)
 }
-onMounted(()=>{
+
+onMounted( async ()=>{
+    await preloadImages(props.dataArr)
     photoInterval = createInterval()
 })
 function handleMouseEnter(index){
@@ -29,6 +43,7 @@ function handleMouseOut(){
     photoInterval = createInterval()
 }
 const currentImg = computed(() => props.dataArr[currentPage.value])
+
 </script>
 <template>
     <!-- slide show  in bg -->
