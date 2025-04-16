@@ -6,7 +6,6 @@ const props = defineProps({
 let currentPage = ref(0)
 let isLastPhoto = false
 let photoInterval
-
 function preloadImages(images) {
   return Promise.all(
     images.map( src => {
@@ -17,7 +16,6 @@ function preloadImages(images) {
           img.onerror = reject
         })
     }))}
-
 function createInterval(){
     return setInterval(()=>{
         if(isLastPhoto){
@@ -29,7 +27,6 @@ function createInterval(){
         isLastPhoto = currentPage.value === props.dataArr.length - 1 &&  true
     },5000)
 }
-
 onMounted( async ()=>{
     await preloadImages(props.dataArr)
     photoInterval = createInterval()
@@ -43,11 +40,12 @@ function handleMouseOut(){
     photoInterval = createInterval()
 }
 const currentImg = computed(() => props.dataArr[currentPage.value])
-
 </script>
 <template>
     <!-- slide show  in bg -->
-    <div class="relative transition-all duration-1000 ease-in-out bg-center bg-cover max-md:bg-[47%_0%] max-md:bg-size-[320%] " :style="{backgroundImage : `url(${currentImg})`}">
+
+    <div class="relative transition-all duration-1000 ease-in-out bg-center bg-cover" :style="{backgroundImage : `url(${currentImg})`}">
+
         <!-- slide indicator -->
         <div class="flex justify-center w-full z-10 mb-6 absolute bottom-0">
             <div class="bg-theme-primary-40 rounded-full mx-1 w-8 h-1 transition-all ease-in duration-300"  

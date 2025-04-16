@@ -14,6 +14,7 @@ export async function getData(url, token) {
     try {
         const res = await fetch(url,createFetchingObject("GET", token))
         const data = await res.json()
+        
         !data.status && console.log(data.message)
         return data.result
     } catch (error) {

@@ -12,6 +12,7 @@
         <!-- img container -->
         <div class="w-full h-full absolute top-0 left-0 flex z-0">
             <Slider class="w-full min-h-full z-0 
+                    max-md:bg-[47%_0%] max-md:bg-size-[320%] 
                     after:absolute after:w-full after:h-full after:bg-black after:opacity-60" 
                     :dataArr="roomAlbum"></Slider>
         </div>

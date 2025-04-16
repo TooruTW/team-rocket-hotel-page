@@ -9,7 +9,7 @@
         <!-- hero -->
             <Hero></Hero>
         <!-- content -->
-            <RoomList></RoomList>
+            <RoomList ></RoomList>
         <!-- footer -->
         <div class="flex justify-center items-center bg-theme-neutral-bg max-md:h-screen">
             <Footer></Footer>
