@@ -42,9 +42,9 @@ function handleMenu(){
 }
 </script>
 <template>
-    <nav  class="w-full flex items-center justify-between py-6 max-md:py-4 " :class="[classFromParent]">
+    <nav  class="w-full flex items-center justify-between py-6 max-md:py-4 overflow-x-hidden" :class="[classFromParent]">
         <RouterLink class="h-full" to="/">
-            <img class="h-full max-w-50" src="/hotel-icon.png" alt="hotel-icon">
+            <img class="h-full max-w-50 max-md:w-27" src="/hotel-icon.png" alt="hotel-icon">
         </RouterLink>
         <Menu class="z-50" @click="handleMenu" size="30" color="text-theme-neutral-0" :isShow="isShowBurgerMenu"></Menu>
         <ul class="flex gap-4 w-auto" :class="[ulClassState, ulPosition]">
