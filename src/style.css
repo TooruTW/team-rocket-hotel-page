@@ -25,6 +25,9 @@
     --color-theme-alert-100:#DA3E51;
     --color-theme-alert-20:#F5CCD1;
     --color-theme-alert-10:#FDECEF;
+    --color-section3-box-start: #140F0A;
+    --color-section3-box-end: #BE9C7C;
+
 
     --aspect-ration-info-card: 474/294;
     --aspect-ration-info-card-mb: 315/294;
@@ -39,7 +42,7 @@
 
 
     --radius-md:8px;
-    --radius-20px:20px
+    --radius-20px:20px;
     --radius-5xl: 40px;
     --radius-10xl: 80px;
     --text-100: 100px;
