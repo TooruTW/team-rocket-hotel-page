@@ -1,17 +1,20 @@
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import Slider from '../Slider.vue';
     const props = defineProps({
     dataObj: Object
     })
-    
+
+const showBTN = computed(()=>{
+   return  window.innerWidth >= 768 ? true : false;
+})
 
 </script>
 <template>
     <div class="w-full flex rounded-3xl overflow-hidden max-md:flex-col max-md:h-135">
 
         <!-- slider -->
-        <Slider class="w-3/5 max-md:w-full max-md:h-1/3" :dataArr="props.dataObj.imageUrlList"></Slider>
+        <Slider class="w-3/5 max-md:w-full max-md:h-1/3" :dataArr="props.dataObj.imageUrlList" :btn="showBTN"></Slider>
 
         <!-- right content -->
 

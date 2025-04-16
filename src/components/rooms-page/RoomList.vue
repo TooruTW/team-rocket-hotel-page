@@ -7,6 +7,7 @@ const roominfoURL = "https://team-rocket-hotelapi-from-freyja.onrender.com/api/v
 const token = inject("token")
 const roomInfo = ref(null)
 
+
 onMounted(async ()=>{
     const data = await getData(roominfoURL,token)
     console.log("get data",data)
@@ -26,7 +27,7 @@ onMounted(async ()=>{
             <!-- card container -->
             <div class="w-full flex flex-col gap-12">
                 <!-- cards -->
-                <RoomCard v-for="(room,index) in roomInfo" :dataObj="room"></RoomCard>
+                <RoomCard v-for="(room,index) in roomInfo" :dataObj="room" ></RoomCard>
             </div>
         </div>
     </div>
