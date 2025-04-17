@@ -27,6 +27,8 @@
     --color-theme-alert-10:#FDECEF;
     --color-section3-box-start: #140F0A;
     --color-section3-box-end: #BE9C7C;
+    
+    --drop-shadow-3xl: 0 4px 0px #000000; 
 
 
     --aspect-ration-info-card: 474/294;
