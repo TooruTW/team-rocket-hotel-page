@@ -70,19 +70,12 @@ function handleArrowBtn(isNext) {
 }
 
 function handlePickDay(year, month, date) {
-  console.log(year, month, date);
-
   const dateinCode = new Date(year, month - 1, date);
-
-  console.log(dateinCode);
-
   if (!dateCheckIn.value) {
-    console.log("check in not exist")
     dateCheckIn.value = dateinCode;
     return;
   }
   if (!dateCheckOut.value) {
-    console.log("check out not exist")
     if (dateCheckIn.value.getTime() > dateinCode.getTime()) {
       dateCheckOut.value = dateCheckIn.value;
       dateCheckIn.value = dateinCode;
@@ -91,17 +84,20 @@ function handlePickDay(year, month, date) {
     dateCheckOut.value = dateinCode;
     return;
   }
-
   const minDate = Math.min(dateinCode.getTime(), dateCheckIn.value.getTime())
   dateCheckIn.value = new Date(minDate)
   const maxDate = Math.max(dateinCode.getTime(), dateCheckOut.value.getTime())
   dateCheckOut.value = new Date(maxDate)
-
   if(dateinCode.getTime() > dateCheckIn.value.getTime()){
     dateCheckOut.value = dateinCode
   }
 }
-
+function handleClearnBtn(event){
+    event.preventDefault()
+    console.log("got click")
+    dateCheckIn.value = null
+    dateCheckOut.value = null
+}
 
 
 
@@ -220,7 +216,7 @@ function handlePickDay(year, month, date) {
       </div>
       <!-- buttons -->
       <div class="flex justify-end gap-4">
-        <button class="py-4 px-6 rounded-md">清除日期</button>
+        <button class="py-4 px-6 rounded-md" @click="handleClearnBtn">清除日期</button>
         <button
           class="py-4 px-6 rounded-md bg-theme-primary-100 text-theme-neutral-0"
         >
