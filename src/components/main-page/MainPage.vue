@@ -14,19 +14,19 @@ const isTokenExist = computed(() => {
 });
 </script>
 <template>
-  <!-- <Section1></Section1>
+  <Section1></Section1>
   <Suspense v-if="isTokenExist">
     <Sectioin2></Sectioin2>
-  </Suspense> -->
+  </Suspense>
 
   <Section3></Section3>
 
-  <!-- <Suspense v-if="isTokenExist">
+  <Suspense v-if="isTokenExist">
     <Section4></Section4>
   </Suspense>
   <Suspense v-if="isTokenExist">
     <Section5></Section5>
   </Suspense>
-  <Section6></Section6> -->
+  <Section6></Section6>
 </template>
 <style scoped></style>

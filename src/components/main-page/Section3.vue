@@ -4,14 +4,16 @@ const bgImg =
 </script>
 <template>
   <div class=" bg-theme-neutral-bg w-full min-h-screen h-200 flex items-center z-0">
-    <div class="h-3/4 w-full relative">
+    <div class="h-3/4 w-full relative flex items-end justify-center">
       <img class="h-9/10  w-full object-cover z-10 absolute top-0" :src="bgImg" alt="" />
-      <div class="h-9/10 max-md:h-fit max-w-260 max-2xl:max-w-200 max-xl:max-w-4/5 max-md:max-w-80 w-full flex flex-col gap-20 max-md:gap-10 rounded-10xl max-md:rounded-5xl rounded-br-none border-b-1 border-l-1 z-20 p-20 max-lg:p-6 absolute bottom-0 left-[30%] max-xl:left-[15%] max-lg:left-0 max-md:left-10 text-theme-neutral-0 border-theme-neutral-0 bg-linear-to-b from-section3-box-start/80 to-section3-box-end/80 backdrop-blur-lg">
+      <div class="h-9/10 max-md:h-fit max-w-260 max-xl:max-w-8/10 w-full flex flex-col justify-between gap-10 rounded-10xl max-md:rounded-5xl rounded-br-none border-b-1 border-l-1 p-20 max-md:p-6 
+      relative z-20 transition-all translate-x-[10%] max-md:translate-x-[5%] 
+      text-theme-neutral-0 border-theme-neutral-0 bg-linear-to-b from-section3-box-start/80 to-section3-box-end/80 backdrop-blur-lg">
         <div class="flex items-center gap-10">
             <h1 class="text-48 max-md:text-32 text-nowrap font-bold leading-[1.2] tracking-wider">關於<br />我們</h1>
             <div class="w-40 h-0.5 bg-theme-neutral-0"></div>
         </div>
-        <div class="text-base max-md:text-14 font-medium leading-[1.5] tracking-[2%] flex flex-col gap-10 max-md:gap-4">
+        <div class="text-base max-md:text-14 font-medium leading-[1.5] tracking-[2%] flex flex-col justify-between gap-4">
           <p>
             享樂酒店，位於美麗島高雄的心臟地帶，是這座城市的璀璨瑰寶與傲人地標。
             我們的存在，不僅僅是為了提供奢華的住宿體驗，更是為了將高雄的美麗與活力，獻給每一位蒞臨的旅客。
