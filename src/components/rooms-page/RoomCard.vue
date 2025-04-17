@@ -2,6 +2,7 @@
 import { computed, ref } from "vue";
 import Slider from "../Slider.vue";
 import { RouterLink } from "vue-router";
+
 const props = defineProps({
   dataObj: Object,
 });
@@ -9,6 +10,7 @@ const props = defineProps({
 const showBTN = computed(() => {
   return window.innerWidth >= 768 ? true : false;
 });
+
 </script>
 <template>
   <div
