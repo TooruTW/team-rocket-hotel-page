@@ -3,6 +3,7 @@ import Header from "../../Header.vue";
 import Footer from "../../Footer.vue";
 import RoomAlbum from "./RoomAlbum.vue";
 import RoomTextContent from "./RoomTextContent.vue";
+import DatePicker from "./DatePicker.vue";
 import { computed, ref } from "vue";
 
 const sampleObj = ref({
@@ -187,9 +188,11 @@ function handlePerson(isPlus){
             </p>
           </div>
           <!-- inputs -->
-          <div class="flex flex-col">
+          <div class="flex flex-col gap-4">
             <!-- date -->
-            <div class="w-full"></div>
+            <div class="w-full">
+                <DatePicker></DatePicker>
+            </div>
             <!-- person -->
             <div class="w-full flex items-center justify-between">
               <h6 class="text-base font-bold leading-[1.5] tracking-wide">人數</h6>
