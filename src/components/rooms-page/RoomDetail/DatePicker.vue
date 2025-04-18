@@ -2,6 +2,8 @@
 import { ref, computed } from "vue";
 import Slider from "../../Slider.vue";
 
+const today = new Date()
+const todayStart = new Date(today.getFullYear(),today.getMonth(),today.getDate())
 function formateDate(time) {
   if (!time) {
     return `-- / -- / --`;
@@ -43,7 +45,6 @@ const calendarArrLeft = computed(() => {
   return createCalendarArr(select.value.year, select.value.month);
 });
 const calendarArrRight = computed(() => {
-  console.log("calender log", select.value);
   if (select.value.month === 11) {
     return createCalendarArr(select.value.year + 1, 1);
   }
@@ -69,8 +70,12 @@ function handleArrowBtn(isNext) {
   }
 }
 
-function handlePickDay(year, month, date) {
-  const dateinCode = new Date(year, month - 1, date);
+function handlePickDay(year, month, day) {
+    const thisDay = new Date(year,month -1,day)
+
+    if(thisDay.getTime() <= todayStart.getTime()) return
+
+  const dateinCode = thisDay;
   if (!dateCheckIn.value) {
     dateCheckIn.value = dateinCode;
     return;
@@ -79,29 +84,62 @@ function handlePickDay(year, month, date) {
     if (dateCheckIn.value.getTime() > dateinCode.getTime()) {
       dateCheckOut.value = dateCheckIn.value;
       dateCheckIn.value = dateinCode;
-      return
+      return;
     }
     dateCheckOut.value = dateinCode;
     return;
   }
-  const minDate = Math.min(dateinCode.getTime(), dateCheckIn.value.getTime())
-  dateCheckIn.value = new Date(minDate)
-  const maxDate = Math.max(dateinCode.getTime(), dateCheckOut.value.getTime())
-  dateCheckOut.value = new Date(maxDate)
-  if(dateinCode.getTime() > dateCheckIn.value.getTime()){
-    dateCheckOut.value = dateinCode
+  const minDate = Math.min(dateinCode.getTime(), dateCheckIn.value.getTime());
+  dateCheckIn.value = new Date(minDate);
+  const maxDate = Math.max(dateinCode.getTime(), dateCheckOut.value.getTime());
+  dateCheckOut.value = new Date(maxDate);
+  if (dateinCode.getTime() > dateCheckIn.value.getTime()) {
+    dateCheckOut.value = dateinCode;
   }
 }
-function handleClearnBtn(event){
-    event.preventDefault()
-    console.log("got click")
-    dateCheckIn.value = null
-    dateCheckOut.value = null
+function handleClearnBtn(event) {
+  event.preventDefault();
+  console.log("got click");
+  dateCheckIn.value = null;
+  dateCheckOut.value = null;
 }
 
+function createDateClass(year,month, day) {
+  let dateClass = "";
+  month = month === 13 ? 1 : month;
+  const thisDay = new Date(year,month -1,day)
+
+  if(!day) return
+
+  console.log(todayStart)
+  console.log(thisDay)
+// today
+  if(thisDay.getTime() === todayStart.getTime()){
+    dateClass += `border-b-2 border-theme-primary-100 `
+  }
+  if(thisDay.getTime() < todayStart.getTime()){
+    dateClass += `text-theme-neutral-40 `
+  }
+  if(dateCheckIn.value){
+    if(dateCheckIn.value.getTime() === thisDay.getTime()){
+    dateClass += `rounded-full bg-theme-neutral-100 text-theme-neutral-0 `
+  }}
+  if(dateCheckOut.value){
+    if(dateCheckOut.value.getTime() === thisDay.getTime()){
+    dateClass += `rounded-full bg-theme-neutral-100 text-theme-neutral-0 `
+  }}
+
+  if(dateCheckIn.value && dateCheckOut.value){
+    if(thisDay.getTime() > dateCheckIn.value.getTime() && thisDay.getTime() < dateCheckOut.value.getTime()){
+        dateClass += `bg-theme-neutral-10 `
+    }
+  }
 
 
 
+  console.log(year,month, day);
+  return dateClass;
+}
 </script>
 <template>
   <!-- inshort -->
@@ -155,18 +193,20 @@ function handleClearnBtn(event){
           >
             {{ select.year }} 年 {{ select.month }}月
           </h6>
-          <div class="grid grid-cols-7 w-full">
+
+          <div class="grid grid-cols-7 w-full gap-y-1">
             <div
               v-for="(day, index) in dayArr"
               :key="index"
-              class="flex justify-center items-center py-3"
+              class="font-bold text-base leading-[1.2] tracking-wider flex justify-center items-center py-3 aspect-square w-full "
             >
               {{ day }}
             </div>
             <div
-              class="font-bold text-base leading-[1.2] tracking-wider flex justify-center items-center py-3"
+              class="font-bold text-base leading-[1.2] tracking-wider flex justify-center items-center py-3 aspect-square w-full "
               v-for="(date, index) in calendarArrLeft"
               :key="index"
+              :class="createDateClass(select.year, select.month, date)"
               @click="handlePickDay(select.year, select.month, date)"
             >
               {{ date }}
@@ -195,18 +235,19 @@ function handleClearnBtn(event){
             {{ select.month === 12 ? select.year + 1 : select.year }} 年
             {{ select.month === 12 ? 1 : select.month + 1 }}月
           </h6>
-          <div class="grid grid-cols-7 w-full">
+          <div class="grid grid-cols-7 w-full gap-y-1">
             <div
               v-for="(day, index) in dayArr"
               :key="index"
-              class="flex justify-center items-center py-3"
+              class="font-bold text-base leading-[1.2] tracking-wider flex justify-center items-center py-3 aspect-square w-full "
             >
               {{ day }}
             </div>
             <div
-              class="font-bold text-base leading-[1.2] tracking-wider flex justify-center items-center py-3"
+              class="font-bold text-base leading-[1.2] tracking-wider flex justify-center items-center py-3 aspect-square w-full "
               v-for="(date, index) in calendarArrRight"
               :key="index"
+              :class="createDateClass(select.year, select.month + 1, date)"
               @click="handlePickDay(select.year, select.month + 1, date)"
             >
               {{ date }}
@@ -216,7 +257,9 @@ function handleClearnBtn(event){
       </div>
       <!-- buttons -->
       <div class="flex justify-end gap-4">
-        <button class="py-4 px-6 rounded-md" @click="handleClearnBtn">清除日期</button>
+        <button class="py-4 px-6 rounded-md" @click="handleClearnBtn">
+          清除日期
+        </button>
         <button
           class="py-4 px-6 rounded-md bg-theme-primary-100 text-theme-neutral-0"
         >
