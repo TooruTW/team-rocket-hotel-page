@@ -2,8 +2,14 @@
 import { ref, computed } from "vue";
 import Slider from "../../Slider.vue";
 
-const today = new Date()
-const todayStart = new Date(today.getFullYear(),today.getMonth(),today.getDate())
+const isShow = ref(false);
+
+const today = new Date();
+const todayStart = new Date(
+  today.getFullYear(),
+  today.getMonth(),
+  today.getDate()
+);
 function formateDate(time) {
   if (!time) {
     return `-- / -- / --`;
@@ -52,7 +58,6 @@ const calendarArrRight = computed(() => {
 });
 
 function handleArrowBtn(isNext) {
-  console.log("got click", isNext);
   if (isNext) {
     if (select.value.month === 12) {
       select.value.month = 1;
@@ -71,9 +76,9 @@ function handleArrowBtn(isNext) {
 }
 
 function handlePickDay(year, month, day) {
-    const thisDay = new Date(year,month -1,day)
+  const thisDay = new Date(year, month - 1, day);
 
-    if(thisDay.getTime() <= todayStart.getTime()) return
+  if (thisDay.getTime() <= todayStart.getTime()) return;
 
   const dateinCode = thisDay;
   if (!dateCheckIn.value) {
@@ -97,54 +102,58 @@ function handlePickDay(year, month, day) {
     dateCheckOut.value = dateinCode;
   }
 }
+
 function handleClearnBtn(event) {
   event.preventDefault();
-  console.log("got click");
   dateCheckIn.value = null;
   dateCheckOut.value = null;
 }
 
-function createDateClass(year,month, day) {
+function createDateClass(year, month, day) {
   let dateClass = "";
   month = month === 13 ? 1 : month;
-  const thisDay = new Date(year,month -1,day)
-
-  if(!day) return
-
-  console.log(todayStart)
-  console.log(thisDay)
-// today
-  if(thisDay.getTime() === todayStart.getTime()){
-    dateClass += `border-b-2 border-theme-primary-100 `
+  const thisDay = new Date(year, month - 1, day);
+  if (!day) return;
+  // today
+  if (thisDay.getTime() === todayStart.getTime()) {
+    dateClass += `border-b-2 border-theme-primary-100 `;
   }
-  if(thisDay.getTime() < todayStart.getTime()){
-    dateClass += `text-theme-neutral-40 `
+  if (thisDay.getTime() < todayStart.getTime()) {
+    dateClass += `text-theme-neutral-40 `;
   }
-  if(dateCheckIn.value){
-    if(dateCheckIn.value.getTime() === thisDay.getTime()){
-    dateClass += `rounded-full bg-theme-neutral-100 text-theme-neutral-0 `
-  }}
-  if(dateCheckOut.value){
-    if(dateCheckOut.value.getTime() === thisDay.getTime()){
-    dateClass += `rounded-full bg-theme-neutral-100 text-theme-neutral-0 `
-  }}
-
-  if(dateCheckIn.value && dateCheckOut.value){
-    if(thisDay.getTime() > dateCheckIn.value.getTime() && thisDay.getTime() < dateCheckOut.value.getTime()){
-        dateClass += `bg-theme-neutral-10 `
+  if (dateCheckIn.value) {
+    if (dateCheckIn.value.getTime() === thisDay.getTime()) {
+      dateClass += `rounded-full bg-theme-neutral-100 text-theme-neutral-0 `;
+    }
+  }
+  if (dateCheckOut.value) {
+    if (dateCheckOut.value.getTime() === thisDay.getTime()) {
+      dateClass += `rounded-full bg-theme-neutral-100 text-theme-neutral-0 `;
     }
   }
 
-
-
-  console.log(year,month, day);
+  if (dateCheckIn.value && dateCheckOut.value) {
+    if (
+      thisDay.getTime() > dateCheckIn.value.getTime() &&
+      thisDay.getTime() < dateCheckOut.value.getTime()
+    ) {
+      dateClass += `bg-theme-neutral-10 `;
+    }
+  }
   return dateClass;
+}
+
+function handlePicker(show) {
+  isShow.value = show ? true : false;
 }
 </script>
 <template>
   <!-- inshort -->
-  <div class="relative">
-    <div class="flex justify-between gap-2 z-10 relative">
+  <div class="relative z-10">
+    <div
+      @click="handlePicker(true)"
+      class="flex justify-between gap-2 z-10 relative"
+    >
       <div class="p-4 w-full border-1 rounded-md">
         <p>入住</p>
         <p>{{ dateCheckInFormted }}</p>
@@ -157,6 +166,7 @@ function createDateClass(year,month, day) {
 
     <!-- full -->
     <div
+      v-show="isShow"
       class="w-200 bg-theme-neutral-0 -z-0 absolute -right-10 -top-6 p-8 rounded-20px flex flex-col gap-10"
     >
       <!-- state -->
@@ -198,12 +208,12 @@ function createDateClass(year,month, day) {
             <div
               v-for="(day, index) in dayArr"
               :key="index"
-              class="font-bold text-base leading-[1.2] tracking-wider flex justify-center items-center py-3 aspect-square w-full "
+              class="font-bold text-base leading-[1.2] tracking-wider flex justify-center items-center py-3 aspect-square w-full"
             >
               {{ day }}
             </div>
             <div
-              class="font-bold text-base leading-[1.2] tracking-wider flex justify-center items-center py-3 aspect-square w-full "
+              class="font-bold text-base leading-[1.2] tracking-wider flex justify-center items-center py-3 aspect-square w-full"
               v-for="(date, index) in calendarArrLeft"
               :key="index"
               :class="createDateClass(select.year, select.month, date)"
@@ -239,12 +249,12 @@ function createDateClass(year,month, day) {
             <div
               v-for="(day, index) in dayArr"
               :key="index"
-              class="font-bold text-base leading-[1.2] tracking-wider flex justify-center items-center py-3 aspect-square w-full "
+              class="font-bold text-base leading-[1.2] tracking-wider flex justify-center items-center py-3 aspect-square w-full"
             >
               {{ day }}
             </div>
             <div
-              class="font-bold text-base leading-[1.2] tracking-wider flex justify-center items-center py-3 aspect-square w-full "
+              class="font-bold text-base leading-[1.2] tracking-wider flex justify-center items-center py-3 aspect-square w-full"
               v-for="(date, index) in calendarArrRight"
               :key="index"
               :class="createDateClass(select.year, select.month + 1, date)"
@@ -261,11 +271,17 @@ function createDateClass(year,month, day) {
           清除日期
         </button>
         <button
+          @click="handlePicker(false)"
           class="py-4 px-6 rounded-md bg-theme-primary-100 text-theme-neutral-0"
+          type="button"
         >
           確定日期
         </button>
       </div>
     </div>
   </div>
+  <div
+    v-show="isShow"
+    class="fixed w-screen h-screen bg-theme-neutral-100/40 backdrop-blur-xl top-0 left-0 z-0"
+  ></div>
 </template>

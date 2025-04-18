@@ -153,7 +153,7 @@ function handlePerson(isPlus){
 <template>
   <div>
     <!-- header -->
-    <div class="w-full bg-theme-neutral-bg flex justify-center px-20">
+    <div class="w-full bg-theme-neutral-bg flex justify-center px-20 fixed">
       <Header></Header>
     </div>
     <!-- content -->
