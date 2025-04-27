@@ -134,8 +134,6 @@ const sampleObj = ref({
   createdAt: "2025-04-08T02:13:48.267Z",
   updatedAt: "2025-04-08T02:26:28.344Z",
 });
-
-
 const numPerson = ref(2)
 
 function handlePerson(isPlus){

@@ -1,8 +1,9 @@
 <script setup>
 import { ref, computed } from "vue";
-import Slider from "../../Slider.vue";
-
+import Remider from "../../Remider.vue";
 const isShow = ref(false);
+
+const errorMessage = ref("testing")
 
 const today = new Date();
 const todayStart = new Date(
@@ -107,11 +108,16 @@ function handleClearnBtn(event) {
   event.preventDefault();
   dateCheckIn.value = null;
   dateCheckOut.value = null;
+  errorMessage.value = "Date has been clearned"
 }
 
 function createDateClass(year, month, day) {
   let dateClass = "";
-  month = month === 13 ? 1 : month;
+  // 處理跨年問題
+  if(month === 13){
+    year ++
+    month = 1
+  }
   const thisDay = new Date(year, month - 1, day);
   if (!day) return;
   // today
@@ -131,7 +137,6 @@ function createDateClass(year, month, day) {
       dateClass += `rounded-full bg-theme-neutral-100 text-theme-neutral-0 `;
     }
   }
-
   if (dateCheckIn.value && dateCheckOut.value) {
     if (
       thisDay.getTime() > dateCheckIn.value.getTime() &&
@@ -145,6 +150,7 @@ function createDateClass(year, month, day) {
 
 function handlePicker(show) {
   isShow.value = show ? true : false;
+  errorMessage.value = "show picker"
 }
 </script>
 <template>
@@ -284,4 +290,6 @@ function handlePicker(show) {
     v-show="isShow"
     class="fixed w-screen h-screen bg-theme-neutral-100/40 backdrop-blur-xl top-0 left-0 z-0"
   ></div>
+
+  <Remider :remindText="errorMessage" :triggerKey="Date.now()"></Remider>
 </template>
