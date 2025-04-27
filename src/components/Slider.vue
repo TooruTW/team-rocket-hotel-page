@@ -9,7 +9,6 @@ const showBtn = computed(()=>{
     return props.btn ? true : false;
 })
 
-console.log(showBtn.value)
 
 let currentPage = ref(0)
 let isLastPhoto = false
