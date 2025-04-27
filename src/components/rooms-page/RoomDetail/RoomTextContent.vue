@@ -1,13 +1,18 @@
 <script setup>
-import { ref } from "vue";
+import { computed } from "vue";
 
 const props = defineProps({
-    dataObj: Object
+    dataObj: Object,
+    rule: Boolean
+
+})
+const isShowRule = computed(()=>{
+  return props.rule
 })
 
 </script>
 <template>
-          <div class="flex justify-center">
+          <div class="flex w-full">
         <!-- detail description -->
         <div class="flex flex-col justify-between gap-20 max-xl:gap-6">
           <!-- Heading -->
@@ -221,7 +226,7 @@ const props = defineProps({
 
           </div>
           <!-- rule -->
-          <div class="flex flex-col gap-6">
+          <div v-if="isShowRule" class="flex flex-col gap-6">
             <div class="flex items-center gap-3 w-full">
               <div class="h-6 w-1 rounded-sm bg-theme-primary-100"></div>
               <h5 class="font-bold text-24 leading-[1.2] tracking-wider">

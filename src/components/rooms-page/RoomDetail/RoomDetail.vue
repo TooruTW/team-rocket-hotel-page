@@ -182,7 +182,7 @@ function handleBooking() {
       <!-- main area -->
       <div class="p-30 max-xl:p-3 flex justify-center gap-18">
         <!-- text content -->
-        <RoomTextContent :dataObj="sampleObj"></RoomTextContent>
+        <RoomTextContent :dataObj="sampleObj" :rule="true"></RoomTextContent>
         <!-- reservation -->
         <div
           class="h-fit w-full max-w-120 flex flex-col gap-10 p-10 rounded-20px bg-theme-neutral-0 --drop-shadow-3xl max-lg:hidden"
