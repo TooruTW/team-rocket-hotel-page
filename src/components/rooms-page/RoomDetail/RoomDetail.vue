@@ -4,6 +4,7 @@ import Footer from "../../Footer.vue";
 import RoomAlbum from "./RoomAlbum.vue";
 import RoomTextContent from "./RoomTextContent.vue";
 import DatePicker from "./DatePicker.vue";
+import Slider from "../../Slider.vue";
 import { computed, ref } from "vue";
 
 const sampleObj = ref({
@@ -164,13 +165,14 @@ function handleBooking(){
       <Header></Header>
     </div>
     <!-- content -->
-    <div class="w-full bg-theme-primary-10">
+    <div class="w-full bg-theme-primary-10 pt-28">
       <!-- album -->
-      <div class="p-20">
+      <div class="p-20 max-lg:p-0">
         <RoomAlbum
           :album="sampleObj.imageUrlList"
-          class="rounded-20px overflow-hidden"
+          class="rounded-20px overflow-hidden max-lg:hidden"
         ></RoomAlbum>
+        <Slider class="w-full h-60 hidden max-lg:block" :btn="false" :dataArr="sampleObj.imageUrlList"></Slider>
       </div>
       <div class="p-30 flex justify-center gap-18">
         <!-- text content -->
