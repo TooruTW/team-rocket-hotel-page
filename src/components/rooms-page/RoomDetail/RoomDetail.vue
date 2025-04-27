@@ -135,51 +135,57 @@ const sampleObj = ref({
   createdAt: "2025-04-08T02:13:48.267Z",
   updatedAt: "2025-04-08T02:26:28.344Z",
 });
-const numPerson = ref(2)
-const bookingDate = ref(null)
-function getBooking(date){
-  console.log("date passed,here the date :",date)
-  bookingDate.value = date
+const numPerson = ref(2);
+const bookingDate = ref(null);
+function getBooking(date) {
+  console.log("date passed,here the date :", date);
+  bookingDate.value = date;
 }
-function handlePerson(isPlus){
-    if(isPlus){
-        if(numPerson.value >= sampleObj.value.maxPeople) return
-        numPerson.value ++
-    }else{  
-        if(numPerson.value <= 0) return
-        numPerson.value --
-    }
-}
-
-function handleBooking(){
-  console.log("date", bookingDate.value)
-  console.log("person", numPerson.value)
+function handlePerson(isPlus) {
+  if (isPlus) {
+    if (numPerson.value >= sampleObj.value.maxPeople) return;
+    numPerson.value++;
+  } else {
+    if (numPerson.value <= 0) return;
+    numPerson.value--;
+  }
 }
 
+function handleBooking() {
+  console.log("date", bookingDate.value);
+  console.log("person", numPerson.value);
+}
 </script>
 
 <template>
-  <div>
+  <div class="">
     <!-- header -->
-    <div class="w-full bg-theme-neutral-bg flex justify-center px-20 fixed">
+    <div
+      class="w-full bg-theme-neutral-bg flex justify-center px-20 fixed z-100 max-xl:px-3 max-xl:relative max-xl:overflow-x-hidden"
+    >
       <Header></Header>
     </div>
     <!-- content -->
-    <div class="w-full bg-theme-primary-10 pt-28">
+    <div class="w-full z-0 bg-theme-primary-10 pt-28 max-xl:pt-0">
       <!-- album -->
       <div class="p-20 max-lg:p-0">
         <RoomAlbum
           :album="sampleObj.imageUrlList"
           class="rounded-20px overflow-hidden max-lg:hidden"
         ></RoomAlbum>
-        <Slider class="w-full h-60 hidden max-lg:block" :btn="false" :dataArr="sampleObj.imageUrlList"></Slider>
+        <Slider
+          class="w-full h-60 hidden max-lg:block"
+          :btn="false"
+          :dataArr="sampleObj.imageUrlList"
+        ></Slider>
       </div>
-      <div class="p-30 flex justify-center gap-18">
+      <!-- main area -->
+      <div class="p-30 max-xl:p-3 flex justify-center gap-18">
         <!-- text content -->
         <RoomTextContent :dataObj="sampleObj"></RoomTextContent>
         <!-- reservation -->
         <div
-          class="h-fit w-full max-w-120 flex flex-col gap-10 p-10 rounded-20px bg-theme-neutral-0 --drop-shadow-3xl"
+          class="h-fit w-full max-w-120 flex flex-col gap-10 p-10 rounded-20px bg-theme-neutral-0 --drop-shadow-3xl max-lg:hidden"
         >
           <!-- section title -->
           <div class="w-full border-b-2 border-theme-neutral-40">
@@ -200,17 +206,20 @@ function handleBooking(){
           <div class="flex flex-col gap-4">
             <!-- date -->
             <div class="w-full">
-                <DatePicker @update="getBooking"></DatePicker>
+              <DatePicker @update="getBooking"></DatePicker>
             </div>
             <!-- person -->
             <div class="w-full flex items-center justify-between">
-              <h6 class="text-base font-bold leading-[1.5] tracking-wide">人數</h6>
+              <h6 class="text-base font-bold leading-[1.5] tracking-wide">
+                人數
+              </h6>
               <div class="h-full flex items-center">
-
-                <div @click="handlePerson(false)"
+                <div
+                  @click="handlePerson(false)"
                   class="rounded-full border-1 border-theme-neutral-40 w-14 h-14 flex justify-center items-center"
                 >
-                  <svg class=" pointer-events-none"
+                  <svg
+                    class="pointer-events-none"
                     width="14"
                     height="2"
                     viewBox="0 0 14 2"
@@ -223,10 +232,12 @@ function handleBooking(){
                 <h6 class="px-4 text-20 font-bold leading-[1.2] tracking-wider">
                   {{ numPerson }}
                 </h6>
-                <div @click="handlePerson(true)"
+                <div
+                  @click="handlePerson(true)"
                   class="rounded-full border-1 border-theme-neutral-40 w-14 h-14 flex justify-center items-center"
                 >
-                  <svg class=" pointer-events-none"
+                  <svg
+                    class="pointer-events-none"
                     width="14"
                     height="14"
                     viewBox="0 0 14 14"
@@ -236,21 +247,29 @@ function handleBooking(){
                     <path d="M14 8H8V14H6V8H0V6H6V0H8V6H14V8Z" fill="black" />
                   </svg>
                 </div>
-
               </div>
             </div>
           </div>
           <!-- price -->
-          <h5  class="text-24 font-bold leading-[1.2] tracking-wider text-theme-primary-100">
+          <h5
+            class="text-24 font-bold leading-[1.2] tracking-wider text-theme-primary-100"
+          >
             NT$ {{ sampleObj.price }}
           </h5>
           <!-- submit -->
-          <button @click="handleBooking"  class="text-16 font-bold leading-[1.5] tracking-wid text-theme-neutral-0 w-full bg-theme-primary-100 py-4 rounded-md">立即預訂</button>
+          <button
+            @click="handleBooking"
+            class="text-16 font-bold leading-[1.5] tracking-wid text-theme-neutral-0 w-full bg-theme-primary-100 py-4 rounded-md"
+          >
+            立即預訂
+          </button>
         </div>
       </div>
     </div>
     <!-- footer -->
-    <div class="w-full bg-theme-neutral-bg flex justify-center px-20">
+    <div
+      class="w-full bg-theme-neutral-bg flex justify-center px-20 max-xl:px-3"
+    >
       <Footer></Footer>
     </div>
   </div>

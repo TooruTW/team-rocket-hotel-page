@@ -9,7 +9,7 @@ const props = defineProps({
 <template>
           <div class="flex justify-center">
         <!-- detail description -->
-        <div class="flex flex-col justify-between gap-20">
+        <div class="flex flex-col justify-between gap-20 max-xl:gap-6">
           <!-- Heading -->
           <div class="flex flex-col gap-6">
             <h1
@@ -31,7 +31,6 @@ const props = defineProps({
                 房型基本資訊
               </h5>
             </div>
-
             <div class="flex gap-4">
               <div
                 class="w-24 p-4 bg-theme-neutral-0 rounded-md aspect-square flex flex-col justify-center gap-2"
@@ -131,8 +130,8 @@ const props = defineProps({
               </h5>
             </div>
 
-            <div class="flex gap-10 w-full bg-theme-neutral-0 rounded-md p-6">
-              <h6 class="flex justify-center gap-2 items-center text-base leading-[1.5] tracking-wide font-bold" v-for="(item, index) in props.dataObj.layoutInfo" :key="index">
+            <div class="grid gap-x-10 gap-y-2 grid-cols-5 max-2xl:grid-cols-4 max-xl:grid-cols-3 max-md:grid-cols-2 w-full bg-theme-neutral-0 rounded-md p-6">
+              <h6 class="flex gap-2 items-center text-base leading-[1.5] tracking-wide font-bold" v-for="(item, index) in props.dataObj.layoutInfo" :key="index">
                 <svg class=" text-theme-primary-100 w-6 h-6"
                   viewBox="0 0 24 24"
                   fill="none"
@@ -164,7 +163,7 @@ const props = defineProps({
               </h5>
             </div>
 
-            <div class="grid gap-x-10 gap-y-2 grid-cols-5 w-full bg-theme-neutral-0 rounded-md p-6">
+            <div class="grid gap-x-10 gap-y-2 grid-cols-5 max-2xl:grid-cols-4 max-xl:grid-cols-3 max-md:grid-cols-2 w-full bg-theme-neutral-0 rounded-md p-6">
               <h6 class="flex gap-2 items-center text-base leading-[1.5] tracking-wide font-bold" v-for="(item, index) in props.dataObj.facilityInfo" :key="index">
                 <svg class=" text-theme-primary-100 w-6 h-6"
                   viewBox="0 0 24 24"
@@ -197,7 +196,7 @@ const props = defineProps({
               </h5>
             </div>
 
-            <div class="grid gap-x-10 gap-y-2 grid-cols-5 w-full bg-theme-neutral-0 rounded-md p-6">
+            <div class="grid gap-x-10 gap-y-2 grid-cols-5  max-2xl:grid-cols-4 max-xl:grid-cols-3 max-md:grid-cols-2  w-full bg-theme-neutral-0 rounded-md p-6">
               <h6 class="flex gap-2 items-center text-base leading-[1.5] tracking-wide font-bold" v-for="(item, index) in props.dataObj.amenityInfo" :key="index">
                 <svg class=" text-theme-primary-100 w-6 h-6"
                   viewBox="0 0 24 24"
