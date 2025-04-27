@@ -2,9 +2,7 @@
 import { ref, computed } from "vue";
 import Remider from "../../Remider.vue";
 const isShow = ref(false);
-
 const errorMessage = ref("testing")
-
 const today = new Date();
 const todayStart = new Date(
   today.getFullYear(),
@@ -24,6 +22,15 @@ const dateCheckIn = ref(null);
 const dateCheckOut = ref(null);
 const dateCheckInFormted = computed(() => formateDate(dateCheckIn.value));
 const dateCheckOutFormted = computed(() => formateDate(dateCheckOut.value));
+
+const emit = defineEmits(['update'])
+
+function passDate(){
+  emit('update',{
+    checkIn: dateCheckIn.value,
+    checkOut: dateCheckOut.value
+  })
+}
 
 const select = ref({
   year: new Date().getFullYear(),
@@ -151,6 +158,10 @@ function createDateClass(year, month, day) {
 function handlePicker(show) {
   isShow.value = show ? true : false;
   errorMessage.value = "show picker"
+  if(!show && dateCheckIn.value && dateCheckOut.value){
+    passDate()
+    console.log("date updated")
+  }
 }
 </script>
 <template>

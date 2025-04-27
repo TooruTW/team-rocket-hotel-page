@@ -135,7 +135,11 @@ const sampleObj = ref({
   updatedAt: "2025-04-08T02:26:28.344Z",
 });
 const numPerson = ref(2)
-
+const bookingDate = ref(null)
+function getBooking(date){
+  console.log("date passed,here the date :",date)
+  bookingDate.value = date
+}
 function handlePerson(isPlus){
     if(isPlus){
         if(numPerson.value >= sampleObj.value.maxPeople) return
@@ -144,6 +148,11 @@ function handlePerson(isPlus){
         if(numPerson.value <= 0) return
         numPerson.value --
     }
+}
+
+function handleBooking(){
+  console.log("date", bookingDate.value)
+  console.log("person", numPerson.value)
 }
 
 </script>
@@ -189,7 +198,7 @@ function handlePerson(isPlus){
           <div class="flex flex-col gap-4">
             <!-- date -->
             <div class="w-full">
-                <DatePicker></DatePicker>
+                <DatePicker @update="getBooking"></DatePicker>
             </div>
             <!-- person -->
             <div class="w-full flex items-center justify-between">
@@ -234,7 +243,7 @@ function handlePerson(isPlus){
             NT$ {{ sampleObj.price }}
           </h5>
           <!-- submit -->
-          <button  class="text-16 font-bold leading-[1.5] tracking-wid text-theme-neutral-0 w-full bg-theme-primary-100 py-4 rounded-md">立即預訂</button>
+          <button @click="handleBooking"  class="text-16 font-bold leading-[1.5] tracking-wid text-theme-neutral-0 w-full bg-theme-primary-100 py-4 rounded-md">立即預訂</button>
         </div>
       </div>
     </div>
