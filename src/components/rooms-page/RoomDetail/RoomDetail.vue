@@ -158,10 +158,10 @@ function handleBooking() {
 </script>
 
 <template>
-  <div class="">
+  <div class="max-xl:overflow-x-hidden">
     <!-- header -->
     <div
-      class="w-full bg-theme-neutral-bg flex justify-center px-20 fixed z-100 max-xl:px-3 max-xl:relative max-xl:overflow-x-hidden"
+      class="w-full bg-theme-neutral-bg flex justify-center px-20 fixed z-100 max-xl:px-3 max-xl:relative "
     >
       <Header></Header>
     </div>

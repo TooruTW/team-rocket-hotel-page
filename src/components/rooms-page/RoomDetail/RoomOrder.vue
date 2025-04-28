@@ -153,15 +153,15 @@ function formateDate(time) {
 </script>
 
 <template>
-  <div class="bg-theme-primary-10 flex flex-col items-center">
+  <div class="bg-theme-primary-10 flex flex-col items-center -z-0 max-xl:overflow-x-hidden">
     <!-- header -->
     <div
-      class="w-full bg-theme-neutral-bg flex justify-center px-20 fixed z-100 max-xl:px-3 max-xl:relative max-xl:overflow-x-hidden"
+      class="w-full h-full bg-theme-neutral-bg flex justify-center px-20 fixed z-100 max-xl:px-3 max-xl:relative "
     >
       <Header></Header>
     </div>
     <!-- content -->
-    <div class="mt-30 py-30 w-full max-w-324 flex flex-col items-center px-3 max-lg:py-10 max-lg:mt-0">
+    <div class=" relative z-0 mt-30 py-30 w-full max-w-324 flex flex-col items-center px-3 max-lg:py-10 max-lg:mt-0">
       
       <div class="flex items-center mb-10 w-full">
         <svg class="max-lg:w-6 h-6"
@@ -293,6 +293,7 @@ function formateDate(time) {
         </div>
       </div>
     </div>
+
     <!-- footer -->
     <div
       class="w-full bg-theme-neutral-bg flex justify-center px-20 max-xl:px-3"
