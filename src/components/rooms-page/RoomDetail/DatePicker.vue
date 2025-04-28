@@ -9,6 +9,7 @@ const todayStart = new Date(
   today.getMonth(),
   today.getDate()
 );
+
 function formateDate(time) {
   if (!time) {
     return `-- / -- / --`;
@@ -18,6 +19,7 @@ function formateDate(time) {
   const date = time.getDate();
   return `${year} / ${month} / ${date}`;
 }
+
 const dateCheckIn = ref(null);
 const dateCheckOut = ref(null);
 const dateCheckInFormted = computed(() => formateDate(dateCheckIn.value));
@@ -239,7 +241,9 @@ function handlePicker(show) {
               {{ date }}
             </div>
           </div>
+
         </div>
+
         <div class="relative w-full">
           <svg
             class="text-theme-neutral-100 hover:text-theme-neutral-60 absolute right-0"

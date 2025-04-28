@@ -6,6 +6,7 @@ import RoomTextContent from "./RoomTextContent.vue";
 import DatePicker from "./DatePicker.vue";
 import Slider from "../../Slider.vue";
 import { computed, ref } from "vue";
+import DatePickerMobile from "./DatePickerMobile.vue";
 
 const sampleObj = ref({
   _id: "67f4865cd695541536fc0a50",
@@ -135,12 +136,28 @@ const sampleObj = ref({
   createdAt: "2025-04-08T02:13:48.267Z",
   updatedAt: "2025-04-08T02:26:28.344Z",
 });
+
 const numPerson = ref(2);
+
 const bookingDate = ref(null);
+
 function getBooking(date) {
   console.log("date passed,here the date :", date);
   bookingDate.value = date;
 }
+
+function getBookingMobile(data){
+  console.log("date passed,here the date :", data);
+  numPerson.value = data.person
+  bookingDate.value = {
+    checkIn:data.checkIn,
+    checkOut:data.checkOut
+  }
+  handleBooking()
+}
+
+
+
 function handlePerson(isPlus) {
   if (isPlus) {
     if (numPerson.value >= sampleObj.value.maxPeople) return;
@@ -152,21 +169,23 @@ function handlePerson(isPlus) {
 }
 
 function handleBooking() {
+  console.log("goint to booking sever process")
   console.log("date", bookingDate.value);
   console.log("person", numPerson.value);
 }
+
 </script>
 
 <template>
   <div class="max-xl:overflow-x-hidden">
     <!-- header -->
     <div
-      class="w-full bg-theme-neutral-bg flex justify-center px-20 fixed z-100 max-xl:px-3 max-xl:relative "
+      class="w-full bg-theme-neutral-bg flex justify-center px-20 fixed z-100 max-xl:px-3 max-xl:relative"
     >
       <Header></Header>
     </div>
     <!-- content -->
-    <div class="w-full z-0 bg-theme-primary-10 pt-28 max-xl:pt-0">
+    <div class="w-full z-0 bg-theme-primary-10 pt-28 relative max-xl:pt-0">
       <!-- album -->
       <div class="p-20 max-lg:p-0">
         <RoomAlbum
@@ -263,6 +282,11 @@ function handleBooking() {
           >
             立即預訂
           </button>
+        </div>
+        <!-- reservation mobile -->
+        <div class="fixed bottom-0 w-screen z-1000 hidden max-lg:block">
+          <!-- date picker -->
+          <DatePickerMobile @updateMobile="getBookingMobile" class="bg-theme-neutral-0 overflow-hidden rounded-t-20px w-full border-t-1 border-theme-neutral-40"></DatePickerMobile>
         </div>
       </div>
     </div>
