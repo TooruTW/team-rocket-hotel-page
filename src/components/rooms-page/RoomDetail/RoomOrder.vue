@@ -147,15 +147,13 @@ function formateDate(time) {
   const months = time.getMonth() + 1;
   const data = time.getDate();
   const day = time.getDay();
-
   const week = ["日", "一", "二", "三", "四", "五", "六"];
-
   return `${year} 年 ${months} 月 ${data} 日星期${week[day]}`;
 }
 </script>
 
 <template>
-  <div class=" bg-theme-primary-10 flex flex-col items-center">
+  <div class="bg-theme-primary-10 flex flex-col items-center">
     <!-- header -->
     <div
       class="w-full bg-theme-neutral-bg flex justify-center px-20 fixed z-100 max-xl:px-3 max-xl:relative max-xl:overflow-x-hidden"
@@ -163,7 +161,7 @@ function formateDate(time) {
       <Header></Header>
     </div>
     <!-- content -->
-    <div class="mt-30 pt-30 w-full max-w-324">
+    <div class="mt-30 py-30 w-full max-w-324">
       <div class="flex items-center mb-10">
         <svg
           width="40"
@@ -189,17 +187,16 @@ function formateDate(time) {
         </h3>
       </div>
 
-      <div>
+      <div class="flex justify-between gap-4">
         <!-- right -->
-        <div class="flex flex-col gap-12">
-
+        <div class="flex flex-col gap-12 w-full max-w-186">
           <!-- 訂房資訊 -->
           <div class="flex flex-col gap-10 text-base">
             <h4 class="font-bold text-28 leading-[1.2] tracking-wider">
               訂房資訊
             </h4>
 
-            <div class=" flex flex-col gap-6">
+            <div class="flex flex-col gap-6">
               <div class="flex flex-col gap-3">
                 <div class="flex item-center gap-3">
                   <div class="h-6 w-1 rounded-sm bg-theme-primary-100"></div>
@@ -245,7 +242,7 @@ function formateDate(time) {
             <BookingData></BookingData>
           </div>
 
-          <hr>
+          <hr />
 
           <div class="flex flex-col gap-10 text-base">
             <h4 class="font-bold text-28 leading-[1.2] tracking-wider">
@@ -253,13 +250,46 @@ function formateDate(time) {
             </h4>
             <RoomTextContent
               :dataObj="sampleObj"
-              :rule="false"
+              :hideRule="true"
+              :hideTitle="true"
             ></RoomTextContent>
           </div>
-
         </div>
-        <!-- left -->
-        <div></div>
+        <!-- card -->
+        <div
+          class="flex flex-col p-10 gap-10 bg-theme-neutral-0 w-full max-w-120 rounded-20px h-fit sticky top-40"
+        >
+          <img
+            class="w-full object-cover rounded-md aspect-10/7"
+            src="../../../../public/fakeImg.webp"
+            alt="房間照片"
+          />
+          <div class="flex flex-col gap-6">
+            <h4 class="font-bold text-28 leading-[1.2] tracking-wider">
+              價格詳情
+            </h4>
+            <ul class="font-medium text-base leading-[1.5] tracking-wide">
+              <li class="flex justify-between items-center">
+                <span>
+                  <span>NT$ {{ "房價" }}</span> Ｘ
+                  <span class="text-theme-neutral-80">{{ "時長" }} 晚</span>
+                </span>
+                <span>NT$ </span>
+              </li>
+              <li class="flex justify-between items-center">
+                <span>住宿折扣</span
+                ><span class="text-theme-primary-100">-NT$</span>
+              </li>
+            </ul>
+            <hr class="w-full text-theme-neutral-40" />
+            <p
+              class="font-bold text-base leading-[1.5] tracking-wide flex justify-between items-center"
+            >
+              <span>總價</span><span>NT$ </span>
+            </p>
+          </div>
+          <button class=" rounded-md font-bold text-base bg-theme-primary-100 text-theme-neutral-0 py-4">確認訂房</button>
+        </div>
       </div>
     </div>
     <!-- footer -->

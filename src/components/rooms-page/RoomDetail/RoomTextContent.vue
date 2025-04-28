@@ -1,22 +1,26 @@
 <script setup>
-import { computed } from "vue";
+import { compile, computed } from 'vue';
+
 
 const props = defineProps({
     dataObj: Object,
-    rule: Boolean
+    hideRule: Boolean,
+    hideTitle: Boolean,
+    smallMode: Boolean
+})
 
+const gapSize = computed(()=>{
+  return !props.hideTitle? `gap-20`:`gap-6`
 })
-const isShowRule = computed(()=>{
-  return props.rule
-})
+
 
 </script>
 <template>
           <div class="flex w-full">
         <!-- detail description -->
-        <div class="flex flex-col justify-between gap-20 max-xl:gap-6">
+        <div class="flex flex-col justify-between max-xl:gap-6" :class="gapSize">
           <!-- Heading -->
-          <div class="flex flex-col gap-6">
+          <div v-if="!props.hideTitle" class="flex flex-col gap-6">
             <h1
               class="text-40 text-theme-neutral-100 font-bold leading-[1.2] tracking-wider max-md:text-28"
             >
@@ -226,7 +230,7 @@ const isShowRule = computed(()=>{
 
           </div>
           <!-- rule -->
-          <div v-if="isShowRule" class="flex flex-col gap-6">
+          <div v-if="!props.hideRule" class="flex flex-col gap-6">
             <div class="flex items-center gap-3 w-full">
               <div class="h-6 w-1 rounded-sm bg-theme-primary-100"></div>
               <h5 class="font-bold text-24 leading-[1.2] tracking-wider">
