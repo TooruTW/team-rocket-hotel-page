@@ -136,12 +136,15 @@ const sampleObj = ref({
   createdAt: "2025-04-08T02:13:48.267Z",
   updatedAt: "2025-04-08T02:26:28.344Z",
 });
+
 const numPerson = ref(2);
+
 const bookingDate = ref(null);
 function getBooking(date) {
   console.log("date passed,here the date :", date);
   bookingDate.value = date;
 }
+
 function handlePerson(isPlus) {
   if (isPlus) {
     if (numPerson.value >= sampleObj.value.maxPeople) return;
@@ -269,18 +272,6 @@ function handleBooking() {
         <div class="fixed bottom-0 w-screen z-1000">
           <!-- date picker -->
           <DatePickerMobile class=" bg-theme-neutral-0 overflow-hidden rounded-t-20px w-full border-t-1 border-theme-neutral-40"></DatePickerMobile>
-          <!-- bottom line -->
-          <div
-            class="w-full p-3 flex justify-between items-center bg-theme-neutral-0 border-t-1 border-theme-neutral-40"
-          >
-            <p>NT$ {{ "roomprice" }} / 晚</p>
-            <button
-              class="rounded-md bg-theme-primary-100 py-4 px-12 text-theme-neutral-0"
-            >
-              查看可訂日期
-            </button>
-          </div>
-
         </div>
       </div>
     </div>
