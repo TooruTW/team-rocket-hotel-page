@@ -130,6 +130,17 @@ const sampleObj = ref({
   updatedAt: "2025-04-08T02:26:28.344Z",
 });
 
+const emit = defineEmits(['updateMobile'])
+
+function passDate(){
+  emit('updateMobile',{
+    checkIn: dateCheckIn.value,
+    checkOut: dateCheckOut.value,
+    person: person.value,
+  })
+}
+
+
 const roomInfo = ref(sampleObj.value)
 const step = ref(0)
 const person = ref(2);
@@ -153,11 +164,12 @@ function handleSave(event){
 }
 function handleBooking(event){
     event.preventDefault()
-    book(dateCheckIn.value,dateCheckOut.value, person.value,roomInfo.value.name)
+    book(dateCheckIn.value,dateCheckOut.value, person.value)
 }
-function book(checkIn,checkOut,person,roomtype){
-    console.log("booking",roomtype,person,'人',checkIn,"~",checkOut)
-    alert("booking success")
+function book(checkIn,checkOut,person){
+
+    passDate()
+
 }
 function handleNextStep(isNext){
     if(isNext) return step.value ++

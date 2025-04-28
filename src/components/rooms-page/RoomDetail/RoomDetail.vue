@@ -140,10 +140,23 @@ const sampleObj = ref({
 const numPerson = ref(2);
 
 const bookingDate = ref(null);
+
 function getBooking(date) {
   console.log("date passed,here the date :", date);
   bookingDate.value = date;
 }
+
+function getBookingMobile(data){
+  console.log("date passed,here the date :", data);
+  numPerson.value = data.person
+  bookingDate.value = {
+    checkIn:data.checkIn,
+    checkOut:data.checkOut
+  }
+  handleBooking()
+}
+
+
 
 function handlePerson(isPlus) {
   if (isPlus) {
@@ -156,9 +169,11 @@ function handlePerson(isPlus) {
 }
 
 function handleBooking() {
+  console.log("goint to booking sever process")
   console.log("date", bookingDate.value);
   console.log("person", numPerson.value);
 }
+
 </script>
 
 <template>
@@ -269,9 +284,9 @@ function handleBooking() {
           </button>
         </div>
         <!-- reservation mobile -->
-        <div class="fixed bottom-0 w-screen z-1000">
+        <div class="fixed bottom-0 w-screen z-1000 hidden max-lg:block">
           <!-- date picker -->
-          <DatePickerMobile class=" bg-theme-neutral-0 overflow-hidden rounded-t-20px w-full border-t-1 border-theme-neutral-40"></DatePickerMobile>
+          <DatePickerMobile @updateMobile="getBookingMobile" class="bg-theme-neutral-0 overflow-hidden rounded-t-20px w-full border-t-1 border-theme-neutral-40"></DatePickerMobile>
         </div>
       </div>
     </div>
