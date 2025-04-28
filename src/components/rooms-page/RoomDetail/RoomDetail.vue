@@ -6,6 +6,7 @@ import RoomTextContent from "./RoomTextContent.vue";
 import DatePicker from "./DatePicker.vue";
 import Slider from "../../Slider.vue";
 import { computed, ref } from "vue";
+import DatePickerMobile from "./DatePickerMobile.vue";
 
 const sampleObj = ref({
   _id: "67f4865cd695541536fc0a50",
@@ -161,12 +162,12 @@ function handleBooking() {
   <div class="max-xl:overflow-x-hidden">
     <!-- header -->
     <div
-      class="w-full bg-theme-neutral-bg flex justify-center px-20 fixed z-100 max-xl:px-3 max-xl:relative "
+      class="w-full bg-theme-neutral-bg flex justify-center px-20 fixed z-100 max-xl:px-3 max-xl:relative"
     >
       <Header></Header>
     </div>
     <!-- content -->
-    <div class="w-full z-0 bg-theme-primary-10 pt-28 max-xl:pt-0">
+    <div class="w-full z-0 bg-theme-primary-10 pt-28 relative max-xl:pt-0">
       <!-- album -->
       <div class="p-20 max-lg:p-0">
         <RoomAlbum
@@ -263,6 +264,23 @@ function handleBooking() {
           >
             立即預訂
           </button>
+        </div>
+        <!-- reservation mobile -->
+        <div class="fixed bottom-0 w-screen z-1000">
+          <!-- date picker -->
+          <DatePickerMobile class=" bg-theme-neutral-0 overflow-hidden rounded-t-20px w-full border-t-1 border-theme-neutral-40"></DatePickerMobile>
+          <!-- bottom line -->
+          <div
+            class="w-full p-3 flex justify-between items-center bg-theme-neutral-0 border-t-1 border-theme-neutral-40"
+          >
+            <p>NT$ {{ "roomprice" }} / 晚</p>
+            <button
+              class="rounded-md bg-theme-primary-100 py-4 px-12 text-theme-neutral-0"
+            >
+              查看可訂日期
+            </button>
+          </div>
+
         </div>
       </div>
     </div>
