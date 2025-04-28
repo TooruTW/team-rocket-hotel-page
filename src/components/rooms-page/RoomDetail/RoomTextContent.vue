@@ -18,7 +18,7 @@ const gapSize = computed(()=>{
 <template>
           <div class="flex w-full">
         <!-- detail description -->
-        <div class="flex flex-col justify-between max-xl:gap-6" :class="gapSize">
+        <div class="flex flex-col justify-between w-full max-xl:gap-6" :class="gapSize">
           <!-- Heading -->
           <div v-if="!props.hideTitle" class="flex flex-col gap-6">
             <h1
@@ -139,7 +139,7 @@ const gapSize = computed(()=>{
               </h5>
             </div>
 
-            <div class="grid gap-x-10 gap-y-2 grid-cols-5 max-2xl:grid-cols-4 max-xl:grid-cols-3 max-md:grid-cols-2 w-full bg-theme-neutral-0 rounded-md p-6">
+            <div class="grid gap-x-10 gap-y-2 grid-cols-5  max-2xl:grid-cols-4 max-md:grid-cols-2  w-full bg-theme-neutral-0 rounded-md p-6">
               <h6 class="flex gap-2 items-center text-base leading-[1.5] tracking-wide font-bold" v-for="(item, index) in props.dataObj.layoutInfo" :key="index">
                 <svg class=" text-theme-primary-100 w-6 h-6"
                   viewBox="0 0 24 24"
@@ -172,7 +172,7 @@ const gapSize = computed(()=>{
               </h5>
             </div>
 
-            <div class="grid gap-x-10 gap-y-2 grid-cols-5 max-2xl:grid-cols-4 max-xl:grid-cols-3 max-md:grid-cols-2 w-full bg-theme-neutral-0 rounded-md p-6">
+            <div class="grid gap-x-10 gap-y-2 grid-cols-5  max-2xl:grid-cols-4 max-md:grid-cols-2  w-full bg-theme-neutral-0 rounded-md p-6">
               <h6 class="flex gap-2 items-center text-base leading-[1.5] tracking-wide font-bold" v-for="(item, index) in props.dataObj.facilityInfo" :key="index">
                 <svg class=" text-theme-primary-100 w-6 h-6"
                   viewBox="0 0 24 24"
@@ -205,7 +205,7 @@ const gapSize = computed(()=>{
               </h5>
             </div>
 
-            <div class="grid gap-x-10 gap-y-2 grid-cols-5  max-2xl:grid-cols-4 max-xl:grid-cols-3 max-md:grid-cols-2  w-full bg-theme-neutral-0 rounded-md p-6">
+            <div class="grid gap-x-10 gap-y-2 grid-cols-5  max-2xl:grid-cols-4 max-md:grid-cols-2  w-full bg-theme-neutral-0 rounded-md p-6">
               <h6 class="flex gap-2 items-center text-base leading-[1.5] tracking-wide font-bold" v-for="(item, index) in props.dataObj.amenityInfo" :key="index">
                 <svg class=" text-theme-primary-100 w-6 h-6"
                   viewBox="0 0 24 24"

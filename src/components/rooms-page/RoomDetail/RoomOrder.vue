@@ -161,9 +161,10 @@ function formateDate(time) {
       <Header></Header>
     </div>
     <!-- content -->
-    <div class="mt-30 py-30 w-full max-w-324">
-      <div class="flex items-center mb-10">
-        <svg
+    <div class="mt-30 py-30 w-full max-w-324 flex flex-col items-center px-3 max-lg:py-10 max-lg:mt-0">
+      
+      <div class="flex items-center mb-10 w-full">
+        <svg class="max-lg:w-6 h-6"
           width="40"
           height="40"
           viewBox="0 0 40 40"
@@ -182,17 +183,17 @@ function formateDate(time) {
             </clipPath>
           </defs>
         </svg>
-        <h3 class="font-bold text-32 leading-[1.2] tracking-wider">
+        <h3 class="font-bold text-32 leading-[1.2] tracking-wider max-lg:text-24">
           確認訂房資訊
         </h3>
       </div>
 
-      <div class="flex justify-between gap-4">
+      <div class="flex justify-between gap-4 w-full max-lg:flex-col max-lg:items-center">
         <!-- right -->
-        <div class="flex flex-col gap-12 w-full max-w-186">
+        <div class="flex flex-col gap-12 max-lg:gap-10 w-full max-w-186 max-lg:max-w-none">
           <!-- 訂房資訊 -->
-          <div class="flex flex-col gap-10 text-base">
-            <h4 class="font-bold text-28 leading-[1.2] tracking-wider">
+          <div class="flex flex-col gap-10 max-lg:gap-6 text-base">
+            <h4 class="font-bold text-28 max-lg:text-20 leading-[1.2] tracking-wider ">
               訂房資訊
             </h4>
 
@@ -235,8 +236,8 @@ function formateDate(time) {
 
           <hr />
           <!-- 訂房人資料 -->
-          <div class="flex flex-col gap-10 text-base">
-            <h4 class="font-bold text-28 leading-[1.2] tracking-wider">
+          <div class="flex flex-col gap-10 max-lg:gap-6 text-base">
+            <h4 class="font-bold text-28 max-lg:text-20 leading-[1.2] tracking-wider">
               訂房人資訊
             </h4>
             <BookingData></BookingData>
@@ -244,8 +245,8 @@ function formateDate(time) {
 
           <hr />
 
-          <div class="flex flex-col gap-10 text-base">
-            <h4 class="font-bold text-28 leading-[1.2] tracking-wider">
+          <div class="flex flex-col gap-10 max-lg:gap-6 text-base">
+            <h4 class="font-bold text-28 max-lg:text-20 leading-[1.2] tracking-wider">
               房間資訊
             </h4>
             <RoomTextContent
@@ -257,7 +258,7 @@ function formateDate(time) {
         </div>
         <!-- card -->
         <div
-          class="flex flex-col p-10 gap-10 bg-theme-neutral-0 w-full max-w-120 rounded-20px h-fit sticky top-40"
+          class="flex flex-col p-10 gap-10 max-lg:gap-6 bg-theme-neutral-0 w-full max-w-120 rounded-20px h-fit sticky top-40 max-lg:max-w-none max-lg:p-6"
         >
           <img
             class="w-full object-cover rounded-md aspect-10/7"
@@ -265,7 +266,7 @@ function formateDate(time) {
             alt="房間照片"
           />
           <div class="flex flex-col gap-6">
-            <h4 class="font-bold text-28 leading-[1.2] tracking-wider">
+            <h4 class="font-bold text-28 max-lg:text-20 leading-[1.2] tracking-wider">
               價格詳情
             </h4>
             <ul class="font-medium text-base leading-[1.5] tracking-wide">
