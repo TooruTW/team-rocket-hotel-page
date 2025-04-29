@@ -6,6 +6,7 @@ import RegisterForm from "../components/user-page/RegisterForm.vue";
 import RoomsPage from "../components/rooms-page/RoomsPage.vue";
 import RoomDetail from "../components/rooms-page/RoomDetail/RoomDetail.vue";
 import RoomOrder from "../components/rooms-page/RoomDetail/RoomOrder.vue";
+import OrderComplete from "../components/rooms-page/orderComplete/OrderComplete.vue";
 
 const routes = [
   { path: "/", name: "MainPage", component: MainPage },
@@ -20,7 +21,9 @@ const routes = [
   },
   { path: "/rooms", name: "RoomsPage", component: RoomsPage },
   { path: "/room-detail", name: "RoomDetail", component: RoomDetail },
-  { path: "/room-order", name: "RoomOrder", component: RoomOrder }
+  { path: "/room-order", name: "RoomOrder", component: RoomOrder },
+  { path: "/room-order-complete", name: "OrderComplete", component: OrderComplete }
+
   
 ];
 
