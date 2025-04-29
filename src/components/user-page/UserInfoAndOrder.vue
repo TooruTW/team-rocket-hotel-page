@@ -2,8 +2,7 @@
 import Header from "../Header.vue";
 import Footer from "../Footer.vue";
 import { ref, computed } from "vue";
-import ProfolioAccount from "./ProfolioAccount.vue";
-import ProfolioInfo from "./ProfolioInfo.vue";
+
 import { RouterView, RouterLink } from "vue-router";
 
 const sampleProfolio = {
@@ -20,8 +19,16 @@ const sampleProfolio = {
   updatedAt: "2025-04-15T07:36:35.399Z",
 };
 
-
 const isProfolio = ref(true);
+
+function switchCard(isChangeToOrder){
+  if(isChangeToOrder){
+    isProfolio.value = false
+  }else{
+    isProfolio.value = true
+  }
+}
+
 </script>
 <template>
   <div class="flex flex-col items-center bg-theme-neutral-bg overflow-x-hidden">
@@ -50,19 +57,21 @@ const isProfolio = ref(true);
         </div>
       </div>
       <!-- main -->
-      <div class="max-w-324 w-full flex pt-20 pb-30 flex-col gap-20 max-lg:gap-10">
+      <div
+        class="max-w-324 w-full flex pt-20 pb-30 flex-col gap-20 max-lg:gap-10"
+      >
         <!-- selector -->
         <div
           class="text-theme-neutral-0 flex font-bold leading-[1.2] tracking-wider"
         >
           <div class="flex flex-col items-center">
-            <RouterLink to="/Profolio/myinfo">
+            <RouterLink to="/usinfo-and-order/myinfo" @click="switchCard(false)">
               <h6
-              class="py-4 px-6"
-              :class="!isProfolio ? null : `text-theme-primary-100`"
-            >
-              個人資料
-            </h6>
+                class="py-4 px-6"
+                :class="!isProfolio ? null : `text-theme-primary-100`"
+              >
+                個人資料
+              </h6>
             </RouterLink>
 
             <div
@@ -72,12 +81,14 @@ const isProfolio = ref(true);
           </div>
 
           <div class="flex flex-col items-center">
-            <h6
-              class="py-4 px-6"
-              :class="isProfolio ? null : `text-theme-primary-100`"
-            >
-              我的訂單
-            </h6>
+            <RouterLink to="/usinfo-and-order/myorder" @click="switchCard(true)">
+              <h6
+                class="py-4 px-6"
+                :class="isProfolio ? null : `text-theme-primary-100`"
+              >
+                我的訂單
+              </h6>
+            </RouterLink>
             <div
               class="w-8 h-1 bg-theme-primary-100 rounded-full transition-all ease-in-out"
               :class="!isProfolio ? null : `hidden`"
@@ -85,7 +96,7 @@ const isProfolio = ref(true);
           </div>
         </div>
         <!-- view -->
-         <RouterView class="px-3"></RouterView>
+        <RouterView class="px-3 max-w-324 w-full flex gap-10 justify-between"></RouterView>
       </div>
     </div>
 

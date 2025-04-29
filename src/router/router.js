@@ -7,8 +7,9 @@ import RoomsPage from "../components/rooms-page/RoomsPage.vue";
 import RoomDetail from "../components/rooms-page/RoomDetail/RoomDetail.vue";
 import RoomOrder from "../components/rooms-page/RoomDetail/RoomOrder.vue";
 import OrderComplete from "../components/rooms-page/orderComplete/OrderComplete.vue";
-import Profolio from "../components/user-page/Profolio.vue";
+import UserInfoAndOrder from "../components/user-page/UserInfoAndOrder.vue";
 import MyInfo from "../components/user-page/MyInfo.vue";
+import MyOrder from "../components/user-page/MyOrder.vue";
 
 const routes = [
   { path: "/", name: "MainPage", component: MainPage },
@@ -21,9 +22,12 @@ const routes = [
       { path: "register", component: RegisterForm },
     ],
   },
-  { path: "/Profolio", name: "Profolio", component: Profolio,
+  { path: "/usinfo-and-order", name: "usinfo-and-order", component: UserInfoAndOrder,
     children:[
       { path: "myinfo", component: MyInfo },
+      { path: "myorder", component: MyOrder },
+
+
     ]
    },
   { path: "/rooms", name: "RoomsPage", component: RoomsPage },
