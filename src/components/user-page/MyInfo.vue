@@ -19,7 +19,7 @@ const sampleProfolio = {
 
 </script>
 <template>
-  <div class="flex justify-between gap-10 max-lg:flex-col max-lg:items-center max-lg:gap-6">
+  <div>
     <!-- card 1 -->
     <ProfolioAccount :userObj="sampleProfolio"></ProfolioAccount>
     <ProfolioInfo :userObj="sampleProfolio"></ProfolioInfo>

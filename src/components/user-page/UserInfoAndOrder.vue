@@ -96,7 +96,7 @@ function switchCard(isChangeToOrder){
           </div>
         </div>
         <!-- view -->
-        <RouterView class="px-3 max-w-324 w-full flex gap-10 justify-between"></RouterView>
+        <RouterView class="flex justify-between gap-10 px-3 max-lg:flex-col max-lg:items-center max-lg:gap-6"></RouterView>
       </div>
     </div>
 
