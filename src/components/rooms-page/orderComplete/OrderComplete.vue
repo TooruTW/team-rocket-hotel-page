@@ -151,7 +151,7 @@ const orderSample = {
 };
 </script>
 <template>
-  <div class="flex flex-col items-center bg-theme-neutral-bg">
+  <div class="flex flex-col items-center bg-theme-neutral-bg overflow-x-hidden">
     <!-- header -->
     <div
       class="w-full flex justify-center px-20 fixed top-0 z-100 max-xl:px-3 max-xl:relative"
@@ -161,13 +161,13 @@ const orderSample = {
 
     <!-- content -->
     <div
-      class="w-full py-30 mt-30 flex justify-between text-theme-neutral-0 max-w-325"
+      class="relative w-full py-30 mt-30 flex justify-between text-theme-neutral-0 max-w-325  max-xl:px-3 max-lg:flex-col max-lg:items-center max-lg:mt-0 max-lg:py-10 max-lg:gap-15"
     >
       <!-- text content -->
       <div class="flex flex-col max-w-186 w-full gap-20 justify-between">
         <div>
-          <div class="flex items-center gap-10 mb-10">
-            <svg
+          <div class="flex items-center gap-10 mb-10 max-lg:flex-col max-lg:items-start max-lg:gap-4 max-lg:mb-8">
+            <svg class="max-lg:w-10"
               width="56"
               height="56"
               viewBox="0 0 56 56"
@@ -192,7 +192,7 @@ const orderSample = {
                 </clipPath>
               </defs>
             </svg>
-            <h1 class="font-bold text-48 leading-[1.2] tracking-wider">
+            <h1 class="font-bold text-48 leading-[1.2] tracking-wider max-lg:text-32">
               <span>恭喜，Jessica！</span> <br />
               <span>您已預訂成功</span>
             </h1>
@@ -205,11 +205,11 @@ const orderSample = {
         </div>
         <hr class="text-theme-neutral-40" />
         <div>
-          <h5 class="font-bold text-24 leading-[1.2] tracking-wider mb-10">
+          <h5 class="font-bold text-24 leading-[1.2] tracking-wider mb-10 max-lg:text-base max-lg:mb-6">
             立即查看您的訂單紀錄
           </h5>
           <button
-            class="font-bold text-base leading-[1.5] tracking-wide bg-theme-primary-100 rounded-md py-4 px-15"
+            class="font-bold text-base leading-[1.5] tracking-wide bg-theme-primary-100 rounded-md py-4 px-15 max-lg:w-full"
           >
             前往我的訂單
           </button>
@@ -238,14 +238,14 @@ const orderSample = {
         </div>
       </div>
       <!-- card -->
-      <div class=" rounded-md bg-theme-neutral-0 text-theme-neutral-80 p-10 max-w-120 w-full flex flex-col gap-10">
+      <div class=" rounded-md bg-theme-neutral-0 text-theme-neutral-80 p-10 max-w-120 w-full flex flex-col gap-10 max-lg:p-4 max-lg:gap-6">
         <div>
-          <p class=" font-medium text-base leading-1.5 tracking-wide mb-2">預訂參考編號： <span>HH2302183151222</span></p>
-          <h5 class=" font-bold text-24 leading-[1.2] tracking-wider text-theme-neutral-100">即將來的行程</h5>
+          <p class=" font-medium text-base leading-1.5 tracking-wide mb-2 max-lg:text-14">預訂參考編號： <span>HH2302183151222</span></p>
+          <h5 class=" font-bold text-24 leading-[1.2] tracking-wider text-theme-neutral-100 max-lg:text-base">即將來的行程</h5>
         </div>
         <img class="rounded-md aspect-5/3 w-full" src="/public/fakeImg.webp" alt="房間照片" />
-        <div class="font-bold">
-          <h6 class="text-20 leading-[1.2] tracking-wider mb-6">
+        <div class="font-bold max-lg:text-14">
+          <h6 class="text-20 leading-[1.2] tracking-wider mb-6 max-lg:text-14">
             尊爵雙人房，1 晚
             <span class="mx-2 text-theme-neutral-40">|</span> 住宿人數：2 位
           </h6>
@@ -336,6 +336,11 @@ const orderSample = {
         </div>
       </div>
     </div>
+    <picture class="w-full h-auto">
+        <source media="(max-width: 768px)" srcset="/public/wave-line-horizone-full-md.png">
+        <img src="/public/wave-line-horizone-full.png" alt="decoration-wave-line">
+
+    </picture>
 
     <!-- footer -->
     <div
