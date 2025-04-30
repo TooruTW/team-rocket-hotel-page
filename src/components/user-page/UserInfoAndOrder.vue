@@ -42,15 +42,15 @@ function switchCard(isChangeToOrder){
     <div class="w-full flex flex-col items-center">
       <!-- hero -->
       <div
-        class="mt-30 max-lg:mt-0 px-3 flex justify-center items-center z-0 w-full bg-center bg-cover h-96 relative after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-theme-neutral-100/40"
+        class="mt-30 max-lg:mt-0 px-3 flex justify-center items-center z-0 w-full bg-center bg-cover h-96 max-md:h-50 relative after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-theme-neutral-100/40"
         style="background-image: url(/public/profolio-bg.jpg)"
       >
         <div
-          class="max-w-324 w-full flex items-center gap-6 h-fit relative z-10"
+          class="max-w-324 w-full flex items-center max-md:flex-col max-md:items-start gap-6 h-fit relative z-10"
         >
-          <img class="w-36" src="/public/user-avatar.png" alt="avatar" />
+          <img class="w-36 max-md:w-18" src="/public/user-avatar.png" alt="avatar" />
           <h1
-            class="font-bold text-48 leading-[1.2] tracking-wider text-theme-neutral-0"
+            class="font-bold text-48 max-md:text-32 leading-[1.2] tracking-wider text-theme-neutral-0"
           >
             Hello，{{ sampleProfolio.name }}
           </h1>

@@ -12,6 +12,9 @@ function handleClose(isClose){
    if(isClose){ showConfirm.value = false}
    else{showConfirm.value = true}
 }
+function handleCancel(){
+    console.log('room cancel')
+}
 
 </script>
 <template>
@@ -121,10 +124,12 @@ function handleClose(isClose){
             </RouterLink>
          </div>
          <!-- popup -->
-          <div v-show="showConfirm" class="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center backdrop-blur-xl bg-theme-neutral-100/40">
-            <div class=" rounded-md bg-theme-neutral-0 flex flex-col items-center justify-between w-150 h-75 border border-red-100">
+          <div v-show="showConfirm" class="fixed top-0 left-0 w-full h-full flex justify-center items-center max-md:items-end backdrop-blur-xl max-md:backdrop-blur-none bg-theme-neutral-100/40">
+            <div class=" rounded-md max-md:rounded-b-none bg-theme-neutral-0 flex flex-col items-center justify-between w-150 max-md:w-full h-75 border border-red-100">
                 <!-- close btn -->
-                <svg @click="handleClose(true)" class="self-end" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                 <div class="flex justify-end max-md:justify-between items-center p-4 w-full max-md:border-b-1 border-theme-neutral-40">
+                    <h6 class="font-bold text-14 leading-1.5 tracking-wide hidden max-md:block">取消預訂</h6>
+                    <svg @click="handleClose(true)" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="40" height="40" fill="white"/>
 <g clip-path="url(#clip0_569_8963)">
 <path d="M27 14.41L25.59 13L20 18.59L14.41 13L13 14.41L18.59 20L13 25.59L14.41 27L20 21.41L25.59 27L27 25.59L21.41 20L27 14.41Z" fill="#4B4B4B"/>
@@ -135,12 +140,13 @@ function handleClose(isClose){
 </clipPath>
 </defs>
 </svg>
+                 </div>
 
-                 <h6 class=" text-theme-neutral-80">確定要取消此房型的預訂嗎？</h6>
+                 <h6 class="font-bold text-20 max-md:text-14 leading-1.5 tracking-wide text-theme-neutral-80">確定要取消此房型的預訂嗎？</h6>
                  <!-- btns -->
                  <div  class="flex gap-4 p-3 border-t-1 border-theme-neutral-40 w-full" >
                     <div @click="handleClose(true)" class="w-full flex justify-center items-center py-4 border-1 rounded-md border-theme-primary-100 text-theme-primary-100">關閉視窗</div>
-                    <div class="w-full flex justify-center items-center py-4 rounded-md  bg-theme-primary-100 text-theme-neutral-0">確定取消</div>
+                    <div @click="handleCancel" class="w-full flex justify-center items-center py-4 rounded-md  bg-theme-primary-100 text-theme-neutral-0">確定取消</div>
                  </div>
             </div>
           </div>
