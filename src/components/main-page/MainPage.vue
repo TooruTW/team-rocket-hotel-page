@@ -1,5 +1,5 @@
 <script setup>
-import { provide, computed, inject } from "vue";
+import { computed, inject } from "vue";
 import Section1 from "./Section1.vue";
 import Sectioin2 from "./Sectioin2.vue";
 import Section3 from "./Section3.vue";

@@ -7,6 +7,7 @@ export function createFetchingObject(method, token, body){
         }
     }
     body && (fetchingPromp.body = JSON.stringify(body))
+    console.log("promp",fetchingPromp)
     return fetchingPromp
 }
 
@@ -25,7 +26,7 @@ export async function getData(url, token) {
 
 export async function postDate(url, token = null, body) {
     try {
-        const res = await fetch(url,createFetchingObject("POST",null,body))
+        const res = await fetch(url,createFetchingObject("POST",token,body))
         const data = await res.json()
         console.log(data)
         return data

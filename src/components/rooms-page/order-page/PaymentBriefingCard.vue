@@ -5,6 +5,11 @@ const props = defineProps({
     discount:Number,
     imgUrl:String
 })
+const emit = defineEmits(['passData'])
+function passTosever(event){
+  event.preventDefault()
+  emit('passData')
+}
 </script>
 <template>
   <div
@@ -38,7 +43,7 @@ const props = defineProps({
         <span>總價</span><span>NT$ {{ props.price * props.nights - props.discount }}</span>
       </p>
     </div>
-    <button
+    <button @click="passTosever"
       class="rounded-md font-bold text-base bg-theme-primary-100 text-theme-neutral-0 py-4"
     >
       確認訂房

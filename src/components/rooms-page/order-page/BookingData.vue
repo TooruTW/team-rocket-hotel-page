@@ -1,132 +1,63 @@
 <script setup>
 import { ref, computed } from "vue";
 import cityName from "../../asset/CityCountyData.json";
-import {
-  isEmail,
-  isPassword,
-  isPhoneNum,
-  isBirthday,
-  isAddress,
-} from "../../../validator";
-import { postDate, isEmailRegisted } from "../../../apiFunction";
-import { RouterLink, useRouter } from "vue-router";
+import { isPhoneNum, isAddress, isEmail } from "../../../validator";
 
-const router = useRouter();
-const url =
-  "https://team-rocket-hotelapi-from-freyja.onrender.com/api/v1/user/signup";
-const isStage2 = ref(false);
-const isStage1Pass = ref(false);
-const isStage2Pass = ref(false);
-const today = new Date();
-const stageClass = computed(() => {
-  if (!isStage2.value) {
-    return "border-1  border-theme-neutral-60 text-theme-neutral-60";
-  }
-  return "border-0 bg-theme-primary-100 text-theme-neutral-0";
-});
+// stage-1
+const validatorEmail = ref(null);
+const validatorName = ref(null);
+const validatorPhone = ref(null);
+const validatorAddress = ref(null);
+
 const user = ref({
   name: null,
-  email: null,
-  password: null,
-  phone: null,
-  birthday: null,
   address: {
+    city: null,
+    zone: null,
     zipcode: null,
     detail: null,
   },
-  isReaded: false,
+  phone: null,
+  email: null,
 });
-// stage-1
-const userPasswordConfirm = ref(null);
-const validatorEmail = ref(null);
-const validatorPassword = ref(null);
-const validatorPasswordConfirem = ref(null);
-const validatorName = ref(null);
-const validatorPhone = ref(null);
-const validatorBirthday = ref(null);
-const validatorAddress = ref(null);
-const validatorAggrement = ref(null);
-const isRegisted = ref(null);
 
-function stage1Checker() {
-  // stage 1
-  validatorEmail.value = isEmail(user.value.email)
-    ? null
-    : "電子郵件格式有誤。";
-  validatorPassword.value = isPassword(user.value.password)
-    ? null
-    : "請輸入至少 8 碼密碼，且需包含至少一個英文字。";
-  validatorPasswordConfirem.value =
-    user.value.password === userPasswordConfirm.value ? null : "與輸入密碼不符";
-  if (
-    !validatorEmail.value &&
-    !validatorPassword.value &&
-    !validatorPasswordConfirem.value &&
-    !isRegisted.value
-  ) {
-    isStage1Pass.value = true;
-    console.log("Stage 1 pass");
-  }
+const emit = defineEmits(['userInfoUpdate'])
+function passUserData(){
+  emit('userInfoUpdate', user.value)
 }
-function stage2Checker() {
-  // stage 2
+
+
+function userInfoChecker() {
+  console.log("start checking")
   validatorName.value = user.value.name ? null : "Hello Miss./Mr. Unknow.";
-  validatorPhone.value = isPhoneNum(user.value.phone)
-    ? null
-    : "手機號碼格式有誤。";
-  validatorBirthday.value = isBirthday(user.value.birthday)
-    ? null
-    : "這麼小就想訂房間？？？";
-  validatorAddress.value = isAddress(user.value.address.detail)
-    ? null
-    : "你住這？";
-  validatorAggrement.value = user.value.isReaded
-    ? null
-    : "我知道你不會讀 但還是要勾。";
-  if (
-    !validatorEmail.value &&
-    !validatorPassword.value &&
-    !validatorPasswordConfirem.value &&
-    !validatorName.value &&
-    !validatorPhone.value &&
-    !validatorBirthday.value &&
-    !validatorAddress.value &&
-    !validatorAggrement.value
-  ) {
-    console.log("stage 2 pass");
-    isStage2Pass.value = true;
+  if (user.value.phone) {
+    validatorPhone.value = isPhoneNum(user.value.phone)
+      ? null
+      : "手機號碼格式有誤。";
+  }
+  if (user.value.address.detail) {
+    validatorAddress.value = isAddress(user.value.address.detail)
+      ? null
+      : "你住這？";
+  }
+  if (user.value.email) {
+    validatorEmail.value = isEmail(user.value.email)
+      ? null
+      : "請輸入有效的電子信箱";
+  }
+  if(!validatorAddress.value && !validatorEmail.value && !validatorName.value && !validatorPhone.value ){
+    updateZipCode()
+    passUserData()
   }
 }
-function handleRegiserNext(event) {
-  event.preventDefault();
-  stage1Checker();
-  isStage1Pass.value ? (isStage2.value = true) : false;
-}
 
-// stage-2
-// birthday
-function formatorBirthday() {
-  user.value.birthday = `${selectedYear.value}/${selectedMonth.value}/${selectedDay.value}`;
-}
-const years = Array.from({ length: 100 }, (_, i) => today.getFullYear() - i);
-const months = Array.from({ length: 12 }, (_, i) => i + 1);
-const selectedYear = ref(today.getFullYear());
-const selectedMonth = ref(today.getMonth() + 1);
-const selectedDay = ref(today.getDate());
-const days = computed(() => {
-  const lastDay = new Date(
-    selectedYear.value,
-    selectedMonth.value,
-    0
-  ).getDate();
-  return Array.from({ length: lastDay }, (_, i) => i + 1);
-});
 // address
 const selectedCity = ref("高雄市");
 const selectedZone = ref("新興區");
 const cityArr = computed(() => {
   return cityName.map((city) => city.CityName);
 });
+
 const zoneArr = computed(() => {
   if (!selectedCity.value) return [];
   const zonesInfo = cityName.find(
@@ -135,6 +66,7 @@ const zoneArr = computed(() => {
   const zoneName = zonesInfo.map((zone) => zone.AreaName);
   return zoneName;
 });
+
 const selectedZipCode = computed(() => {
   const zonesInfo = cityName.find(
     (city) => city.CityName === selectedCity.value
@@ -144,34 +76,9 @@ const selectedZipCode = computed(() => {
   ).ZipCode;
   return zipCode;
 });
+
 function updateZipCode() {
   user.value.address.zipcode = Number(selectedZipCode.value);
-}
-async function handleSubmit(event) {
-  event.preventDefault();
-  updateZipCode();
-  formatorBirthday();
-  stage2Checker();
-  if (isStage1Pass.value && isStage2Pass.value) {
-    console.log("Register Compeleted sending data to server");
-    delete user.value.isReaded;
-    const data = await postDate(url, null, user.value);
-    if (data.status) {
-      router.push("/user/login");
-    }
-    return;
-  }
-  console.log("Validate fail", user.value);
-}
-async function checkEmailIsRegisted(useremail) {
-  const email = { email: `${useremail}` };
-  const data = await isEmailRegisted(email);
-  console.log(data.result.isEmailExists);
-  if (data.result.isEmailExists) {
-    isRegisted.value = "Email 已被註冊";
-  } else {
-    isRegisted.value = null;
-  }
 }
 </script>
 <template>
@@ -179,7 +86,7 @@ async function checkEmailIsRegisted(useremail) {
     class="z-10 min-w-416/960 max-2xl:w-full flex flex-col gap-10"
     action=""
   >
-    <div v-if="!isStage1Pass" class="flex flex-col gap-2">
+    <div class="flex flex-col gap-2">
       <label
         class="font-bold text-base max-md:text-14 leading-[1.5] tracking-wide w-full flex flex-col gap-2"
         for="fullName"
@@ -189,6 +96,7 @@ async function checkEmailIsRegisted(useremail) {
           <span class="text-14 text-theme-alert-100">{{ validatorName }}</span>
         </p>
         <input
+          @change="userInfoChecker"
           v-model="user.name"
           id="fullName"
           class="w-full rounded-md p-4 bg-theme-neutral-0 text-theme-neutral-60 font-medium"
@@ -205,6 +113,7 @@ async function checkEmailIsRegisted(useremail) {
           <span class="text-14 text-theme-alert-100">{{ validatorPhone }}</span>
         </p>
         <input
+          @change="userInfoChecker"
           v-model="user.phone"
           id="phoneNum"
           class="w-full rounded-md p-4 bg-theme-neutral-0 text-theme-neutral-60 font-medium"
@@ -222,9 +131,8 @@ async function checkEmailIsRegisted(useremail) {
             {{ validatorEmail }}
           </span>
         </p>
-        <p class="text-14 text-theme-alert-100">{{ isRegisted }}</p>
         <input
-          @change="checkEmailIsRegisted(user.email)"
+          @change="userInfoChecker"
           v-model="user.email"
           id="email"
           class="w-full rounded-md p-4 bg-theme-neutral-0 text-theme-neutral-60 font-medium"
@@ -293,6 +201,7 @@ async function checkEmailIsRegisted(useremail) {
           </div>
         </div>
         <input
+          @change="userInfoChecker"
           v-model="user.address.detail"
           class="w-full rounded-md p-4 bg-theme-neutral-0 text-theme-neutral-60 font-medium"
           type="text"

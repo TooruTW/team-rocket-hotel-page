@@ -2,10 +2,46 @@
 import Header from "../../Header.vue";
 import Footer from "../../Footer.vue";
 import BookingData from "./BookingData.vue";
-import { ref } from "vue";
 import RoomTextContent from "../RoomDetail/RoomTextContent.vue";
 import PaymentBriefingCard from "./PaymentBriefingCard.vue";
 import RoomInfoSection from "./RoomInfoSection.vue";
+import { ref,inject,provide } from "vue";
+import { postDate } from "../../../apiFunction";
+
+const token = inject("token");
+
+function padZero(num) {
+  return num.toString().padStart(2, '0')
+}
+
+function formatDate(time) {
+  const year = time.getFullYear();
+  const months = time.getMonth() + 1;
+  const data = time.getDate();
+  return `${year}/${padZero(months)}/${padZero(data)}`
+}
+
+function postReservationToSever(){
+  const url = `https://team-rocket-hotelapi-from-freyja.onrender.com/api/v1/orders/`
+  const body = {
+  "roomId": bookInfo.value.roomId,
+  "checkInDate": formatDate(bookInfo.value.date.checkIn),
+  "checkOutDate": formatDate(bookInfo.value.date.checkOut),
+  "peopleNum": bookInfo.value.person,
+  "userInfo": {
+    "address": {
+      "zipcode": userInfo.value.address.zipcode,
+      "detail": userInfo.value.address.detail
+    },
+    "name": userInfo.value.name,
+    "phone": userInfo.value.phone,
+    "email": userInfo.value.email
+  }
+}
+console.log(token)
+console.log("body",body)
+postDate(url,token,body)
+}
 
 const roomInfo = ref({
   _id: "67f4865cd695541536fc0a50",
@@ -137,6 +173,7 @@ const roomInfo = ref({
 });
 
 const bookInfo = ref({
+  roomId:"67f4865cd695541536fc0a50",
   roomType: "尊爵雙人房",
   date: {
     checkIn: new Date(2025, 4, 27),
@@ -147,14 +184,25 @@ const bookInfo = ref({
   discount: 1000,
 });
 
-function formateDate(time) {
-  const year = time.getFullYear();
-  const months = time.getMonth() + 1;
-  const data = time.getDate();
-  const day = time.getDay();
-  const week = ["日", "一", "二", "三", "四", "五", "六"];
-  return `${year} 年 ${months} 月 ${data} 日星期${week[day]}`;
+const userInfo = ref({
+  name: "麥克華斯基",
+  address: {
+    city: null,
+    zone: null,
+    zipcode: 800,
+    detail: "大難不死路87號",
+  },
+  phone: "0919102030",
+  email: "test@test.com",
+})
+
+function getUserInfo(newuserInfo){
+  console.log(newuserInfo,"child data")
+  console.log(newuserInfo.address.zipcode)
+  userInfo.value = newuserInfo
+  console.log(userInfo.value , "parent data")
 }
+
 </script>
 
 <template>
@@ -199,7 +247,6 @@ function formateDate(time) {
           確認訂房資訊
         </h3>
       </div>
-
       <div
         class="flex justify-between gap-4 w-full max-lg:flex-col max-lg:items-center"
       >
@@ -221,7 +268,7 @@ function formateDate(time) {
             >
               訂房人資訊
             </h4>
-            <BookingData></BookingData>
+            <BookingData @userInfoUpdate="getUserInfo"></BookingData>
           </div>
           <hr />
           <div class="flex flex-col gap-10 max-lg:gap-6 text-base">
@@ -243,6 +290,7 @@ function formateDate(time) {
           :nights="bookInfo.nights"
           :discount="bookInfo.discount"
           :imgUrl="roomInfo.imageUrl"
+          @passData="postReservationToSever"
         ></PaymentBriefingCard>
       </div>
     </div>
