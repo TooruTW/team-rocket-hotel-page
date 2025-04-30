@@ -6,7 +6,7 @@ const props = defineProps({
   roomObj: Object,
 });
 const roomInfo = ref(props.roomObj)
-const showConfirm = ref(true)
+const showConfirm = ref(false)
 
 function handleClose(isClose){
    if(isClose){ showConfirm.value = false}

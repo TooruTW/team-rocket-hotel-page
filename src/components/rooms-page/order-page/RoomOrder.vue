@@ -2,10 +2,11 @@
 import Header from "../../Header.vue";
 import Footer from "../../Footer.vue";
 import BookingData from "./BookingData.vue";
-import { computed, ref } from "vue";
-import RoomTextContent from "./RoomTextContent.vue";
+import { ref } from "vue";
+import RoomTextContent from "../RoomDetail/RoomTextContent.vue";
+import PaymentBriefingCard from "./PaymentBriefingCard.vue";
 
-const sampleObj = ref({
+const roomInfo = ref({
   _id: "67f4865cd695541536fc0a50",
   name: "尊爵雙人房",
   description:
@@ -140,8 +141,11 @@ const bookInfo = ref({
     checkIn: new Date(2025, 4, 27),
     checkOut: new Date(2025, 5, 1),
   },
+  nights: 2,
   person: 2,
+  discount: 1000,
 });
+
 function formateDate(time) {
   const year = time.getFullYear();
   const months = time.getMonth() + 1;
@@ -156,13 +160,13 @@ function formateDate(time) {
   <div class="bg-theme-primary-10 flex flex-col items-center -z-0 max-xl:overflow-x-hidden">
     <!-- header -->
     <div
-      class="w-full h-full bg-theme-neutral-bg flex justify-center px-20 fixed z-100 max-xl:px-3 max-xl:relative "
+      class="w-full bg-theme-neutral-bg flex justify-center px-20 fixed z-100 max-xl:px-3 max-xl:relative "
     >
       <Header></Header>
     </div>
     <!-- content -->
     <div class=" relative z-0 mt-30 py-30 w-full max-w-324 flex flex-col items-center px-3 max-lg:py-10 max-lg:mt-0">
-      
+      <!-- title -->
       <div class="flex items-center mb-10 w-full">
         <svg class="max-lg:w-6 h-6"
           width="40"
@@ -242,55 +246,21 @@ function formateDate(time) {
             </h4>
             <BookingData></BookingData>
           </div>
-
           <hr />
-
           <div class="flex flex-col gap-10 max-lg:gap-6 text-base">
             <h4 class="font-bold text-28 max-lg:text-20 leading-[1.2] tracking-wider">
               房間資訊
             </h4>
             <RoomTextContent
-              :dataObj="sampleObj"
+              :dataObj="roomInfo"
               :hideRule="true"
               :hideTitle="true"
             ></RoomTextContent>
           </div>
         </div>
+
         <!-- card -->
-        <div
-          class="flex flex-col p-10 gap-10 max-lg:gap-6 bg-theme-neutral-0 w-full max-w-120 rounded-20px h-fit sticky top-40 max-lg:max-w-none max-lg:p-6"
-        >
-          <img
-            class="w-full object-cover rounded-md aspect-10/7"
-            src="../../../../public/fakeImg.webp"
-            alt="房間照片"
-          />
-          <div class="flex flex-col gap-6">
-            <h4 class="font-bold text-28 max-lg:text-20 leading-[1.2] tracking-wider">
-              價格詳情
-            </h4>
-            <ul class="font-medium text-base leading-[1.5] tracking-wide">
-              <li class="flex justify-between items-center">
-                <span>
-                  <span>NT$ {{ "房價" }}</span> Ｘ
-                  <span class="text-theme-neutral-80">{{ "時長" }} 晚</span>
-                </span>
-                <span>NT$ </span>
-              </li>
-              <li class="flex justify-between items-center">
-                <span>住宿折扣</span
-                ><span class="text-theme-primary-100">-NT$</span>
-              </li>
-            </ul>
-            <hr class="w-full text-theme-neutral-40" />
-            <p
-              class="font-bold text-base leading-[1.5] tracking-wide flex justify-between items-center"
-            >
-              <span>總價</span><span>NT$ </span>
-            </p>
-          </div>
-          <button class=" rounded-md font-bold text-base bg-theme-primary-100 text-theme-neutral-0 py-4">確認訂房</button>
-        </div>
+         <PaymentBriefingCard :price="roomInfo.price" :nights="bookInfo.nights" :discount="bookInfo.discount" :imgUrl="roomInfo.imageUrl"></PaymentBriefingCard>
       </div>
     </div>
 

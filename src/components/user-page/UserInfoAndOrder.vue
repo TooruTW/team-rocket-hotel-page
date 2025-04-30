@@ -1,10 +1,8 @@
 <script setup>
 import Header from "../Header.vue";
 import Footer from "../Footer.vue";
-import { ref, computed } from "vue";
-
+import { ref } from "vue";
 import { RouterView, RouterLink } from "vue-router";
-
 const sampleProfolio = {
   address: {
     zipcode: 800,
@@ -18,9 +16,7 @@ const sampleProfolio = {
   createdAt: "2025-04-15T07:36:35.399Z",
   updatedAt: "2025-04-15T07:36:35.399Z",
 };
-
 const isProfolio = ref(true);
-
 function switchCard(isChangeToOrder){
   if(isChangeToOrder){
     isProfolio.value = false
@@ -28,7 +24,6 @@ function switchCard(isChangeToOrder){
     isProfolio.value = true
   }
 }
-
 </script>
 <template>
   <div class="flex flex-col items-center bg-theme-neutral-bg overflow-x-hidden">
@@ -99,7 +94,7 @@ function switchCard(isChangeToOrder){
         <RouterView class="flex justify-between gap-10 px-3 max-lg:flex-col max-lg:items-center max-lg:gap-6"></RouterView>
       </div>
     </div>
-
+    <!-- decoration -->
     <picture class="w-full h-auto">
       <source
         media="(max-width: 768px)"
@@ -110,7 +105,6 @@ function switchCard(isChangeToOrder){
         alt="decoration-wave-line"
       />
     </picture>
-
     <!-- footer -->
     <div
       class="w-full bg-theme-neutral-bg flex justify-center px-20 max-xl:px-3"
