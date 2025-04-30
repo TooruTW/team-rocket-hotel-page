@@ -1,13 +1,21 @@
 <script setup>
 import { ref } from 'vue';
+import { RouterLink } from 'vue-router';
 
 const props = defineProps({
   roomObj: Object,
 });
 const roomInfo = ref(props.roomObj)
+const showConfirm = ref(true)
+
+function handleClose(isClose){
+   if(isClose){ showConfirm.value = false}
+   else{showConfirm.value = true}
+}
+
 </script>
 <template>
-      <div class="  text-theme-neutral-80 p-10 flex flex-col gap-10 max-lg:p-4 max-lg:gap-6">
+      <div class=" text-theme-neutral-80 p-10 flex flex-col gap-10 max-lg:p-4 max-lg:gap-6">
         <!-- title -->
         <div>
           <p class=" font-medium text-base leading-1.5 tracking-wide mb-2 max-lg:text-14">預訂參考編號： <span>HH2302183151222</span></p>
@@ -107,8 +115,34 @@ const roomInfo = ref(props.roomObj)
         </div>
         <!-- btn -->
          <div class="flex gap-4">
-            <div class="w-full flex justify-center items-center py-4 border-1 rounded-md border-theme-primary-100 text-theme-primary-100">取消預訂</div>
-            <div class="w-full flex justify-center items-center py-4 rounded-md  bg-theme-primary-100 text-theme-neutral-0">查看詳情</div>
+            <div @click="handleClose(false)" class="w-full flex justify-center items-center py-4 border-1 rounded-md border-theme-primary-100 text-theme-primary-100">取消預訂</div>
+            <RouterLink to="/room-detail"  class="w-full flex justify-center items-center py-4 rounded-md  bg-theme-primary-100 text-theme-neutral-0">
+                查看詳情
+            </RouterLink>
          </div>
+         <!-- popup -->
+          <div v-show="showConfirm" class="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center backdrop-blur-xl bg-theme-neutral-100/40">
+            <div class=" rounded-md bg-theme-neutral-0 flex flex-col items-center justify-between w-150 h-75 border border-red-100">
+                <!-- close btn -->
+                <svg @click="handleClose(true)" class="self-end" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="40" height="40" fill="white"/>
+<g clip-path="url(#clip0_569_8963)">
+<path d="M27 14.41L25.59 13L20 18.59L14.41 13L13 14.41L18.59 20L13 25.59L14.41 27L20 21.41L25.59 27L27 25.59L21.41 20L27 14.41Z" fill="#4B4B4B"/>
+</g>
+<defs>
+<clipPath id="clip0_569_8963">
+<rect width="24" height="24" fill="white" transform="translate(8 8)"/>
+</clipPath>
+</defs>
+</svg>
+
+                 <h6 class=" text-theme-neutral-80">確定要取消此房型的預訂嗎？</h6>
+                 <!-- btns -->
+                 <div  class="flex gap-4 p-3 border-t-1 border-theme-neutral-40 w-full" >
+                    <div @click="handleClose(true)" class="w-full flex justify-center items-center py-4 border-1 rounded-md border-theme-primary-100 text-theme-primary-100">關閉視窗</div>
+                    <div class="w-full flex justify-center items-center py-4 rounded-md  bg-theme-primary-100 text-theme-neutral-0">確定取消</div>
+                 </div>
+            </div>
+          </div>
       </div>
 </template>
