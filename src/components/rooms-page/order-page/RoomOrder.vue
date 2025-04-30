@@ -5,182 +5,46 @@ import BookingData from "./BookingData.vue";
 import RoomTextContent from "../RoomDetail/RoomTextContent.vue";
 import PaymentBriefingCard from "./PaymentBriefingCard.vue";
 import RoomInfoSection from "./RoomInfoSection.vue";
-import { ref,inject,provide } from "vue";
+import { ref, inject, onMounted, computed } from "vue";
 import { postDate } from "../../../apiFunction";
+import { useRoute } from "vue-router";
+import { getData } from "../../../apiFunction";
 
-const token = inject("token");
-
-function padZero(num) {
-  return num.toString().padStart(2, '0')
-}
-
-function formatDate(time) {
-  const year = time.getFullYear();
-  const months = time.getMonth() + 1;
-  const data = time.getDate();
-  return `${year}/${padZero(months)}/${padZero(data)}`
-}
-
-function postReservationToSever(){
-  const url = `https://team-rocket-hotelapi-from-freyja.onrender.com/api/v1/orders/`
-  const body = {
-  "roomId": bookInfo.value.roomId,
-  "checkInDate": formatDate(bookInfo.value.date.checkIn),
-  "checkOutDate": formatDate(bookInfo.value.date.checkOut),
-  "peopleNum": bookInfo.value.person,
-  "userInfo": {
-    "address": {
-      "zipcode": userInfo.value.address.zipcode,
-      "detail": userInfo.value.address.detail
-    },
-    "name": userInfo.value.name,
-    "phone": userInfo.value.phone,
-    "email": userInfo.value.email
-  }
-}
-console.log(token)
-console.log("body",body)
-postDate(url,token,body)
-}
+const route = useRoute();
+const roomId = route.params.id;
+const bookingInfo = route.query;
 
 const roomInfo = ref({
-  _id: "67f4865cd695541536fc0a50",
-  name: "尊爵雙人房",
-  description:
-    "享受高級的住宿體驗，尊爵雙人房提供給您舒適寬敞的空間和精緻的裝潢。",
-  imageUrl:
-    "https://images.unsplash.com/photo-1560448205-4d9b3e6bb6db?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  imageUrlList: [
-    "https://images.unsplash.com/photo-1560448205-4d9b3e6bb6db?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?q=80&w=2942&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1472232533367-7fea57261049?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1497215457980-d57c69aee12d?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1482867899247-e295efdd8c1a?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  ],
-  areaInfo: "24坪",
-  bedInfo: "1 張大床",
-  maxPeople: 4,
-  price: 10000,
-  status: 1,
-  layoutInfo: [
-    {
-      title: "市景",
-      isProvide: true,
-    },
-    {
-      title: "獨立衛浴",
-      isProvide: true,
-    },
-    {
-      title: "客廳",
-      isProvide: true,
-    },
-    {
-      title: "書房",
-      isProvide: true,
-    },
-    {
-      title: "樓層電梯",
-      isProvide: true,
-    },
-  ],
-  facilityInfo: [
-    {
-      title: "平面電視",
-      isProvide: true,
-    },
-    {
-      title: "吹風機",
-      isProvide: true,
-    },
-    {
-      title: "冰箱",
-      isProvide: true,
-    },
-    {
-      title: "熱水壺",
-      isProvide: true,
-    },
-    {
-      title: "檯燈",
-      isProvide: true,
-    },
-    {
-      title: "衣櫃",
-      isProvide: true,
-    },
-    {
-      title: "除濕機",
-      isProvide: true,
-    },
-    {
-      title: "浴缸",
-      isProvide: true,
-    },
-    {
-      title: "書桌",
-      isProvide: true,
-    },
-    {
-      title: "音響",
-      isProvide: true,
-    },
-  ],
-  amenityInfo: [
-    {
-      title: "衛生紙",
-      isProvide: true,
-    },
-    {
-      title: "推鞋",
-      isProvide: true,
-    },
-    {
-      title: "沐浴用品",
-      isProvide: true,
-    },
-    {
-      title: "清潔用品",
-      isProvide: true,
-    },
-    {
-      title: "刮鬍刀",
-      isProvide: true,
-    },
-    {
-      title: "吊衣架",
-      isProvide: true,
-    },
-    {
-      title: "浴巾",
-      isProvide: true,
-    },
-    {
-      title: "刷牙用品",
-      isProvide: true,
-    },
-    {
-      title: "罐裝水",
-      isProvide: true,
-    },
-    {
-      title: "梳子",
-      isProvide: true,
-    },
-  ],
-  createdAt: "2025-04-08T02:13:48.267Z",
-  updatedAt: "2025-04-08T02:26:28.344Z",
+  _id: null,
+  name: null,
+  description: null,
+  imageUrl: null,
+  imageUrlList: [],
+  areaInfo: null,
+  bedInfo: null,
+  maxPeople: null,
+  price: null,
+  status: null,
+  layoutInfo: [],
+  facilityInfo: [],
+  amenityInfo: [],
 });
 
+const nights = computed(() => {
+  return (
+    (new Date(bookingInfo.checkOut) - new Date(bookingInfo.checkIn)) /
+    (1000 * 60 * 60 * 24)
+  );
+});
 const bookInfo = ref({
-  roomId:"67f4865cd695541536fc0a50",
-  roomType: "尊爵雙人房",
+  roomId: roomId,
+  roomType: null,
   date: {
-    checkIn: new Date(2025, 4, 27),
-    checkOut: new Date(2025, 5, 1),
+    checkIn: new Date(bookingInfo.checkIn),
+    checkOut: new Date(bookingInfo.checkOut),
   },
-  nights: 2,
-  person: 2,
+  nights: nights,
+  person: Number(bookingInfo.people),
   discount: 1000,
 });
 
@@ -193,16 +57,57 @@ const userInfo = ref({
     detail: null,
   },
   phone: null,
-  email: null
-})
+  email: null,
+});
 
-function getUserInfo(newuserInfo){
-  console.log(newuserInfo,"child data")
-  console.log(newuserInfo.address.zipcode)
-  userInfo.value = newuserInfo
-  console.log(userInfo.value , "parent data")
+const roominfoURL =
+  "https://team-rocket-hotelapi-from-freyja.onrender.com/api/v1/admin/rooms/";
+const token = inject("token");
+onMounted(async () => {
+  const data = await getData(roominfoURL, token);
+  const roomObj = data.find((item) => item._id === roomId);
+  roomInfo.value = roomObj;
+  bookInfo.value.roomType = roomInfo.value.name
+  console.log(roomInfo.value)
+});
+function padZero(num) {
+  return num.toString().padStart(2, "0");
+}
+function formatDate(time) {
+  const year = time.getFullYear();
+  const months = time.getMonth() + 1;
+  const data = time.getDate();
+  return `${year}/${padZero(months)}/${padZero(data)}`;
 }
 
+function postReservationToSever() {
+  const url = `https://team-rocket-hotelapi-from-freyja.onrender.com/api/v1/orders/`;
+  const body = {
+    roomId: bookInfo.value.roomId,
+    checkInDate: formatDate(bookInfo.value.date.checkIn),
+    checkOutDate: formatDate(bookInfo.value.date.checkOut),
+    peopleNum: bookInfo.value.person,
+    userInfo: {
+      address: {
+        zipcode: userInfo.value.address.zipcode,
+        detail: userInfo.value.address.detail,
+      },
+      name: userInfo.value.name,
+      phone: userInfo.value.phone,
+      email: userInfo.value.email,
+    },
+  };
+  postDate(url, token, body);
+}
+
+
+
+function getUserInfo(newuserInfo) {
+  console.log(newuserInfo, "child data");
+  console.log(newuserInfo.address.zipcode);
+  userInfo.value = newuserInfo;
+  console.log(userInfo.value, "parent data");
+}
 </script>
 
 <template>
