@@ -5,8 +5,13 @@ import RoomAlbum from "./RoomAlbum.vue";
 import RoomTextContent from "./RoomTextContent.vue";
 import DatePicker from "./DatePicker.vue";
 import Slider from "../../Slider.vue";
-import { computed, ref } from "vue";
+import { ref,onMounted,inject } from "vue";
 import DatePickerMobile from "./DatePickerMobile.vue";
+import { useRoute } from "vue-router";
+import { getData } from "../../../apiFunction";
+
+const route = useRoute()
+const roomId = route.params.id
 
 const sampleObj = ref({
   _id: "67f4865cd695541536fc0a50",
@@ -137,6 +142,18 @@ const sampleObj = ref({
   updatedAt: "2025-04-08T02:26:28.344Z",
 });
 
+const roominfoURL = "https://team-rocket-hotelapi-from-freyja.onrender.com/api/v1/admin/rooms/"
+const token = inject("token")
+
+
+onMounted(async ()=>{
+    const data = await getData(roominfoURL,token)
+    console.log("get data",data)
+    const roomObj = data.find(item => item._id === roomId)
+    sampleObj.value = roomObj
+})
+
+
 const numPerson = ref(2);
 
 const bookingDate = ref(null);
@@ -190,7 +207,7 @@ function handleBooking() {
       <div class="p-20 max-lg:p-0">
         <RoomAlbum
           :album="sampleObj.imageUrlList"
-          class="rounded-20px overflow-hidden max-lg:hidden"
+          class="rounded-20px h-100 overflow-hidden max-lg:hidden"
         ></RoomAlbum>
         <Slider
           class="w-full h-60 hidden max-lg:block"

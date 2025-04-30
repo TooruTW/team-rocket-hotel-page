@@ -9,7 +9,7 @@ const fristImgClass = ref(`row-span-2`);
 <template>
   <div class="grid grid-cols-[2.5fr_1fr_1fr] grid-rows-2 gap-2">
     <img
-      class="h-full"
+      class="w-full h-full object-cover"
       v-for="(img, index) in props.album"
       :src="img"
       :alt="'room-img-' + index"

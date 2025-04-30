@@ -8,6 +8,7 @@ const token = inject("token")
 const roomInfo = ref(null)
 
 
+
 onMounted(async ()=>{
     const data = await getData(roominfoURL,token)
     console.log("get data",data)

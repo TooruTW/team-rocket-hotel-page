@@ -7,7 +7,6 @@ export function createFetchingObject(method, token, body){
         }
     }
     body && (fetchingPromp.body = JSON.stringify(body))
-    console.log("promp",fetchingPromp)
     return fetchingPromp
 }
 

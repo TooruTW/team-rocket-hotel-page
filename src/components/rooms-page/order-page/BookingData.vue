@@ -21,14 +21,13 @@ const user = ref({
   email: null,
 });
 
-const emit = defineEmits(['userInfoUpdate'])
-function passUserData(){
-  emit('userInfoUpdate', user.value)
+const emit = defineEmits(["userInfoUpdate"]);
+function passUserData() {
+  emit("userInfoUpdate", user.value);
 }
 
-
 function userInfoChecker() {
-  console.log("start checking")
+  console.log("start checking");
   validatorName.value = user.value.name ? null : "Hello Miss./Mr. Unknow.";
   if (user.value.phone) {
     validatorPhone.value = isPhoneNum(user.value.phone)
@@ -45,9 +44,14 @@ function userInfoChecker() {
       ? null
       : "請輸入有效的電子信箱";
   }
-  if(!validatorAddress.value && !validatorEmail.value && !validatorName.value && !validatorPhone.value ){
-    updateZipCode()
-    passUserData()
+  if (
+    !validatorAddress.value &&
+    !validatorEmail.value &&
+    !validatorName.value &&
+    !validatorPhone.value
+  ) {
+    updateZipCode();
+    passUserData();
   }
 }
 
@@ -155,6 +159,7 @@ function updateZipCode() {
             class="w-full flex items-center relative bg-theme-neutral-0 rounded-md"
           >
             <select
+              @change="userInfoChecker"
               class="appearance-none p-4 w-full"
               name="city"
               id="city"
@@ -179,6 +184,7 @@ function updateZipCode() {
             class="w-full flex items-center relative bg-theme-neutral-0 rounded-md"
           >
             <select
+              @change="userInfoChecker"
               class="appearance-none p-4 w-full"
               name="zone"
               id="zone"

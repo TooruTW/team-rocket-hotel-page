@@ -185,15 +185,15 @@ const bookInfo = ref({
 });
 
 const userInfo = ref({
-  name: "麥克華斯基",
+  name: null,
   address: {
     city: null,
     zone: null,
-    zipcode: 800,
-    detail: "大難不死路87號",
+    zipcode: null,
+    detail: null,
   },
-  phone: "0919102030",
-  email: "test@test.com",
+  phone: null,
+  email: null
 })
 
 function getUserInfo(newuserInfo){
