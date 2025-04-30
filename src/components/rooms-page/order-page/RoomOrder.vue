@@ -5,6 +5,7 @@ import BookingData from "./BookingData.vue";
 import { ref } from "vue";
 import RoomTextContent from "../RoomDetail/RoomTextContent.vue";
 import PaymentBriefingCard from "./PaymentBriefingCard.vue";
+import RoomInfoSection from "./RoomInfoSection.vue";
 
 const roomInfo = ref({
   _id: "67f4865cd695541536fc0a50",
@@ -157,18 +158,23 @@ function formateDate(time) {
 </script>
 
 <template>
-  <div class="bg-theme-primary-10 flex flex-col items-center -z-0 max-xl:overflow-x-hidden">
+  <div
+    class="bg-theme-primary-10 flex flex-col items-center -z-0 max-xl:overflow-x-hidden"
+  >
     <!-- header -->
     <div
-      class="w-full bg-theme-neutral-bg flex justify-center px-20 fixed z-100 max-xl:px-3 max-xl:relative "
+      class="w-full bg-theme-neutral-bg flex justify-center px-20 fixed z-100 max-xl:px-3 max-xl:relative"
     >
       <Header></Header>
     </div>
     <!-- content -->
-    <div class=" relative z-0 mt-30 py-30 w-full max-w-324 flex flex-col items-center px-3 max-lg:py-10 max-lg:mt-0">
+    <div
+      class="relative z-0 mt-30 py-30 w-full max-w-324 flex flex-col items-center px-3 max-lg:py-10 max-lg:mt-0"
+    >
       <!-- title -->
       <div class="flex items-center mb-10 w-full">
-        <svg class="max-lg:w-6 h-6"
+        <svg
+          class="max-lg:w-6 h-6"
           width="40"
           height="40"
           viewBox="0 0 40 40"
@@ -187,68 +193,41 @@ function formateDate(time) {
             </clipPath>
           </defs>
         </svg>
-        <h3 class="font-bold text-32 leading-[1.2] tracking-wider max-lg:text-24">
+        <h3
+          class="font-bold text-32 leading-[1.2] tracking-wider max-lg:text-24"
+        >
           確認訂房資訊
         </h3>
       </div>
 
-      <div class="flex justify-between gap-4 w-full max-lg:flex-col max-lg:items-center">
+      <div
+        class="flex justify-between gap-4 w-full max-lg:flex-col max-lg:items-center"
+      >
         <!-- right -->
-        <div class="flex flex-col gap-12 max-lg:gap-10 w-full max-w-186 max-lg:max-w-none">
+        <div
+          class="flex flex-col gap-12 max-lg:gap-10 w-full max-w-186 max-lg:max-w-none"
+        >
           <!-- 訂房資訊 -->
-          <div class="flex flex-col gap-10 max-lg:gap-6 text-base">
-            <h4 class="font-bold text-28 max-lg:text-20 leading-[1.2] tracking-wider ">
-              訂房資訊
-            </h4>
-
-            <div class="flex flex-col gap-6">
-              <div class="flex flex-col gap-3">
-                <div class="flex item-center gap-3">
-                  <div class="h-6 w-1 rounded-sm bg-theme-primary-100"></div>
-                  <h5 class="font-bold leading-[1.2] tracking-wider">
-                    選擇房型
-                  </h5>
-                </div>
-                <h5>{{ bookInfo.roomType }}</h5>
-              </div>
-
-              <div class="flex flex-col gap-3">
-                <div class="flex item-center gap-3">
-                  <div class="h-6 w-1 rounded-sm bg-theme-primary-100"></div>
-                  <h5 class="font-bold leading-[1.2] tracking-wider">
-                    訂房日期
-                  </h5>
-                </div>
-
-                <div class="flex flex-col">
-                  <h5>{{ formateDate(bookInfo.date.checkIn) }}</h5>
-                  <h5>{{ formateDate(bookInfo.date.checkOut) }}</h5>
-                </div>
-              </div>
-
-              <div class="flex flex-col gap-3">
-                <div class="flex item-center gap-3">
-                  <div class="h-6 w-1 rounded-sm bg-theme-primary-100"></div>
-                  <h5 class="font-bold leading-[1.2] tracking-wider">
-                    房客人數
-                  </h5>
-                </div>
-                <h5>{{ bookInfo.person }}</h5>
-              </div>
-            </div>
-          </div>
-
+          <RoomInfoSection
+            :roomType="bookInfo.roomType"
+            :date="bookInfo.date"
+            :person="bookInfo.person"
+          ></RoomInfoSection>
           <hr />
           <!-- 訂房人資料 -->
           <div class="flex flex-col gap-10 max-lg:gap-6 text-base">
-            <h4 class="font-bold text-28 max-lg:text-20 leading-[1.2] tracking-wider">
+            <h4
+              class="font-bold text-28 max-lg:text-20 leading-[1.2] tracking-wider"
+            >
               訂房人資訊
             </h4>
             <BookingData></BookingData>
           </div>
           <hr />
           <div class="flex flex-col gap-10 max-lg:gap-6 text-base">
-            <h4 class="font-bold text-28 max-lg:text-20 leading-[1.2] tracking-wider">
+            <h4
+              class="font-bold text-28 max-lg:text-20 leading-[1.2] tracking-wider"
+            >
               房間資訊
             </h4>
             <RoomTextContent
@@ -258,12 +237,15 @@ function formateDate(time) {
             ></RoomTextContent>
           </div>
         </div>
-
         <!-- card -->
-         <PaymentBriefingCard :price="roomInfo.price" :nights="bookInfo.nights" :discount="bookInfo.discount" :imgUrl="roomInfo.imageUrl"></PaymentBriefingCard>
+        <PaymentBriefingCard
+          :price="roomInfo.price"
+          :nights="bookInfo.nights"
+          :discount="bookInfo.discount"
+          :imgUrl="roomInfo.imageUrl"
+        ></PaymentBriefingCard>
       </div>
     </div>
-
     <!-- footer -->
     <div
       class="w-full bg-theme-neutral-bg flex justify-center px-20 max-xl:px-3"
