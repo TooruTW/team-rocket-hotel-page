@@ -7,8 +7,6 @@ const props = defineProps({
   dataObj: Object,
 });
 
-console.log(props.dataObj._id)
-
 const showBTN = computed(() => {
   return window.innerWidth >= 768 ? true : false;
 });

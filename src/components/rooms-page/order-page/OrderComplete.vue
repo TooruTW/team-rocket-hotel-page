@@ -1,8 +1,11 @@
 <script setup>
 import Header from "../../Header.vue";
 import Footer from "../../Footer.vue";
+import { ref, onMounted, inject } from "vue";
+import { useRoute } from "vue-router";
+import { getData } from "../../../apiFunction";
 
-const orderSample = {
+const order = ref({
   userInfo: {
     address: {
       zipcode: 802,
@@ -148,7 +151,37 @@ const orderSample = {
   status: 0,
   createdAt: "2025-04-29T02:17:51.121Z",
   updatedAt: "2025-04-29T02:17:51.121Z",
-};
+});
+const token = inject('token')
+
+onMounted(async()=>{
+  const route = useRoute()
+  const orderId = route.params.id;
+  console.log("Pass Id",orderId)
+  const url = `https://team-rocket-hotelapi-from-freyja.onrender.com/api/v1/orders/${orderId}`
+
+    const data = await getData(url,token)
+    console.log("form sever",data)
+    order.value = data
+    console.log("current order data",order.value)
+
+})
+
+function countNights(dayin,dayout){
+  const diffDay = (new Date(dayout) - new Date(dayin)) /  (1000 * 60 * 60 * 24)
+  return diffDay
+}
+
+function formatDate(time){
+  const theday = new Date(time)
+  const month = theday.getMonth() + 1
+  const date = theday.getDate()
+  const day = theday.getDay()
+
+  const dayArr = ["日", "一", "二", "三", "四", "五", "六"];
+
+  return `${month} 月 ${date} 日星期${dayArr[day]}`
+}
 </script>
 <template>
   <div class="flex flex-col items-center bg-theme-neutral-bg overflow-x-hidden">
@@ -161,13 +194,16 @@ const orderSample = {
 
     <!-- content -->
     <div
-      class="relative w-full py-30 mt-30 flex justify-between text-theme-neutral-0 max-w-325  max-xl:px-3 max-lg:flex-col max-lg:items-center max-lg:mt-0 max-lg:py-10 max-lg:gap-15"
+      class="relative w-full py-30 mt-30 flex justify-between text-theme-neutral-0 max-w-325 max-xl:px-3 max-lg:flex-col max-lg:items-center max-lg:mt-0 max-lg:py-10 max-lg:gap-15"
     >
       <!-- text content -->
       <div class="flex flex-col max-w-186 w-full gap-20 justify-between">
         <div>
-          <div class="flex items-center gap-10 mb-10 max-lg:flex-col max-lg:items-start max-lg:gap-4 max-lg:mb-8">
-            <svg class="max-lg:w-10"
+          <div
+            class="flex items-center gap-10 mb-10 max-lg:flex-col max-lg:items-start max-lg:gap-4 max-lg:mb-8"
+          >
+            <svg
+              class="max-lg:w-10"
               width="56"
               height="56"
               viewBox="0 0 56 56"
@@ -192,8 +228,10 @@ const orderSample = {
                 </clipPath>
               </defs>
             </svg>
-            <h1 class="font-bold text-48 leading-[1.2] tracking-wider max-lg:text-32">
-              <span>恭喜，Jessica！</span> <br />
+            <h1
+              class="font-bold text-48 leading-[1.2] tracking-wider max-lg:text-32"
+            >
+              <span>恭喜，{{ order.userInfo.name }}！</span> <br />
               <span>您已預訂成功</span>
             </h1>
           </div>
@@ -205,7 +243,9 @@ const orderSample = {
         </div>
         <hr class="text-theme-neutral-40" />
         <div>
-          <h5 class="font-bold text-24 leading-[1.2] tracking-wider mb-10 max-lg:text-base max-lg:mb-6">
+          <h5
+            class="font-bold text-24 leading-[1.2] tracking-wider mb-10 max-lg:text-base max-lg:mb-6"
+          >
             立即查看您的訂單紀錄
           </h5>
           <button
@@ -224,40 +264,62 @@ const orderSample = {
           >
             <li>
               <p>姓名</p>
-              <p class="font-bold text-theme-neutral-0">Jessica Ｗang</p>
+              <p class="font-bold text-theme-neutral-0">
+                {{ order.userInfo.name }}
+              </p>
             </li>
             <li>
               <p>手機號碼</p>
-              <p class="font-bold text-theme-neutral-0">+886 912 345 678</p>
+              <p class="font-bold text-theme-neutral-0">
+                {{ order.userInfo.phone }}
+              </p>
             </li>
             <li>
               <p>電子信箱</p>
-              <p class="font-bold text-theme-neutral-0">jessica@sample.com</p>
+              <p class="font-bold text-theme-neutral-0">
+                {{ order.userInfo.email }}
+              </p>
             </li>
           </ul>
         </div>
       </div>
       <!-- card -->
-      <div class=" rounded-md bg-theme-neutral-0 text-theme-neutral-80 p-10 max-w-120 w-full flex flex-col gap-10 max-lg:p-4 max-lg:gap-6">
+      <div
+        class="rounded-md bg-theme-neutral-0 text-theme-neutral-80 p-10 max-w-120 max-lg:max-w-186 w-full flex flex-col gap-10 max-lg:p-4 max-lg:gap-6"
+      >
         <div>
-          <p class=" font-medium text-base leading-1.5 tracking-wide mb-2 max-lg:text-14">預訂參考編號： <span>HH2302183151222</span></p>
-          <h5 class=" font-bold text-24 leading-[1.2] tracking-wider text-theme-neutral-100 max-lg:text-base">即將來的行程</h5>
+          <p
+            class="font-medium text-base leading-1.5 tracking-wide mb-2 max-lg:text-14"
+          >
+            預訂參考編號： <span>{{ order._id }}</span>
+          </p>
+          <h5
+            class="font-bold text-24 leading-[1.2] tracking-wider text-theme-neutral-100 max-lg:text-base"
+          >
+            即將來的行程
+          </h5>
         </div>
-        <img class="rounded-md aspect-5/3 w-full" src="/public/fakeImg.webp" alt="房間照片" />
+        <img
+          class="rounded-md aspect-5/3 w-full"
+          :src="order.roomId.imageUrl"
+          alt="房間照片"
+        />
         <div class="font-bold max-lg:text-14">
           <h6 class="text-20 leading-[1.2] tracking-wider mb-6 max-lg:text-14">
-            尊爵雙人房，1 晚
-            <span class="mx-2 text-theme-neutral-40">|</span> 住宿人數：2 位
+            {{ order.roomId.name }}，{{
+              countNights(order.checkInDate, order.checkOutDate)
+            }}
+            晚 <span class="mx-2 text-theme-neutral-40">|</span> 住宿人數：2 位
           </h6>
           <div class="flex items-center gap-3 mb-2">
             <div class="h-6 w-1 rounded-sm bg-theme-primary-100"></div>
-            <p>入住：6 月 10 日星期二，15:00 可入住</p>
+            <p>入住：{{ formatDate(order.checkInDate) }}，15:00 可入住</p>
           </div>
           <div class="flex items-center gap-3 mb-6">
             <div class="h-6 w-1 rounded-sm bg-theme-neutral-60"></div>
-            <p>退房：6 月 11 日星期三，12:00 前退房</p>
+            <p>退房：{{ formatDate(order.checkOutDate) }}，12:00 前退房</p>
           </div>
-          <p>NT$ 10,000</p>
+          <p>NT$ {{ order.roomId.price *  countNights(order.checkInDate, order.checkOutDate) }}</p>
         </div>
         <hr class="text-theme-neutral-40" />
         <!-- 設備 -->
@@ -272,7 +334,7 @@ const orderSample = {
           >
             <h6
               class="flex gap-2 items-center text-base leading-[1.5] tracking-wide font-bold"
-              v-for="(item, index) in orderSample.roomId.facilityInfo"
+              v-for="(item, index) in order.roomId.facilityInfo"
               :key="index"
             >
               <svg
@@ -309,7 +371,7 @@ const orderSample = {
           >
             <h6
               class="flex gap-2 items-center text-base leading-[1.5] tracking-wide font-bold"
-              v-for="(item, index) in orderSample.roomId.amenityInfo"
+              v-for="(item, index) in order.roomId.amenityInfo"
               :key="index"
             >
               <svg
@@ -337,9 +399,14 @@ const orderSample = {
       </div>
     </div>
     <picture class="w-full h-auto">
-        <source media="(max-width: 768px)" srcset="/public/wave-line-horizone-full-md.png">
-        <img src="/public/wave-line-horizone-full.png" alt="decoration-wave-line">
-
+      <source
+        media="(max-width: 768px)"
+        srcset="/public/wave-line-horizone-full-md.png"
+      />
+      <img
+        src="/public/wave-line-horizone-full.png"
+        alt="decoration-wave-line"
+      />
     </picture>
 
     <!-- footer -->

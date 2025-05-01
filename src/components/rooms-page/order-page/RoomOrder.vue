@@ -5,14 +5,17 @@ import BookingData from "./BookingData.vue";
 import RoomTextContent from "../RoomDetail/RoomTextContent.vue";
 import PaymentBriefingCard from "./PaymentBriefingCard.vue";
 import RoomInfoSection from "./RoomInfoSection.vue";
-import { ref, inject, onMounted, computed } from "vue";
+import { ref, inject, onMounted, computed ,provide } from "vue";
 import { postDate } from "../../../apiFunction";
-import { useRoute } from "vue-router";
+import { useRoute,useRouter } from "vue-router";
 import { getData } from "../../../apiFunction";
+import Connecting from "./Connecting.vue";
 
 const route = useRoute();
+const router = useRouter()
 const roomId = route.params.id;
 const bookingInfo = route.query;
+const isLoading = ref(false)
 
 const roomInfo = ref({
   _id: null,
@@ -80,7 +83,8 @@ function formatDate(time) {
   return `${year}/${padZero(months)}/${padZero(data)}`;
 }
 
-function postReservationToSever() {
+async function postReservationToSever() {
+  isLoading.value = true
   const url = `https://team-rocket-hotelapi-from-freyja.onrender.com/api/v1/orders/`;
   const body = {
     roomId: bookInfo.value.roomId,
@@ -97,17 +101,21 @@ function postReservationToSever() {
       email: userInfo.value.email,
     },
   };
-  postDate(url, token, body);
+  try {
+    const data = await postDate(url, token, body);
+    router.push({path:`/room-order-complete/${data.result._id}`})
+
+  } catch (error) {
+    throw error
+  }finally{
+    isLoading.value = false
+  }
 }
-
-
 
 function getUserInfo(newuserInfo) {
-  console.log(newuserInfo, "child data");
-  console.log(newuserInfo.address.zipcode);
   userInfo.value = newuserInfo;
-  console.log(userInfo.value, "parent data");
 }
+
 </script>
 
 <template>
@@ -199,6 +207,9 @@ function getUserInfo(newuserInfo) {
         ></PaymentBriefingCard>
       </div>
     </div>
+
+    <Connecting v-if="isLoading"></Connecting>
+
     <!-- footer -->
     <div
       class="w-full bg-theme-neutral-bg flex justify-center px-20 max-xl:px-3"

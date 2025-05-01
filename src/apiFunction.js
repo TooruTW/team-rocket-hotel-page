@@ -32,6 +32,7 @@ export async function postDate(url, token = null, body) {
     } catch (error) {
         console.log(error.message)
         alert(error.message)
+        throw error
     }
 }
 
