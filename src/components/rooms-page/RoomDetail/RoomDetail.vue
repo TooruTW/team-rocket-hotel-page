@@ -10,8 +10,21 @@ import DatePickerMobile from "./DatePickerMobile.vue";
 import { useRoute, useRouter } from "vue-router";
 import { getData } from "../../../apiFunction";
 
+const isEditable = ref(true)
+
 const route = useRoute();
 const roomId = route.params.id;
+const dayin = ref(null)
+const dayout =ref(null)
+const totalPrice =ref(null)
+console.log(route.query.isEditable)
+if(route.query.isEditable === "false"){
+  isEditable.value = false
+   dayin.value = route.query.checkInDate
+   dayout.value = route.query.checkOutDate
+   totalPrice.value = route.query.price
+}
+
 const roomInfo = ref({
   _id: null,
   name: null,
@@ -123,10 +136,10 @@ function handleBooking() {
           <div class="flex flex-col gap-4">
             <!-- date -->
             <div class="w-full">
-              <DatePicker @update="getBooking"></DatePicker>
+              <DatePicker v-if="isEditable" @update="getBooking"></DatePicker>
             </div>
             <!-- person -->
-            <div class="w-full flex items-center justify-between">
+            <div v-if="isEditable" class="w-full flex items-center justify-between">
               <h6 class="text-base font-bold leading-[1.5] tracking-wide">
                 人數
               </h6>
@@ -168,13 +181,25 @@ function handleBooking() {
             </div>
           </div>
           <!-- price -->
-          <h5
+          <h5 v-if="isEditable"
             class="text-24 font-bold leading-[1.2] tracking-wider text-theme-primary-100"
           >
             NT$ {{ roomInfo.price }}
           </h5>
+          <!-- unediable state -->
+          <h5 v-if="!isEditable"
+            class="text-24 font-bold leading-[1.2] tracking-wider text-theme-neutral-100"
+          > 
+             {{ dayin }} ~ {{ dayout }}
+          </h5>
+          <h5 v-if="!isEditable"
+            class="text-20 font-bold leading-[1.2] tracking-wider text-theme-primary-100"
+          > 
+            NT$ {{ totalPrice }}
+          </h5>
           <!-- submit -->
           <button
+          v-if="isEditable"
             @click="handleBooking"
             class="text-16 font-bold leading-[1.5] tracking-wid text-theme-neutral-0 w-full bg-theme-primary-100 py-4 rounded-md"
           >
@@ -185,6 +210,7 @@ function handleBooking() {
         <div class="fixed bottom-0 w-screen z-1000 hidden max-lg:block">
           <!-- date picker -->
           <DatePickerMobile
+          v-if="isEditable"
             @updateMobile="getBookingMobile"
             class="bg-theme-neutral-0 overflow-hidden rounded-t-20px w-full border-t-1 border-theme-neutral-40"
           ></DatePickerMobile>

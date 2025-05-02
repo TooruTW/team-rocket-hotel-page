@@ -22,7 +22,7 @@ const routes = [
       { path: "register", component: RegisterForm },
     ],
   },
-  { path: "/usinfo-and-order", name: "usinfo-and-order", component: UserInfoAndOrder,
+  { path: "/userinfo-and-order", name: "userinfo-and-order", component: UserInfoAndOrder,
     children:[
       { path: "myinfo", component: MyInfo },
       { path: "myorder", component: MyOrder },

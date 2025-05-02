@@ -2,7 +2,7 @@
 import Header from "../../Header.vue";
 import Footer from "../../Footer.vue";
 import { ref, onMounted, inject } from "vue";
-import { useRoute } from "vue-router";
+import { RouterLink, useRoute } from "vue-router";
 import { getData } from "../../../apiFunction";
 
 const order = ref({
@@ -187,7 +187,7 @@ function formatDate(time){
   <div class="flex flex-col items-center bg-theme-neutral-bg overflow-x-hidden">
     <!-- header -->
     <div
-      class="w-full flex justify-center px-20 fixed top-0 z-100 max-xl:px-3 max-xl:relative"
+      class="w-full flex justify-center px-20 fixed top-0 z-100 bg-theme-neutral-bg max-xl:px-3 max-xl:relative"
     >
       <Header></Header>
     </div>
@@ -248,11 +248,11 @@ function formatDate(time){
           >
             立即查看您的訂單紀錄
           </h5>
-          <button
+          <RouterLink to="/userinfo-and-order/myorder"
             class="font-bold text-base leading-[1.5] tracking-wide bg-theme-primary-100 rounded-md py-4 px-15 max-lg:w-full"
           >
             前往我的訂單
-          </button>
+          </RouterLink>
         </div>
         <hr class="text-theme-neutral-40" />
         <div>
@@ -309,7 +309,7 @@ function formatDate(time){
             {{ order.roomId.name }}，{{
               countNights(order.checkInDate, order.checkOutDate)
             }}
-            晚 <span class="mx-2 text-theme-neutral-40">|</span> 住宿人數：2 位
+            晚 <span class="mx-2 text-theme-neutral-40">|</span> 住宿人數：{{ order.peopleNum }} 位
           </h6>
           <div class="flex items-center gap-3 mb-2">
             <div class="h-6 w-1 rounded-sm bg-theme-primary-100"></div>

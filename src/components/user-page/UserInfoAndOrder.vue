@@ -1,9 +1,11 @@
 <script setup>
 import Header from "../Header.vue";
 import Footer from "../Footer.vue";
-import { ref } from "vue";
-import { RouterView, RouterLink } from "vue-router";
-const sampleProfolio = {
+import { onMounted, ref, inject } from "vue";
+import { RouterView, RouterLink,useRoute } from "vue-router";
+import { getData } from "../../apiFunction";
+const token = inject("token")
+const accountInfo = ref({
   address: {
     zipcode: 800,
     detail: "哩五告貴婚78號",
@@ -15,8 +17,16 @@ const sampleProfolio = {
   birthday: "1993-04-15T00:00:00.000Z",
   createdAt: "2025-04-15T07:36:35.399Z",
   updatedAt: "2025-04-15T07:36:35.399Z",
-};
+});
+
+onMounted(async()=>{
+  const url = `https://team-rocket-hotelapi-from-freyja.onrender.com/api/v1/user`
+  const data = await getData(url,token)
+  accountInfo.value = data
+})
+
 const isProfolio = ref(true);
+
 function switchCard(isChangeToOrder){
   if(isChangeToOrder){
     isProfolio.value = false
@@ -47,7 +57,7 @@ function switchCard(isChangeToOrder){
           <h1
             class="font-bold text-48 max-md:text-32 leading-[1.2] tracking-wider text-theme-neutral-0"
           >
-            Hello，{{ sampleProfolio.name }}
+            Hello，{{ accountInfo.name }}
           </h1>
         </div>
       </div>
@@ -60,7 +70,7 @@ function switchCard(isChangeToOrder){
           class="text-theme-neutral-0 flex font-bold leading-[1.2] tracking-wider"
         >
           <div class="flex flex-col items-center">
-            <RouterLink to="/usinfo-and-order/myinfo" @click="switchCard(false)">
+            <RouterLink to="/userinfo-and-order/myinfo" @click="switchCard(false)">
               <h6
                 class="py-4 px-6"
                 :class="!isProfolio ? null : `text-theme-primary-100`"
@@ -76,7 +86,7 @@ function switchCard(isChangeToOrder){
           </div>
 
           <div class="flex flex-col items-center">
-            <RouterLink to="/usinfo-and-order/myorder" @click="switchCard(true)">
+            <RouterLink to="/userinfo-and-order/myorder" @click="switchCard(true)">
               <h6
                 class="py-4 px-6"
                 :class="isProfolio ? null : `text-theme-primary-100`"
