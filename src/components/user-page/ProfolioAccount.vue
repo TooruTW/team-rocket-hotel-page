@@ -6,9 +6,9 @@ const props = defineProps({
 })
 const emit = defineEmits(['updateUserPassword'])
 
-const oldPassword =ref(null)
-const newPassword =ref(null)
-const confirmPassword =ref(null)
+const oldPassword = ref(null)
+const newPassword = ref(null)
+const confirmPassword = ref(null)
 const isAccountEdit = ref(false);
 
 function handleAccountEdit(isEdit) {

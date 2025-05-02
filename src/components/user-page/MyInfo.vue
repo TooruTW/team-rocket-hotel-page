@@ -60,7 +60,15 @@ function handleNewPassword(data){
   console.log("data to update",updateForm.value)
   updateUserInfo(updateForm.value)
 }
-function handleNewInfo(){
+function handleNewInfo(data){
+  console.log('update info',data)
+  userProfolio.value.name = data.name
+  userProfolio.value.phone = data.phone
+  userProfolio.value.birthday = data.birthday
+  userProfolio.value.address = data.address
+
+  console.log("data to update",updateForm.value)
+  updateUserInfo(updateForm.value)
 
 }
 
@@ -75,7 +83,7 @@ async function updateUserInfo(body){
   <div>
     <!-- card 1 -->
     <ProfolioAccount @updateUserPassword="handleNewPassword" :userObj="userProfolio"></ProfolioAccount>
-    <ProfolioInfo :userObj="userProfolio"></ProfolioInfo>
+    <ProfolioInfo @updateUserInfo="handleNewInfo" :userObj="userProfolio"></ProfolioInfo>
     <!-- card 2 -->
   </div>
 </template>
