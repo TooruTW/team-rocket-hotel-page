@@ -49,6 +49,19 @@ export async function postDate(url, token = null, body) {
     }
 }
 
+export async function putDate(url, token = null, body) {
+    try {
+        const res = await fetch(url,createFetchingObject("PUT",token,body))
+        const data = await res.json()
+        console.log(data)
+        return data
+    } catch (error) {
+        console.log(error.message)
+        alert(error.message)
+        throw error
+    }
+}
+
 export async function isEmailRegisted(body) {
     const url = "https://team-rocket-hotelapi-from-freyja.onrender.com/api/v1/verify/email"
     try {

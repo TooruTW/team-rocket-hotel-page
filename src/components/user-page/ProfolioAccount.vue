@@ -4,15 +4,33 @@ import { ref } from 'vue';
 const props = defineProps({
     userObj:Object
 })
+const emit = defineEmits(['updateUserPassword'])
 
+const oldPassword =ref(null)
+const newPassword =ref(null)
+const confirmPassword =ref(null)
 const isAccountEdit = ref(false);
 
 function handleAccountEdit(isEdit) {
   if (isEdit) {
     isAccountEdit.value = true;
-  } else {
+  } else {    
+    passPassword()
     isAccountEdit.value = false;
   }
+}
+function passPassword(){
+  if(newPassword.value !== confirmPassword.value){
+      alert("confirm new password again")
+      return
+    }
+    console.log(oldPassword.value)
+    console.log(newPassword.value)
+    console.log(confirmPassword.value)
+    emit('updateUserPassword',{
+      old:oldPassword.value,
+      new:newPassword.value
+    })
 }
 
 </script>
@@ -58,6 +76,7 @@ function handleAccountEdit(isEdit) {
               <li class="flex flex-col gap-2">
                 <label for="oldpassword">舊密碼</label>
                 <input
+                v-model="oldPassword"
                   class="p-4 rounded-md border-1 border-theme-neutral-40 text-theme-neutral-60"
                   id="oldPassword"
                   type="text"
@@ -67,6 +86,7 @@ function handleAccountEdit(isEdit) {
               <li class="flex flex-col gap-2">
                 <label for="oldpassword">新密碼</label>
                 <input
+                v-model="newPassword"
                   class="p-4 rounded-md border-1 border-theme-neutral-40 text-theme-neutral-60"
                   id="newPassword"
                   type="text"
@@ -76,6 +96,7 @@ function handleAccountEdit(isEdit) {
               <li class="flex flex-col gap-2">
                 <label for="oldpassword">確認新密碼</label>
                 <input
+                v-model="confirmPassword"
                   class="p-4 rounded-md border-1 border-theme-neutral-40 text-theme-neutral-60"
                   id="confirmPassword"
                   type="text"
