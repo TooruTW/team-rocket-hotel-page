@@ -5,6 +5,7 @@ import { provide } from "vue";
 
 const token = Cookies.get("usertoken") ? Cookies.get("usertoken") : null;
 provide("token", token);
+
 </script>
 <template>
   <RouterView></RouterView>
