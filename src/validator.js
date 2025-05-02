@@ -15,8 +15,9 @@ export function isPhoneNum(str){
 }
 
 export function isBirthday(str){
-    const birthdayRegex = /^(19\d{2}|20\d{2})\/([1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])$/
+    const birthdayRegex = /^(19\d{2}|20\d{2})\/(0?[1-9]|1[0-2])\/(0?[1-9]|[12]\d|3[01])$/
     if(!birthdayRegex.test(str)){
+        console.log(str)
         console.log("生日格式錯誤")
         return false
     }
