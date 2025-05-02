@@ -1,28 +1,89 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref, inject, computed } from 'vue';
 import ProfolioAccount from "./ProfolioAccount.vue";
 import ProfolioInfo from "./ProfolioInfo.vue";
+import { getData,putDate } from '../../apiFunction';
 
-const sampleProfolio = {
+const token = inject("token")
+const url = `https://team-rocket-hotelapi-from-freyja.onrender.com/api/v1/user`
+
+
+
+const userProfolio = ref({
   address: {
     zipcode: 800,
-    detail: "哩五告貴婚78號",
+    detail: "fake address",
   },
-  _id: "67fe0c83fd9a024ad5c83d9e",
-  name: "巧克力",
-  email: "testing@test.com",
-  phone: "0918273647",
+  _id: "fake id",
+  name: "fake name",
+  email: "fake email",
+  phone: "fakephone",
   birthday: "1993-04-15T00:00:00.000Z",
   createdAt: "2025-04-15T07:36:35.399Z",
   updatedAt: "2025-04-15T07:36:35.399Z",
+});
+
+const oldP = ref()
+const newP = ref()
+
+const updateForm = computed(()=>({
+  "userId": userProfolio.value._id,
+  "name": userProfolio.value.name,
+  "phone": userProfolio.value.phone,
+  "birthday": userProfolio.value.birthday,
+  "address": {
+    "zipcode": userProfolio.value.address.zipcode,
+    "detail": userProfolio.value.address.detail
+  },
+  "oldPassword": oldP.value,
+  "newPassword": newP.value
+}))
+
+onMounted(async()=>{
+  await getUserInfo()
+})
+async function getUserInfo(){
+  const data = await getData(url,token)
+  userProfolio.value = {
+  ...userProfolio.value,
+  ...data,
 };
+userProfolio.value.address = {
+  ...userProfolio.value.address,
+  ...data.address,
+}
+}
+function handleNewPassword(data){
+  console.log('update password',data)
+  oldP.value = data.old
+  newP.value = data.new
+  console.log("data to update",updateForm.value)
+  updateUserInfo(updateForm.value)
+}
+function handleNewInfo(data){
+  console.log('update info',data)
+  userProfolio.value.name = data.name
+  userProfolio.value.phone = data.phone
+  userProfolio.value.birthday = data.birthday
+  userProfolio.value.address = data.address
+
+  console.log("data to update",updateForm.value)
+  updateUserInfo(updateForm.value)
+
+}
+
+async function updateUserInfo(body){
+  console.log(body)
+    const data = await putDate(url,token,body)
+    console.log("update result",data)
+}
 
 </script>
 <template>
   <div>
     <!-- card 1 -->
-    <ProfolioAccount :userObj="sampleProfolio"></ProfolioAccount>
-    <ProfolioInfo :userObj="sampleProfolio"></ProfolioInfo>
+    <ProfolioAccount @updateUserPassword="handleNewPassword" :userObj="userProfolio"></ProfolioAccount>
+    <ProfolioInfo @updateUserInfo="handleNewInfo" :userObj="userProfolio"></ProfolioInfo>
     <!-- card 2 -->
   </div>
 </template>

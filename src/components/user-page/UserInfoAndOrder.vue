@@ -1,11 +1,11 @@
 <script setup>
 import Header from "../Header.vue";
 import Footer from "../Footer.vue";
-import { ref, computed } from "vue";
-
-import { RouterView, RouterLink } from "vue-router";
-
-const sampleProfolio = {
+import { onMounted, ref, inject } from "vue";
+import { RouterView, RouterLink,useRoute } from "vue-router";
+import { getData } from "../../apiFunction";
+const token = inject("token")
+const accountInfo = ref({
   address: {
     zipcode: 800,
     detail: "哩五告貴婚78號",
@@ -17,7 +17,13 @@ const sampleProfolio = {
   birthday: "1993-04-15T00:00:00.000Z",
   createdAt: "2025-04-15T07:36:35.399Z",
   updatedAt: "2025-04-15T07:36:35.399Z",
-};
+});
+
+onMounted(async()=>{
+  const url = `https://team-rocket-hotelapi-from-freyja.onrender.com/api/v1/user`
+  const data = await getData(url,token)
+  accountInfo.value = data
+})
 
 const isProfolio = ref(true);
 
@@ -28,7 +34,6 @@ function switchCard(isChangeToOrder){
     isProfolio.value = true
   }
 }
-
 </script>
 <template>
   <div class="flex flex-col items-center bg-theme-neutral-bg overflow-x-hidden">
@@ -42,17 +47,17 @@ function switchCard(isChangeToOrder){
     <div class="w-full flex flex-col items-center">
       <!-- hero -->
       <div
-        class="mt-30 max-lg:mt-0 px-3 flex justify-center items-center z-0 w-full bg-center bg-cover h-96 relative after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-theme-neutral-100/40"
+        class="mt-30 max-lg:mt-0 px-3 flex justify-center items-center z-0 w-full bg-center bg-cover h-96 max-md:h-50 relative after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-theme-neutral-100/40"
         style="background-image: url(/public/profolio-bg.jpg)"
       >
         <div
-          class="max-w-324 w-full flex items-center gap-6 h-fit relative z-10"
+          class="max-w-324 w-full flex items-center max-md:flex-col max-md:items-start gap-6 h-fit relative z-10"
         >
-          <img class="w-36" src="/public/user-avatar.png" alt="avatar" />
+          <img class="w-36 max-md:w-18" src="/public/user-avatar.png" alt="avatar" />
           <h1
-            class="font-bold text-48 leading-[1.2] tracking-wider text-theme-neutral-0"
+            class="font-bold text-48 max-md:text-32 leading-[1.2] tracking-wider text-theme-neutral-0"
           >
-            Hello，{{ sampleProfolio.name }}
+            Hello，{{ accountInfo.name }}
           </h1>
         </div>
       </div>
@@ -65,7 +70,7 @@ function switchCard(isChangeToOrder){
           class="text-theme-neutral-0 flex font-bold leading-[1.2] tracking-wider"
         >
           <div class="flex flex-col items-center">
-            <RouterLink to="/usinfo-and-order/myinfo" @click="switchCard(false)">
+            <RouterLink to="/userinfo-and-order/myinfo" @click="switchCard(false)">
               <h6
                 class="py-4 px-6"
                 :class="!isProfolio ? null : `text-theme-primary-100`"
@@ -81,7 +86,7 @@ function switchCard(isChangeToOrder){
           </div>
 
           <div class="flex flex-col items-center">
-            <RouterLink to="/usinfo-and-order/myorder" @click="switchCard(true)">
+            <RouterLink to="/userinfo-and-order/myorder" @click="switchCard(true)">
               <h6
                 class="py-4 px-6"
                 :class="isProfolio ? null : `text-theme-primary-100`"
@@ -99,7 +104,7 @@ function switchCard(isChangeToOrder){
         <RouterView class="flex justify-between gap-10 px-3 max-lg:flex-col max-lg:items-center max-lg:gap-6"></RouterView>
       </div>
     </div>
-
+    <!-- decoration -->
     <picture class="w-full h-auto">
       <source
         media="(max-width: 768px)"
@@ -110,7 +115,6 @@ function switchCard(isChangeToOrder){
         alt="decoration-wave-line"
       />
     </picture>
-
     <!-- footer -->
     <div
       class="w-full bg-theme-neutral-bg flex justify-center px-20 max-xl:px-3"

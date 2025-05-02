@@ -33,12 +33,10 @@ function passDate(){
     checkOut: dateCheckOut.value
   })
 }
-
 const select = ref({
   year: new Date().getFullYear(),
   month: new Date().getMonth() + 1,
 });
-
 const nights = computed(() => {
   if (!dateCheckIn.value || !dateCheckOut.value) {
     return 0;
@@ -305,6 +303,4 @@ function handlePicker(show) {
     v-show="isShow"
     class="fixed w-screen h-screen bg-theme-neutral-100/40 backdrop-blur-xl top-0 left-0 z-0"
   ></div>
-
-  <Remider :remindText="errorMessage" :triggerKey="Date.now()"></Remider>
 </template>

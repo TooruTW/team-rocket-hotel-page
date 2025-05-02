@@ -1,19 +1,39 @@
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import cityName from "./asset/CityCountyData.json";
 
-const user = ref({
-  name: null,
-  email: null,
-  password: null,
-  phone: null,
-  birthday: null,
-  address: {
-    zipcode: null,
-    detail: null,
-  },
-  isReaded: false,
+const porps = defineProps({
+  name: String,
+  phone: String,
+  birthday: String,
+  address: Object,
 });
+
+const oldCity = cityName.find((item) => {
+  return item.AreaList.some(
+    (item) => item.ZipCode === String(porps.address.zipcode)
+  );
+});
+const oldArea = oldCity.AreaList.find(
+  (item) => item.ZipCode === String(porps.address.zipcode)
+);
+
+const user = ref({
+  name: porps.name,
+  phone: porps.phone,
+  birthday: porps.birthday,
+  address: porps.address,
+});
+
+const emit = defineEmits(["updateUserInfo"]);
+
+watch(user.value,()=>{
+  emit('updateUserInfo',{
+    newUserInfo:user.value
+  })
+})
+
+
 // validate
 const validatorName = ref(null);
 const validatorPhone = ref(null);
@@ -23,9 +43,9 @@ const validatorAddress = ref(null);
 const today = new Date();
 const years = Array.from({ length: 100 }, (_, i) => today.getFullYear() - i);
 const months = Array.from({ length: 12 }, (_, i) => i + 1);
-const selectedYear = ref(today.getFullYear());
-const selectedMonth = ref(today.getMonth() + 1);
-const selectedDay = ref(today.getDate());
+const selectedYear = ref(new Date(porps.birthday).getFullYear());
+const selectedMonth = ref(new Date(porps.birthday).getMonth() + 1);
+const selectedDay = ref(new Date(porps.birthday).getDate());
 const days = computed(() => {
   const lastDay = new Date(
     selectedYear.value,
@@ -34,9 +54,14 @@ const days = computed(() => {
   ).getDate();
   return Array.from({ length: lastDay }, (_, i) => i + 1);
 });
+
+watch([selectedYear,selectedMonth,selectedDay],()=>{
+  user.value.birthday = new Date(selectedYear.value,selectedMonth.value - 1,selectedDay.value)
+})
 // address
-const selectedCity = ref("高雄市");
-const selectedZone = ref("新興區");
+const selectedCity = ref(oldCity.CityName);
+const selectedZone = ref(oldArea.AreaName);
+
 const cityArr = computed(() => {
   return cityName.map((city) => city.CityName);
 });
@@ -60,9 +85,12 @@ const selectedZipCode = computed(() => {
 function updateZipCode() {
   user.value.address.zipcode = Number(selectedZipCode.value);
 }
+watch(selectedZipCode, () => {
+  updateZipCode();
+  console.log("update user info", user.value.address);
+});
 
-const isAccountEdit = ref(false)
-
+const isAccountEdit = ref(false);
 </script>
 <template>
   <div class="flex flex-col gap-6">
@@ -98,10 +126,7 @@ const isAccountEdit = ref(false)
         placeholder="請輸入手機號碼"
       />
     </label>
-    <label
-      class="font-bold text-base leading-[1.5] tracking-wide"
-      for="year"
-    >
+    <label class="font-bold text-base leading-[1.5] tracking-wide" for="year">
       <p class="flex items-center gap-2">
         生日
         <span class="text-14 text-theme-alert-100">{{
@@ -244,7 +269,5 @@ const isAccountEdit = ref(false)
         placeholder="請輸入詳細地址"
       />
     </label>
-
   </div>
-
 </template>

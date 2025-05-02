@@ -130,7 +130,7 @@ const showBTN = computed(() => {
         class="w-full h-0.5 bg-linear-to-r from-theme-primary-100 to bg-theme-neutral-0"
       ></div>
       <!-- price -->
-      <RouterLink to="/room-detail">
+      <RouterLink :to="`/room-detail/${props.dataObj._id}`">
         <div class="flex items-center justify-between py-4">
           <h5
             class="text-24 text-theme-primary-100 font-bold leading-[1.2] tracking-wider max-md:text-14"

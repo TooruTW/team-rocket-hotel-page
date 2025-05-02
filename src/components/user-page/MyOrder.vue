@@ -1,9 +1,10 @@
 <script setup>
-import { ref } from "vue";
+import { inject, onMounted, ref, computed } from "vue";
 import Comming from "./Comming.vue";
 import History from "./History.vue";
-
-const orderHistory = [
+import { getData } from "../../apiFunction";
+const token = inject("token");
+const orderHistory = ref([
   {
     userInfo: {
       address: {
@@ -592,9 +593,35 @@ const orderHistory = [
     createdAt: "2025-04-29T09:50:00.918Z",
     updatedAt: "2025-04-29T09:50:00.918Z",
   },
-];
-const comming = ref(orderHistory[0]);
-const history = ref(orderHistory);
+]);
+
+onMounted(async () => {
+  const url = `https://team-rocket-hotelapi-from-freyja.onrender.com/api/v1/orders/`;
+  const data = await getData(url, token)
+  orderHistory.value.length = 0
+  orderHistory.value.push(...data);
+  console.log("order History",orderHistory.value)
+  findNearstOrder(orderHistory.value)
+});
+
+function findNearstOrder(list){
+  let nearst = list[0]
+  let smallestDiff = Infinity; 
+  let today = new Date().getTime()
+  for (let i = 0; i < list.length; i++) {
+    let diffDay = new Date(list[i].checkInDate).getTime() - today
+    if(diffDay < 0) continue
+    if(diffDay < smallestDiff){
+      smallestDiff = diffDay
+      nearst = list[i]
+    }
+  }
+  console.log("nearst room id",nearst.roomId._id)
+  return nearst
+}
+
+const comming = computed(() => findNearstOrder(orderHistory.value));
+
 </script>
 <template>
   <div>
@@ -603,7 +630,7 @@ const history = ref(orderHistory);
       class="max-w-182 h-fit max-lg:max-w-none w-full rounded-20px bg-theme-neutral-0 p-10"
     ></Comming>
     <History
-      :roomArr="history"
+      :roomArr="orderHistory"
       class="max-w-132 h-fit max-lg:max-w-none w-full rounded-20px bg-theme-neutral-0 p-10"
     ></History>
   </div>

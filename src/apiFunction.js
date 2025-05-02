@@ -23,15 +23,42 @@ export async function getData(url, token) {
     }
 }
 
+export async function delData(url, token) {
+    try {
+        const res = await fetch(url,createFetchingObject("DELETE", token))
+        const data = await res.json()
+        
+        !data.status && console.log(data.message)
+        return data.result
+    } catch (error) {
+        console.log(error.message)
+        alert(error.message)
+    }
+}
+
 export async function postDate(url, token = null, body) {
     try {
-        const res = await fetch(url,createFetchingObject("POST",null,body))
+        const res = await fetch(url,createFetchingObject("POST",token,body))
         const data = await res.json()
         console.log(data)
         return data
     } catch (error) {
         console.log(error.message)
         alert(error.message)
+        throw error
+    }
+}
+
+export async function putDate(url, token = null, body) {
+    try {
+        const res = await fetch(url,createFetchingObject("PUT",token,body))
+        const data = await res.json()
+        console.log(data)
+        return data
+    } catch (error) {
+        console.log(error.message)
+        alert(error.message)
+        throw error
     }
 }
 

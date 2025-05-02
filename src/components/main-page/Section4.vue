@@ -3,6 +3,7 @@ import { inject, ref, computed } from 'vue';
 import Slider from '../Slider.vue';
 import { getData } from '../../apiFunction';
 import RectWideBtn from './RectWideBtn.vue';
+import { RouterLink } from 'vue-router';
 
 const token = inject("token")
 const roomInfoUrl = "https://team-rocket-hotelapi-from-freyja.onrender.com/api/v1/admin/rooms/"
@@ -42,7 +43,8 @@ function handleArrow(diraction){
                 <p class="text-base font-medium leading-[1.5] tracking-wide max-md:text-14 max-md:font-normal">{{ roomDescribe }}</p>
             </div>
             <h3 class="text-32 font-bold leading-[1.2] tracking-wider max-md:text-24">NT$ <span>{{ roomPrice }}</span></h3>
-            <RectWideBtn class="w-full" content="查看更多"></RectWideBtn>
+            <RouterLink to="/rooms">
+            <RectWideBtn class="w-full" content="查看更多"></RectWideBtn></RouterLink>
             <div class="text-theme-primary-100 flex items-center self-end">
                 <svg @click="handleArrow(false)" class="m-3 hover:scale-150 active:scale-95 transition-all ease-in-out duration-250" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 20L13.41 18.59L7.83 13L20 13L20 11L7.83 11L13.41 5.41L12 4L4 12L12 20Z" fill="currentColor"/>

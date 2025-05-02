@@ -5,20 +5,36 @@ import UserInfoForm from "../UserInfoForm.vue";
 const props = defineProps({
   userObj: Object,
 });
-const userObj = ref(props.userObj);
+
+const newName = ref(props.userObj.name)
+const newPhone = ref(props.userObj.phone)
+const newBirthday = ref(props.userObj.birthday)
+const newAddress = ref(props.userObj.address)
+
+const emit = defineEmits(['updateUserInfo'])
 
 function formateBirthday(birthday) {
-  const arr = birthday.split("");
-  arr.splice(10);
-  return arr.join("");
+  const bri = new Date(birthday)
+  return `${bri.getFullYear()}-${bri.getMonth() + 1 }-${bri.getDate()}`;
+}
+function handleNewUserInfo(data){
+  newName.value = data.newUserInfo.name
+  newPhone.value = data.newUserInfo.phone
+  newBirthday.value = data.newUserInfo.birthday
+  newAddress.value = data.newUserInfo.address
 }
 
 const isUserInfoEdit = ref(false);
-
 function handleAccountEdit(isEdit) {
   if (isEdit) {
     isUserInfoEdit.value = true;
   } else {
+    emit('updateUserInfo',{
+    name:newName.value,
+    phone:newPhone.value,
+    birthday:newBirthday.value,
+    address:newAddress.value
+  })
     isUserInfoEdit.value = false;
   }
 }
@@ -57,7 +73,7 @@ function handleAccountEdit(isEdit) {
     </div>
     <!-- 修改 -->
     <div v-if="isUserInfoEdit">
-      <UserInfoForm></UserInfoForm>
+      <UserInfoForm @updateUserInfo="handleNewUserInfo" :name="userObj.name " :phone="userObj.phone" :birthday="userObj.birthday" :address="userObj.address"></UserInfoForm>
       <div
         @click="handleAccountEdit(false)"
         class="mt-6 py-4 px-8 w-fit rounded-md bg-theme-neutral-40 text-theme-neutral-60"
