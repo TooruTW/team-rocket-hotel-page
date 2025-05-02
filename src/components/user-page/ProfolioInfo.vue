@@ -5,7 +5,6 @@ import UserInfoForm from "../UserInfoForm.vue";
 const props = defineProps({
   userObj: Object,
 });
-const userObj = ref(props.userObj);
 
 function formateBirthday(birthday) {
   const arr = birthday.split("");

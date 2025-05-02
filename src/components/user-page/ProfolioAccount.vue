@@ -4,7 +4,6 @@ import { ref } from 'vue';
 const props = defineProps({
     userObj:Object
 })
-const userObj = ref(props.userObj)
 
 const isAccountEdit = ref(false);
 

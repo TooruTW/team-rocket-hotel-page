@@ -600,6 +600,7 @@ onMounted(async () => {
   const data = await getData(url, token)
   orderHistory.value.length = 0
   orderHistory.value.push(...data);
+  console.log("order History",orderHistory.value)
   findNearstOrder(orderHistory.value)
 });
 

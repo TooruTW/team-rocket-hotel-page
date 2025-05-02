@@ -1,6 +1,9 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed, ref, inject } from "vue";
 import { RouterLink } from "vue-router";
+import { delData } from "../../apiFunction";
+
+const token = inject("token")
 
 const props = defineProps({
   roomObj: Object,
@@ -8,7 +11,6 @@ const props = defineProps({
 
 const roomInfo = computed(() => {
   console.log(props.roomObj.roomId._id);
-
   return props.roomObj;
 });
 const showConfirm = ref(false);
@@ -20,8 +22,12 @@ function handleClose(isClose) {
     showConfirm.value = true;
   }
 }
-function handleCancel() {
+async function handleCancel() {
   console.log("room cancel");
+  const url = `https://team-rocket-hotelapi-from-freyja.onrender.com/api/v1/orders/${props.roomObj._id}`
+  const data = await delData(url,token)
+  console.log(data)
+  handleClose(true)
 }
 
 function countNights(dayin, dayout) {

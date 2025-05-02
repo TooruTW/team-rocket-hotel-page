@@ -23,6 +23,19 @@ export async function getData(url, token) {
     }
 }
 
+export async function delData(url, token) {
+    try {
+        const res = await fetch(url,createFetchingObject("DELETE", token))
+        const data = await res.json()
+        
+        !data.status && console.log(data.message)
+        return data.result
+    } catch (error) {
+        console.log(error.message)
+        alert(error.message)
+    }
+}
+
 export async function postDate(url, token = null, body) {
     try {
         const res = await fetch(url,createFetchingObject("POST",token,body))

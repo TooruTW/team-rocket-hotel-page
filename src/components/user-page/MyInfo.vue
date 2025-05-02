@@ -1,28 +1,45 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref, inject } from 'vue';
 import ProfolioAccount from "./ProfolioAccount.vue";
 import ProfolioInfo from "./ProfolioInfo.vue";
+import { getData } from '../../apiFunction';
+const token = inject("token")
 
-const sampleProfolio = {
+const userProfolio = ref({
   address: {
     zipcode: 800,
-    detail: "哩五告貴婚78號",
+    detail: "fake address",
   },
-  _id: "67fe0c83fd9a024ad5c83d9e",
-  name: "巧克力",
-  email: "testing@test.com",
-  phone: "0918273647",
+  _id: "faleid",
+  name: "fake name",
+  email: "fake email",
+  phone: "fakephone",
   birthday: "1993-04-15T00:00:00.000Z",
   createdAt: "2025-04-15T07:36:35.399Z",
   updatedAt: "2025-04-15T07:36:35.399Z",
+});
+onMounted(async()=>{
+  const url = `https://team-rocket-hotelapi-from-freyja.onrender.com/api/v1/user`
+  const data = await getData(url,token)
+  userProfolio.value = {
+  ...userProfolio.value,
+  ...data,
 };
+userProfolio.value.address = {
+  ...userProfolio.value.address,
+  ...data.address,
+}
+  console.log("user info",userProfolio.value) 
+  
+  console.log("user info from sever", data)
+})
 
 </script>
 <template>
   <div>
     <!-- card 1 -->
-    <ProfolioAccount :userObj="sampleProfolio"></ProfolioAccount>
-    <ProfolioInfo :userObj="sampleProfolio"></ProfolioInfo>
+    <ProfolioAccount :userObj="userProfolio"></ProfolioAccount>
+    <ProfolioInfo :userObj="userProfolio"></ProfolioInfo>
     <!-- card 2 -->
   </div>
 </template>
